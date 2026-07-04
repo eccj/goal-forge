@@ -33,7 +33,7 @@ Jurors treat missing URLs or a single-source claim as unproven.
 - Perf thresholds: copy the user's words into an inequality; if the user gave
   none, propose one in the interview (never leave "fast" unmeasured).
 
-## Notation standard (skeleton v2)
+## §Notation standard (skeleton v2)
 - Metadata line: `[GF·<mode>·budget:<N>·jury:<mode>·ledger:<path>·label=D#]` —
   machine-readable header; tooling and resumed sessions parse it first.
 - IDs: deliverables are `D1..Dn` ↔ ledger `E-D#`; prosecutor findings are
