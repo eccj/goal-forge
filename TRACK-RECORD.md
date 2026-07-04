@@ -29,6 +29,12 @@ METRICS telemetry file, as of 2026-07-04):
   tribunals (checklist-format briefs), including one justified REJECT it
   later revised itself when evidence arrived — the reopen clause working
   as designed.
+- **Jury independence has an honest ceiling**: the mechanical jurors (re-run,
+  hash-recompute) are ground-truth-anchored, but the semantic juror is
+  in-family and cannot be made truly independent by model choice — in-family
+  panels barely decorrelate on judgment calls (LLM-as-judge literature). We
+  anchor verdicts to ground truth and state this ceiling rather than claim it
+  closed; only the optional human external verdict addresses the residual.
 - **Honest self-score: ~7.3-7.6 / 10** on a pessimist rubric (design strong;
   external validity still limited: one operator, one week, few external
   projects). An external cross-family model reviewed the same claims and

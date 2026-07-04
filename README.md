@@ -1,8 +1,8 @@
 # ⚒️ Goal Forge
 
-**An evidence-based `/goal` compiler for Claude Code — your agent can't say "done" without proving it.**
+**An evidence-based `/goal` compiler for Claude Code — faking "done" isn't cheap, and any fake is tamper-evident to a later re-runner.**
 
-![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 1.6](https://img.shields.io/badge/status-1.6-blue.svg) ![Dependencies: none](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum-brightgreen.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 1.8](https://img.shields.io/badge/status-1.8-blue.svg) ![Dependencies: none](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum-brightgreen.svg)
 
 Autonomous agents love declaring victory. They say *"all tests pass"* without pasting the test output, *"deployed"* without a live check, *"optimized"* with no numbers. Goal Forge compiles your task into a `/goal` contract under which **finishing is a verdict, not a feeling**: every deliverable must leave raw command output in a hash-chained evidence ledger, and an adversarial tribunal — a prosecutor whose job is to attack the work, plus three jurors who re-run the checks themselves — must reach a **unanimous** verdict before the agent is allowed to stop.
 
@@ -52,7 +52,7 @@ Then in any Claude Code session: just say **"write a goal"** (or `/goal-forge`).
 
 ## FAQ
 
-**Why a jury instead of one checker?** Panels of identical checkers collapse into one opinion. The three jurors differ by *method* — one re-runs commands, one recomputes the hash chain against real files, one audits constraints and Goodhart gaming ("metric passed AND intent satisfied"). In our development runs, juror rejections repeatedly caught real defects the worker had missed — including fabricated evidence planted as a red-team test (development-run claim — caveats in [TRACK-RECORD.md](TRACK-RECORD.md)).
+**Why a jury instead of one checker?** Panels of identical checkers collapse into one opinion. The three jurors differ by *method* — one re-runs commands, one recomputes the hash chain against real files, one audits constraints and Goodhart gaming ("metric passed AND intent satisfied"). In our development runs, juror rejections repeatedly caught real defects the worker had missed — including fabricated evidence planted as a red-team test (development-run claim — caveats in [TRACK-RECORD.md](TRACK-RECORD.md)). **Honest ceiling:** the mechanical jurors (re-run, hash-recompute) are *ground-truth-anchored* — their agreement is validity, not just correlated opinion — but the semantic juror (constraint + Goodhart) shares the model family and cannot be made truly independent by model choice alone; in-family panels barely decorrelate on judgment calls (measured in the LLM-as-judge literature), so that residual is addressed only by the *optional human external verdict*, never claimed as closed. And the worker convenes its own jury — so the guarantee is that faking a verdict now costs *actually spawning real adversarial subagents against real state* (the evaluator requires genuine tool-call blocks, not prose), and every mechanical claim stays tamper-evident to a later re-runner; it is tamper-*evidence*, not autonomous credibility.
 
 **Isn't this expensive?** Heavy mode (prosecutor + 3 jurors) is for work you'd hate to redo. Small tasks (≤3 deliverables, ≤15 turns) compile to **light mode**: one tool-equipped auditor covering all three methods. Evidence and ledger rules are never lightened — only the headcount.
 

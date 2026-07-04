@@ -51,10 +51,15 @@ case "$cmd" in
 
     lock="${ledger}.lock"; tries=0
     until mkdir "$lock" 2>/dev/null; do
+      holder=$(cat "$lock/pid" 2>/dev/null || true)   # SIGKILL leaves no trap: steal a dead holder's stale lock
+      if [ -n "$holder" ] && ! kill -0 "$holder" 2>/dev/null; then
+        rm -rf "$lock" 2>/dev/null || true; continue   # holder PID is gone — clear stale lock and retry
+      fi
       tries=$((tries+1)); [ "$tries" -lt 50 ] || die "lock timeout: $lock held too long"
       sleep 0.1
     done
-    trap 'rmdir "$lock" 2>/dev/null || true' EXIT
+    printf '%s\n' "$$" > "$lock/pid"
+    trap 'rm -rf "$lock" 2>/dev/null || true' EXIT
 
     prev=$(grep '^hash: ' "$ledger" 2>/dev/null | tail -1 | cut -d' ' -f2 || true)
     prev="${prev:-GENESIS}"
@@ -69,13 +74,13 @@ case "$cmd" in
       echo "hash: ${h}"
       echo
     } >> "$ledger"
-    rmdir "$lock" 2>/dev/null || true; trap - EXIT
+    rm -rf "$lock" 2>/dev/null || true; trap - EXIT
     echo "E${seq} appended (hash: ${h})"
     ;;
 
   verify)
     [ -f "$ledger" ] || die "no such ledger: $ledger"
-    expected_prev="GENESIS"; n=0; fail=0; in_entry=0; entry=""; cur=""
+    expected_prev="GENESIS"; n=0; fail=0; in_entry=0; entry=""; cur=""; pending=0
     while IFS= read -r line; do
       if [ "$in_entry" = 1 ] && [ "$line" != "ENTRY>>>" ]; then
         # inside entry: strip the "| " storage prefix; nothing here is structure
@@ -83,7 +88,7 @@ case "$cmd" in
         continue
       fi
       case "$line" in
-        '### E'*) n=$((n+1)); entry=""; cur="${line#\#\#\# }" ;;
+        '### E'*) n=$((n+1)); pending=1; entry=""; cur="${line#\#\#\# }" ;;
         '<<<ENTRY') in_entry=1; entry="" ;;
         'ENTRY>>>') in_entry=0; entry="${entry%$'\n'}" ;;
         'prev: '*)
@@ -98,11 +103,34 @@ case "$cmd" in
             echo "FAIL at ${cur}: hash mismatch (recomputed ${recomputed:0:12}…, recorded ${hash_claim:0:12}…) — entry text was altered"
             fail=1
           fi
-          expected_prev="$recomputed" ;;   # propagate RECOMPUTED hash: early break cascades
+          expected_prev="$recomputed"; pending=0 ;;   # propagate RECOMPUTED hash: early break cascades
       esac
     done < "$ledger"
     [ "$n" -gt 0 ] || die "empty ledger"
+    [ "$pending" = 0 ] || { echo "FAIL at ${cur}: unterminated entry — no hash line (phantom tail)"; fail=1; }
     if [ "$fail" = 0 ]; then echo "CHAIN INTACT (${n} entries, GENESIS→tip recomputed)"; else echo "CHAIN BROKEN"; exit 1; fi
+    ;;
+
+  coverage)
+    # completion-gate precheck: every D1..D<n> must be ledgered BEFORE the jury
+    # runs — mirrors the verify parse (matches '### E' headers only, never body).
+    [ -f "$ledger" ] || die "no such ledger: $ledger"
+    n="${3:-}"
+    case "$n" in ''|*[!0-9]*) die "usage: ledger.sh coverage <ledger-file> <n>  (n = highest D#)";; esac
+    missing=""; i=1
+    while [ "$i" -le "$n" ]; do
+      # boundary [^0-9]D${i}([^0-9]|$) stops D1 matching D10/D12; header is
+      # "### E<seq> · D<i> · …" so the char before D<i> is the "· " separator
+      # (also matches the hyphen-style "E-D<i>" label — verified both forms).
+      grep -Eq "^### E[0-9]+.*[^0-9]D${i}([^0-9]|\$)" "$ledger" || missing="${missing} D${i}"
+      i=$((i+1))
+    done
+    # Honest scope (not verification): PRESENCE only — proves each D# was
+    # ledgered, NOT that its evidence is genuine (that stays J1's re-run + J2's
+    # from-GENESIS chain recompute). A gate precheck so partial verification can
+    # never slip to the jury; it green-lights nothing on its own.
+    [ -z "$missing" ] || die "coverage gap — no ledger entry for:${missing} (partial verification cannot reach the jury)"
+    echo "COVERAGE OK (D1..D${n} present in $ledger)"
     ;;
 
   measure)

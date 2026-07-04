@@ -3,7 +3,7 @@ name: goal-forge
 description: Compiles bulletproof /goal prompts (and /loop recipes) for finishing any project A-to-Z — interviews the user, lints against 10 quality criteria, and installs an evidence-based jury ("Tribunal") with a tamper-evident Evidence Ledger as the completion condition, within the 4000-char limit. Use when user says "goal yaz", "goal-forge", "loop-forge", "prepare a /goal", "loop yaz", "write a goal", "make this a goal/loop", wants a completion condition for /goal, an engineered /loop recipe, asks goal-vs-loop, or wants a big project split into sequential goals (campaign).
 ---
 
-# Goal Forge 1.6 — a compiler for autonomous goals
+# Goal Forge 1.8 — a compiler for autonomous goals
 
 The /goal evaluator (small, fast) reads ONLY the transcript, runs no tools.
 Invariants: **(a) every deliverable carries transcript-visible evidence, (b)
