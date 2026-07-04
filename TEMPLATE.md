@@ -107,8 +107,8 @@ Guardrails: when the SAME error class bites twice — within one run OR across
 runs (check the file before dismissing a pattern as new) — append a one-line
 lesson to `goals/GUARDRAILS.md` ("<date> · <error class> → <rule>"). Every
 goal compile and every campaign milestone starts by reading that file —
-lessons must be operational, not archaeological. Starter template ships in
-goals/GUARDRAILS.md.
+lessons must be operational, not archaeological. On first run, create
+goals/GUARDRAILS.md in your own project — nothing ships pre-populated.
 
 Honest scope: the chain is tamper-evident against IN-PLACE edits of a ledger
 you already hold — it is keyless, so a from-scratch re-forge with altered
