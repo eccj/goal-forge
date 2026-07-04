@@ -62,6 +62,19 @@ Then in any Claude Code session: just say **"write a goal"** (or `/goal-forge`).
 
 **Can the jury be wrong?** Yes — and the protocol expects it. A juror confronted with irrefutable new evidence must revise (reopen clause); the prosecutor also attacks *shutdown* decisions, so both false-DONE and false-STOP get adversarial review. See [TRACK-RECORD.md](TRACK-RECORD.md) for how this played out in development.
 
+## Why not …?
+
+The model that does the work is never the model that declares it finished — in the spirit of [Loop Engineering](https://addyosmani.com/blog/loop-engineering/). As Boris Cherny (creator of Claude Code) put it: *"I don't prompt Claude anymore. I have loops running that prompt Claude and figuring out what to do. My job is to write loops."* Goal Forge is that loop's contract department.
+
+| | goal-forge | claude-goal (native) | council-review / review panels | ralph-style loop wrappers | promptfoo / DeepEval |
+|---|---|---|---|---|---|
+| Interviews you, compiles the prompt | **✓** | ✗ | ✗ | ✗ | ✗ |
+| Evidence Ledger (raw blocks, hash chain) | **✓** | ✗ | ✗ | ✗ (git history as state) | ✗ |
+| Quality score /100 + char-budget engineering | **✓** | ✗ | ✗ | ✗ | ✗ |
+| Completion-condition jury (not code review) | **✓** | audit prompt | code-review jury | exit-gate heuristics | eval framework |
+| Campaign chains + engineered /loop recipes | **✓** | ✗ | ✗ | brute-force restart loop | ✗ |
+| Living guardrails file (lessons applied at compile) | **✓** | ✗ | ✗ | ✓ (pioneered it) | ✗ |
+
 ## Repository map
 
 | File | Role |
