@@ -2,7 +2,7 @@
 
 **An evidence-based `/goal` compiler for Claude Code — your agent can't say "done" without proving it.**
 
-![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 1.5](https://img.shields.io/badge/status-1.5-blue.svg) ![Dependencies: none](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum-brightgreen.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 1.6](https://img.shields.io/badge/status-1.6-blue.svg) ![Dependencies: none](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum-brightgreen.svg)
 
 Autonomous agents love declaring victory. They say *"all tests pass"* without pasting the test output, *"deployed"* without a live check, *"optimized"* with no numbers. Goal Forge compiles your task into a `/goal` contract under which **finishing is a verdict, not a feeling**: every deliverable must leave raw command output in a hash-chained evidence ledger, and an adversarial tribunal — a prosecutor whose job is to attack the work, plus three jurors who re-run the checks themselves — must reach a **unanimous** verdict before the agent is allowed to stop.
 

@@ -16,6 +16,8 @@ as a raw block (command + stdout), never a summary.
 | **Refactor** | Behavior-parity evidence: same test output before/after + diff stat; "no functional change" claims need both |
 | **Documentation** | File list + section headings quoted + a reader-task check ("following §X reproduces Y" — actually reproduced) |
 | **Config/infra** | Applied state queried back from the system (not the config file): `vercel env ls`, `kubectl get`, raw provider response |
+| **Document rewrite/overwrite** | Before overwriting, `grep`/`diff` OLD↔NEW for a preserve-inventory of valuable sections (tables, quotes, examples) and paste it; silent loss of a valuable section is a FORBIDDEN pattern (1.5-D3: a from-scratch README rewrite silently dropped a comparison table + a quote — the user caught it) |
+| **Git-history / privacy purge** | A "history clean / private data removed" claim is evidenced ONLY by a platform-API scan (e.g. GitHub activity-API SHA now returns 404/422), NEVER by a force-push — force-push leaves dangling commits anonymously reachable (1.5-S1); the only real remediation is repo delete+recreate or a Support purge (both irreversible → §DAL-C terminal HOLD, user runs it) |
 
 ## Research deliverable — full recipe
 When §1 knowledge-gap detection fires (staleness-prone: prices, APIs, best

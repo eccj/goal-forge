@@ -1,4 +1,4 @@
-# Goal Skeleton + Ledger + Tribunal + Archive (1.5, full detail)
+# Goal Skeleton + Ledger + Tribunal + Archive (1.6, full detail)
 
 Produce the goal **in the user's language**. Ideal band 3000-4000 chars
 (hard limit 4000) — measured per LINT #9.
@@ -28,7 +28,8 @@ TASKS (evidence appended to <ledger> via scripts/ledger.sh, label=D#):
 ...
 FORBIDDEN: <untouchables> · <out-of-scope> · no work added outside scope.
 ASSUMPTION: on ambiguity make a reasonable assumption + list it in the report;
-never wait for the user.
+never wait for the user — EXCEPT a §DAL-C case (an irreversible action the
+agent must not self-authorize): name it, ledger a HELD entry, STOP once.
 LEDGER: raw outputs via ledger.sh append; full text stored; changed files get
 a superseding entry; a summary never replaces the raw block.
 PIN: in the FIRST message after compaction AND every ~10 turns, restate in one
@@ -139,13 +140,32 @@ when describing it.
 > self-upgrade run a juror's partial REJECT was correctly reversed once raw
 > evidence and a recomputable hash chain were re-presented.)
 
+Haiku-lane juror brief (small model — render as a NUMBERED-COMMAND checklist,
+NEVER free-persona prose: free-persona confused haiku into "what is my task?"
+and it did not run turn-1 in the 1.5 run). Concrete template:
+1. Run <the exact check command(s) for your method> and paste the raw output.
+2. Compare that output to this item's E-D#/E-S# claim in the ledger.
+3. Match → write "OK <item>"; mismatch → write the exact difference.
+4. Repeat 1-3 for EVERY assigned item; recompute the hash chain if you are J2.
+5. Last line, nothing after it: "APPROVE" or "REJECT + numbered deficiency list".
+
 Prosecutor (heavy mode) prompt core: "Actively try to refute this work: hunt
 missing evidence, untested paths, constraint violations, proxy-gaming. Number
 your findings S1, S2, … — closures will be ledgered as E-S# entries. Return
 an attack list; do not judge — attack. Attack content, not style — judge
 evidence language-independently (multilingual style bias is documented)."
 
-FALLBACK RULE (referenced as SKILL "TEMPLATE Fallback") (evaluator availability): if a prosecutor/juror/gate-judge agent
+## §No-external-dependency (governing constraint — jury included)
+Goal Forge takes ZERO external-API dependencies — no OpenAI/Gemini/paid-judge
+keys, ever; the skill stays pure bash+shasum. Jury diversity is supplied by
+IN-FAMILY model layers (opus/sonnet/haiku) diversified by verification METHOD,
+plus an OPTIONAL human-mediated external verdict: the operator carries an
+evidence pack (see goals/external-judge-pack.md) to an outside model by hand
+and relays the verdict — an escape hatch that adds independence WITHOUT a
+programmatic API call. Never add a network-dependent juror.
+
+## §Fallback (evaluator availability — the SKILL-referenced "TEMPLATE Fallback" anchor)
+If a prosecutor/juror/gate-judge agent
 fails to spawn, stalls, or dies (network drop, watchdog kill), relaunch it
 ONCE with the same prompt. If it fails again: report the outage to the user
 and STOP that verdict — the worker may NEVER simulate a missing juror itself
@@ -153,6 +173,28 @@ and STOP that verdict — the worker may NEVER simulate a missing juror itself
 Field-validated: a network drop killed all three tournament judges in the v6
 run; they were relaunched with identical prompts (recorded in
 the maintainer-private tournament record §Incident).
+
+## §DAL-C — irreversible-action terminal hold (stop-hook loop guard)
+When a deliverable's ONLY forward path is an action the agent must NOT
+self-authorize — repo/branch delete, force-push, prod deploy, data drop,
+publish, billing — the worker neither performs it nor waits in a loop. It
+emits a terminal HOLD: name the action + why it is gated + the exact command
+for the USER to run, append an E-D# HELD ledger entry, and STOP ONCE. Never
+re-poll or re-invoke: a stop-hook re-firing on a HELD item must find the HOLD
+already ledgered and stop again (the 1.5-S1 case looped ~10 turns for lack of
+this branch). A correctly-ledgered HOLD is a LEGITIMATE terminal state, not
+unfinished work — the evaluator treats it as done-for-this-item pending the
+user, and the final report lists it under "awaiting user decision".
+
+## §SAFETY & terminal states (the closed set of legitimate stops)
+The worker's regime band lives in the compiled SAFETY line (below 30% of
+budget: verification + closure only). Every LEGITIMATE stop is ONE of a CLOSED
+set — nothing else counts as a clean finish:
+crash/disconnect → RESUME CARD · evaluator-agent outage → §Fallback ·
+turn-cap reached → honest status report · same item REJECTed 3× → BLOCKED to
+the user · irreversible agent-unauthorized action → §DAL-C terminal HOLD.
+A stop matching one of these is DONE-or-HELD, not unfinished; a stop matching
+NONE is incomplete work and the loop continues.
 
 ## §Roadmap (stack-choice compiles only)
 When interview Q7 fired, the compiled D1-PLAN must be PHASE-ordered:

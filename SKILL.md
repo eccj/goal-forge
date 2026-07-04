@@ -3,7 +3,7 @@ name: goal-forge
 description: Compiles bulletproof /goal prompts (and /loop recipes) for finishing any project A-to-Z — interviews the user, lints against 10 quality criteria, and installs an evidence-based jury ("Tribunal") with a tamper-evident Evidence Ledger as the completion condition, within the 4000-char limit. Use when user says "goal yaz", "goal-forge", "loop-forge", "prepare a /goal", "loop yaz", "write a goal", "make this a goal/loop", wants a completion condition for /goal, an engineered /loop recipe, asks goal-vs-loop, or wants a big project split into sequential goals (campaign).
 ---
 
-# Goal Forge 1.5 — a compiler for autonomous goals
+# Goal Forge 1.6 — a compiler for autonomous goals
 
 The /goal evaluator (small, fast) reads ONLY the transcript, runs no tools.
 Invariants: **(a) every deliverable carries transcript-visible evidence, (b)
@@ -40,7 +40,7 @@ sonnet) · 7 **Tech/Approach** — fires per the
 CAPABILITY-level rule in [STACKS.md](STACKS.md) §Firing (capability/project
 greenfield or migration-core; named-tech→confirm-not-ask; headless→research-
 default); "research decides"→stack-bakeoff (RECIPES) + roadmap PLAN
-(TEMPLATE §Roadmap). Future-user-input items: EXCLUDED → decide-list.
+(TEMPLATE §Roadmap). Future-user-input items: EXCLUDED → decide-list. A pre-filled confirm is required EVEN WHEN answers are derivable from context; sole exception: the user explicitly enumerated the params in-session AND you say so in the report.
 
 ## 3. Compile from template
 Fill the v2 two-layer skeleton in [TEMPLATE.md](TEMPLATE.md): metadata line +
@@ -93,5 +93,5 @@ Archive contract+goal+score to `goals/goal-<date>-<slug>.md` (TEMPLATE
 scorecard + decide-before-launch list. Present finished; don't ask.
 
 Anti-patterns (never emit): subjective finish lines · future-user-input
-items · off-transcript evidence · summaries-as-evidence · no turn cap · one
+items (except a §DAL-C terminal HOLD) · off-transcript evidence · summaries-as-evidence · no turn cap · one
 giant item · Goodhart traps · 8+ items (→campaign) · jury growth.
