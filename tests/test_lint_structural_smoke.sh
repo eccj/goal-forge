@@ -35,7 +35,12 @@ SKILL_DIR="${GF_SKILL_DIR:-/Users/emrew/.claude/skills/goal-forge}"
 if [ -n "${GF_GOOD_FILE:-}" ]; then
   GOOD_FILES=("$GF_GOOD_FILE")
 else
-  GOOD_FILES=("$SKILL_DIR/goals/1.7-m1-draft.txt" "$SKILL_DIR/goals/1.6-draft.txt")
+  # Committed, self-contained fixture (survives a fresh clone where goals/ is gitignored).
+  GOOD_FILES=("$SKILL_DIR/tests/fixtures/known-good-goal.txt")
+  # Also exercise the private drafts when present (local dev only; not shipped).
+  for extra in "$SKILL_DIR/goals/1.7-m1-draft.txt" "$SKILL_DIR/goals/1.6-draft.txt"; do
+    [ -f "$extra" ] && GOOD_FILES+=("$extra")
+  done
 fi
 
 for f in "${GOOD_FILES[@]}"; do
