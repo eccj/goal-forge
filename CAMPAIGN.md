@@ -162,6 +162,19 @@ If green: reply NOOP + run id. Escalate & stop if the same job fails 3 runs
 in a row. Sunset after 24 iterations.
 ```
 
+### Honest ceiling (what's enforced vs disciplined)
+Only two of these are mechanically verifiable: the **round-ledger** (`ledger.sh
+verify` proves the chain wasn't rewritten) and the **frozen same-check** (the
+check-spec's sha256 catches an edit to the spec FILE — it does NOT stop a loop
+from applying a laxer check in-head while leaving the file untouched; that
+residual needs a separate evaluator or human). The **risk tier**, **one-change
+per round**, and **cheap-first escalation** are doc-discipline the operator (or a
+/goal evaluator reading the round-ledger) checks — the loop is the same model
+that wrote them, so they REDUCE drift, they don't eliminate it. The strong lock
+on a RED action is the HELD-and-stop plus a human; on early-exit it is a
+separate /goal. State the tier and cite the round-ledger; don't oversell the
+prose rules as guarantees.
+
 ## Hybrid: loop until a goal condition
 For "keep working the queue until empty" shapes, prefer /goal with a
 queue-empty end state (condition-driven beats cadence-driven when a true
