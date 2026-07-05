@@ -61,6 +61,8 @@ verdict): J1-Re-runner · J2-Ledger-Auditor (chain from GENESIS; D#↔E-D#) ·
 J3-Constraint+Goodhart dual sign-off (proxy ✓ AND intent ✓). On REJECT only a
 deficiency list; reopening is valid; "could be better" is not a REJECT;
 3 rejects = BLOCKED → user.
+REPORT: the final report OPENS with a plain-language Result block (what got
+done · verified? · what's next) BEFORE any ledger/verdict dump (§Plain-report).
 SAFETY: <N> turns; below 30% remaining only verification+closure; if
 unfinished, honest status report.
 
@@ -69,7 +71,7 @@ unfinished, honest status report.
 DONE if and only if the transcript shows (1) an E-D#-labeled raw command+output
 block for EVERY D1-D<n> item AND (2) the 3 jurors' UNANIMOUS verdict AND (3) an
 item-by-item evidence dump. [Only when not derivable from D-items: "<subjective
-wish>" = <measurable inequality>.] [If any D# is a §RED-HOLD terminal HOLD: it
+wish>" = <measurable inequality>.] [If any D# is a §RED-HOLD: it
 satisfies clause (1) via its E-D# HELD entry, which MUST name the gated action
 AND the exact user command (a HELD entry has no execution output by design); a
 bare "HELD" naming neither = NOT DONE. Clauses (2)/(3) still apply to the goal.] If any is missing: NOT DONE.
@@ -264,8 +266,9 @@ the maintainer-private tournament record §Incident).
 ## §RED-HOLD — a RED action, held for the operator (goal-side of the loop RED tier)
 (Plain: some actions are too dangerous for the agent to do on its own — spend
 money, deploy to production, delete data, publish. On those it does NOT act and
-does NOT loop; it HOLDs. "§RED-HOLD" is the goal-side name for exactly the RED
-risk tier used in loops — one concept, both places.)
+does NOT loop; it HOLDs. "§RED-HOLD" is the goal-side core of the RED
+risk tier: loops widen RED to also cover outbound/money, and the
+irreversible-action HOLD is the shared core — hence RED ⊇ §RED-HOLD.)
 When a deliverable's ONLY forward path is an action the agent must NOT
 self-authorize — repo/branch delete, force-push, prod deploy, data drop,
 publish, billing — the worker neither performs it nor waits in a loop. It
@@ -283,7 +286,7 @@ budget: verification + closure only). Every LEGITIMATE stop is ONE of a CLOSED
 set — nothing else counts as a clean finish:
 crash/disconnect → RESUME CARD · evaluator-agent outage → §Fallback ·
 turn-cap reached → honest status report · same item REJECTed 3× → BLOCKED to
-the user · irreversible agent-unauthorized action → §RED-HOLD terminal HOLD.
+the user · irreversible agent-unauthorized action → §RED-HOLD.
 A stop matching one of these is DONE-or-HELD, not unfinished; a stop matching
 NONE is incomplete work and the loop continues.
 
@@ -323,7 +326,7 @@ delivery to the user MUST carry, alongside the paste-ready block:
    · **§RED-HOLD** — a dangerous action (spend money, deploy, delete, publish) the
      AI will NOT do on its own; it stops and hands you the exact command to run.
 Only include the terms that actually appear in this goal. A delivery with the
-dense block but no plain summary + legend is INCOMPLETE (LINT #9 scores it down).
+dense block but no plain summary + legend scores DOWN on LINT #9 — a quality dent, not a hard-floor veto (#2/#10 are the only vetoes).
 
 ## §Plain-report (the final report, when the run finishes)
 The final report to the user OPENS with a plain-language **Result** block — the

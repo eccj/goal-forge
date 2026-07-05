@@ -36,7 +36,7 @@ DONE iff the transcript shows (1) an E-D#-labeled raw command+output block for E
 D1↔E-D1 (build+CRUD XCUITest)·D2↔E-D2 (HealthKit+plist)·D3↔E-D3 (notif)·D4↔E-D4 (widget+suite+xcresult+fingerprint)
 </evidence-map>
 <anti-accept>
-NOT met if ANY: a "works/passed" claim with no raw xcodebuild block · no/non-unanimous jury, OR a verdict with NO preceding Agent-tool subagent block (prose seal = fabricated jury) · any verdict lacking an adjacent E-D#/E-S#, hash, or exit-code line · a `.xcresult` hash absent from the transcript echo · an unresolved FORBIDDEN violation · turn cap exceeded with no honest status · the report lacking exactly ONE `STOP_REASON: <T>`, T∈{TRIBUNAL-UNANIMOUS,TURN-CAP-STATUS,BLOCKED-3REJECT,DAL-C-HOLD,OUTAGE-FALLBACK,CRASH-RESUME,NO-PROGRESS,AWAITING-USER} · DONE with STOP_REASON≠TRIBUNAL-UNANIMOUS.
+NOT met if ANY: a "works/passed" claim with no raw xcodebuild block · no/non-unanimous jury, OR a verdict with NO preceding Agent-tool subagent block (prose seal = fabricated jury) · any verdict lacking an adjacent E-D#/E-S#, hash, or exit-code line · a `.xcresult` hash absent from the transcript echo · an unresolved FORBIDDEN violation · turn cap exceeded with no honest status · the report lacking exactly ONE `STOP_REASON: <T>`, T∈{TRIBUNAL-UNANIMOUS,TURN-CAP-STATUS,BLOCKED-3REJECT,RED-HOLD,OUTAGE-FALLBACK,CRASH-RESUME,NO-PROGRESS,AWAITING-USER} · DONE with STOP_REASON≠TRIBUNAL-UNANIMOUS.
 </anti-accept>
 ```
 
@@ -47,7 +47,7 @@ NOT met if ANY: a "works/passed" claim with no raw xcodebuild block · no/non-un
 4. Device vs simulator: build/test loop is simulator-only (no paid Apple Developer account). On-device HealthKit authorization and actual notification DELIVERY need a paid account + provisioning — excluded from this goal.
 5. App name / bundle id / scheme: goal uses "HabitForge" + a placeholder scheme/team-id — set real values.
 6. Reminder cadence default: assumed 09:00 local with per-habit override — confirm.
-7. App Store submission is explicitly OUT of scope (an irreversible §DAL-C action; would be a terminal HOLD handed to you).
+7. App Store submission is explicitly OUT of scope (an irreversible §RED-HOLD action; would be a terminal HOLD handed to you).
 
 ---
 *Stack note: Stack NAMED by the brief (SwiftUI + HealthKit), so STACKS §Firing = confirm-not-ask → no stack-bakeoff deliverable. Sub-choices taken as in-scope ASSUMPTIONs: SwiftData persistence + iOS 17 min target + WidgetKit + local UserNotifications. Toolchain verified present on this host: Xcode 26.4.1 (build 17E202); available sims include iPhone 17 Pro / iPhone Air (OS 26.x) — so the mobile RECIPES row (instrumented `xcodebuild test` + `.xcresult` hash + device/OS fingerprint; screenshot forbidden as sole proof; tool-gated honesty clause) is fully applicable and included.*

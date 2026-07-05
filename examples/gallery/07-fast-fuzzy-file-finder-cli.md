@@ -42,7 +42,7 @@ symlinked/padded) · narrowing `--package`, `#[ignore]`-ing a required test, or
 fitting the coverage floor post-run · timing warm-cache/tiny-tree/matcher-only ·
 network during audit · out-of-scope features.
 ASSUMPTION: on ambiguity assume + list it in the report; never wait on the user —
-EXCEPT a §DAL-C irreversible action (crates.io publish, repo delete): name it,
+EXCEPT a §RED-HOLD irreversible action (crates.io publish, repo delete): name it,
 ledger a HELD entry, STOP once.
 LEDGER: raw outputs via `ledger.sh append`; full text stored; a changed file gets
 a superseding entry; a summary never replaces the raw block.
@@ -73,7 +73,7 @@ Agent-tool subagent block (prose-only seal = fabricated jury) · a verdict with 
 adjacent E-D#/E-S#, hash, or machine-assertion anchor · a D# never mentioned · an
 unresolved FORBIDDEN violation · turn cap exceeded with no honest status · the
 report lacks exactly ONE `STOP_REASON:
-<T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, DAL-C-HOLD,
+<T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, RED-HOLD,
 OUTAGE-FALLBACK, CRASH-RESUME, NO-PROGRESS, AWAITING-USER} · DONE with STOP_REASON
 ≠ TRIBUNAL-UNANIMOUS.
 </anti-accept>

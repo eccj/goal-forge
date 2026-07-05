@@ -61,7 +61,7 @@ only when not derivable from D-items · <evidence-map> D#↔E-D# ·
 TYPE each □ D# at compile: **[M]achine** (evidence closes on exit-code /
 hash / diff / count alone) or **[J]udgment** (needs semantic assessment) —
 the type drives Tribunal effort routing (§5) and the G=1 fast path.
-An irreversible agent-unauthorized action → **§RED-HOLD terminal HOLD**: ledger names the action + exact user command, agent STOPS once (legitimate terminal state, not a waiting defect).
+An irreversible agent-unauthorized action → **§RED-HOLD**: ledger names the action + exact user command, agent STOPS once (legitimate terminal state, not a waiting defect).
 Machine-greppable keys are ASCII-canon (RECIPES §Notation).
 
 ## 4. Evidence Ledger (during execution)
@@ -118,9 +118,9 @@ Archive contract+goal+score to `goals/goal-<date>-<slug>.md` (TEMPLATE
 §Archive) INCLUDING the **human-mirror**: a plain-language twin
 so the operator can review what they paste.
 Deliver ready-to-paste ` /goal ... ` + scorecard + decide-before-launch list
-+ a ≤5-line plain summary AND a term legend (TEMPLATE §Plain-delivery). Present finished; don't ask.
++ a ≤5-line plain summary AND a term legend (§Plain-delivery); report opens with a plain Result (§Plain-report). Present finished.
 
 Anti-patterns (never emit): subjective finish lines · future-user-input
-items (except a §RED-HOLD terminal HOLD) · off-transcript evidence ·
+items (except a §RED-HOLD) · off-transcript evidence ·
 summaries-as-evidence · no turn cap · one giant item · Goodhart traps ·
 8+ items (→campaign) · jury growth · jury-shopping.

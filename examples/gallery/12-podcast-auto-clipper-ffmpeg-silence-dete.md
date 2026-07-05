@@ -23,7 +23,7 @@ TASKS (evidence → EVIDENCE.md via ledger.sh, label=D#):
 □ D5 Caption burn-in: transcript→SRT→burn per clip — evidence: `ffprobe -of json` (re-encoded video) + ONE frame/clip assessed IN WRITING (caption legible) + SRT.
 □ D6 End-to-end: `python -m clipper run <fixture>` — evidence: full `pytest -q` (exit visible) + determinism: run pipeline TWICE, diff sha256 of a fixed clip → identical or FAIL + clip_count == expected (padding/dropping fails).
 FORBIDDEN: editing fixture/frozen truth after D2 · re-fetch/re-transcribe live to verify (parse cached outputs only) · network calls in tests (models pinned local) · shipping an ffprobe-invalid clip · "N clips" as success without per-clip ffprobe+dur proof · work outside this pipeline.
-ASSUMPTION: on ambiguity, assume reasonably + list it in the report; never wait on the user. Stack = Python3 + system ffmpeg/ffprobe, offline. No §DAL-C action in scope; if one arises, ledger a HELD entry + exact user command, STOP once.
+ASSUMPTION: on ambiguity, assume reasonably + list it in the report; never wait on the user. Stack = Python3 + system ffmpeg/ffprobe, offline. No §RED-HOLD action in scope; if one arises, ledger a HELD entry + exact user command, STOP once.
 LEDGER: raw outputs via `ledger.sh append` (full text stored); changed files get a superseding entry; a summary never replaces the raw block.
 PIN: after compaction AND every ~10 turns, restate in one line: FORBIDDEN + gate decision + ledger path.
 PROCESS: on a done-claim → COMPLETION GATE (re-run all ffprobe/silencedetect/pytest + `ledger.sh coverage EVIDENCE.md 6` + `ledger.sh verify`; any fail = no jury) → PROSECUTOR self-audit → 3 tool-equipped jurors: J1 Re-runner (re-runs checks by its OWN commands) · J2 Ledger-Auditor (chain from GENESIS; D#↔E-D#) · J3 Constraint+Goodhart (proxy ✓ AND intent ✓). REJECT → deficiency list only; reopening valid; "could be better" ≠ REJECT; 3 rejects = BLOCKED → user.
@@ -37,7 +37,7 @@ DONE iff the transcript shows (1) an E-D# raw cmd+output block for EVERY D1-D6, 
 D1↔E-D1(PLAN) · D2↔E-D2(fixture) · D3↔E-D3(silence) · D4↔E-D4(cut) · D5↔E-D5(caption) · D6↔E-D6(e2e)
 </evidence-map>
 <anti-accept>
-NOT met if ANY: "done/valid" with no raw ffprobe/exit block · summary where a raw block is required · no jury verdict / non-unanimous / a juror verdict with NO preceding Agent-tool subagent block (prose-only = fabricated jury) · a juror verdict with no adjacent E-D#/E-S#, hash, or machine-assertion anchor · a D# never mentioned · turn cap exceeded with no honest status · final report lacks exactly ONE STOP_REASON ∈ {TRIBUNAL-UNANIMOUS,TURN-CAP-STATUS,BLOCKED-3REJECT,DAL-C-HOLD,OUTAGE-FALLBACK,CRASH-RESUME,NO-PROGRESS,AWAITING-USER} · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS.
+NOT met if ANY: "done/valid" with no raw ffprobe/exit block · summary where a raw block is required · no jury verdict / non-unanimous / a juror verdict with NO preceding Agent-tool subagent block (prose-only = fabricated jury) · a juror verdict with no adjacent E-D#/E-S#, hash, or machine-assertion anchor · a D# never mentioned · turn cap exceeded with no honest status · final report lacks exactly ONE STOP_REASON ∈ {TRIBUNAL-UNANIMOUS,TURN-CAP-STATUS,BLOCKED-3REJECT,RED-HOLD,OUTAGE-FALLBACK,CRASH-RESUME,NO-PROGRESS,AWAITING-USER} · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS.
 </anti-accept>
 ```
 

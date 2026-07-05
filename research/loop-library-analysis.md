@@ -10,7 +10,7 @@ Kaynak: x.com/exm7777 thread (2026-07; kullanıcı tam-metni yapıştırdı). Fu
 - named terminal states = STOP_REASON kümesi.
 
 ## ADOPT — bizde yok/daha zayıf, eklemeye değer (öncelik sırası)
-1. **Green/Yellow/Red risk-rengi (loop-başına)** — green=yalnız-okur/kendi-dosyası · yellow=taslak, insan-ship'ler · red=asla-yalnız (para/prod/outbound). Bizim §DAL-C ikili (geri-dönülmez→HOLD); bu SPEKTRUM + "yellow=draft-human-ships" daha kullanışlı. → TEMPLATE/CAMPAIGN'e loop-renk-etiketi.
+1. **Green/Yellow/Red risk-rengi (loop-başına)** — green=yalnız-okur/kendi-dosyası · yellow=taslak, insan-ship'ler · red=asla-yalnız (para/prod/outbound). Bizim §RED-HOLD ikili (geri-dönülmez→HOLD); bu SPEKTRUM + "yellow=draft-human-ships" daha kullanışlı. → TEMPLATE/CAMPAIGN'e loop-renk-etiketi.
 2. **ONE-change-per-round** — "tek en-önemli şeyi düzelt, asla hepsini". Frontier-researcher disiplini (değiştir-test-et-koru-yaz). goal-forge /loop-reçetesi bunu SERT-kural yapmalı. → loop-recipe invariantı.
 3. **Same-check-every-time** — hafta-hafta kıyaslanabilir SABİT-metrik (trend, tahmin değil). → loop-recipe ölçüm-disiplini.
 4. **#21 hard-question escalation queue** — "ucuz-model önce; flagship yalnız LOGLANMIŞ-fail'de". EFFORT-ROUTING'i açık loop-kuralı + "logged failure gate" yapar (maliyet-patlaması önler). → PROCESS/loop.
@@ -19,7 +19,7 @@ Kaynak: x.com/exm7777 thread (2026-07; kullanıcı tam-metni yapıştırdı). Fu
 7. **#25 shadow prompt loop** — yeni prompt'u "gölgede gerçek-trafiğe karşı koştur, anlaşmazlıklar karar-versin". Yeni LINT/SKILL-sürümünü PROMOTE-etmeden önce gerçek-goal'lara karşı gölge-test → verdict-diff. (v1.9'un test-suite + external-breaker turuyla örtüşür.)
 
 ## En yüksek-değerli 3 (hemen)
-(a) Green/Yellow/Red — DAL-C'yi spektruma çevir · (b) ONE-change-per-round loop-invariantı · (c) #24 repeat-offender meta-digest (ledger-üstü GUARDRAILS).
+(a) Green/Yellow/Red — §RED-HOLD'yi spektruma çevir · (b) ONE-change-per-round loop-invariantı · (c) #24 repeat-offender meta-digest (ledger-üstü GUARDRAILS).
 
 ## Uyarı-notu
 Thread'in "Fable en pahalı model; 7 Temmuz'da pay-as-you-go'ya geçiyor; cheap-first-routing + hard-cap ZORUNLU olur" uyarısı → bizim budget/EFFORT-ROUTING disiplininin ekonomik-aciliyet gerekçesi.

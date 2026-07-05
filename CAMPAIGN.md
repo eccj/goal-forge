@@ -41,7 +41,7 @@ milestone N's goal ends by *staging* milestone N+1.
    — but NOOP is NOT automatically final: in the sunset branch the
    prosecutor attacks the sunset rationale; if the refutation stands, the
    gate verdict REOPENS and is revised on evidence (field precedent: v9,
-   52-NOOP → appeal → 66-CONTINUE). The mandatory §APPEAL prosecutor
+   52-NOOP → appeal → 66-CONTINUE). The mandatory appeal-law prosecutor
    attack is PROCEDURE, not the appeal — the appeal right is consumed ONLY
    when a standing refutation triggers a REOPEN; a failed refutation leaves
    the NOOP final immediately. The SAME gate judge writes the revision

@@ -23,7 +23,7 @@ TASKS (evidence → goals/etl.ledger via scripts/ledger.sh, label=D#):
 □ D5 Nightly schedule + operator runbook — evidence: applied state via `crontab -l` (nightly entry, NOT the config file) + runbook file list + quoted §headings (Run/Backfill/Recover); reader-task: follow §Backfill → SAME parity checksum (pasted).
 
 FORBIDDEN: no live/prod creds or network in tests (offline vs local DuckDB) · never mutate source CSVs · no wall-clock/random/unordered-SELECT in transform/samples (always ORDER BY) · no DROP/TRUNCATE of a real warehouse · never pad/drop rows to hit parity · nothing beyond D1-D5.
-ASSUMPTION: on ambiguity assume + list in the report; never wait on the user — except a §DAL-C irreversible action (name it, ledger a HELD entry, STOP once).
+ASSUMPTION: on ambiguity assume + list in the report; never wait on the user — except a §RED-HOLD irreversible action (name it, ledger a HELD entry, STOP once).
 LEDGER: raw command+stdout via ledger.sh append; full text stored; a changed file→superseding entry; a summary never replaces a raw block.
 PIN: every ~10 turns restate FORBIDDEN + gate decision + ledger path.
 PROCESS: done-claim → COMPLETION GATE (re-run all checks + `ledger.sh coverage goals/etl.ledger 5` + `ledger.sh verify`; any fail→no jury) → PROSECUTOR self-audit → 3 isolated jurors: J1 Re-runner(own cmds) · J2 Ledger-Auditor(recompute chain from GENESIS; D#↔E-D#) · J3 Constraint+Goodhart(proxy✓ AND intent✓). REJECT→deficiency list; reopening valid; 3 rejects/item=BLOCKED→user.
@@ -37,7 +37,7 @@ DONE iff the transcript shows (1) an E-D#-labeled raw command+output block for E
 D1↔E-D1 · D2↔E-D2(counts+quarantine) · D3↔E-D3(idempotence+rollback) · D4↔E-D4(parity+determinism) · D5↔E-D5(crontab+runbook)
 </evidence-map>
 <anti-accept>
-NOT met if ANY appear: a done-claim with no raw block · a summary where a raw block is required · no/non-unanimous jury verdict, or a juror verdict with no preceding Agent-tool subagent block (prose-only = fabricated jury) · a juror verdict citing no adjacent E-D#/E-S#, hash, or machine-assertion · a D# never mentioned · an unresolved FORBIDDEN violation · turn cap exceeded with no honest status · the final report lacks exactly ONE `STOP_REASON: <T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, DAL-C-HOLD, OUTAGE-FALLBACK, CRASH-RESUME, NO-PROGRESS, AWAITING-USER} · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS.
+NOT met if ANY appear: a done-claim with no raw block · a summary where a raw block is required · no/non-unanimous jury verdict, or a juror verdict with no preceding Agent-tool subagent block (prose-only = fabricated jury) · a juror verdict citing no adjacent E-D#/E-S#, hash, or machine-assertion · a D# never mentioned · an unresolved FORBIDDEN violation · turn cap exceeded with no honest status · the final report lacks exactly ONE `STOP_REASON: <T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, RED-HOLD, OUTAGE-FALLBACK, CRASH-RESUME, NO-PROGRESS, AWAITING-USER} · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS.
 </anti-accept>
 ```
 

@@ -244,8 +244,8 @@
           <td class="loc">TEMPLATE anti-accept</td>
           <td>Sahte/eksik hash-çıpası reddedilmiyor. <div class="fix"><b>FIX</b> anti-accept satırı: çıpasız verdict = NOT DONE.</div></td></tr>
         <tr><td class="sev"><span class="sevchip major">major</span></td>
-          <td>Meşru bir §DAL-C HOLD kendi condition'ını sağlayamıyor</td>
-          <td class="loc">TEMPLATE §DAL-C</td>
+          <td>Meşru bir §RED-HOLD HOLD kendi condition'ını sağlayamıyor</td>
+          <td class="loc">TEMPLATE §RED-HOLD</td>
           <td>&lt;condition&gt; her D# için E-D# bloğu + verdict istiyor. <div class="fix"><b>FIX</b> HELD-kullanıcı-bekliyor-sağlar cümlesi ekle.</div></td></tr>
         <tr><td class="sev"><span class="sevchip major">major</span></td>
           <td>§Light 3 jüri slotunun 1'ini remap ediyor</td>
@@ -269,7 +269,7 @@
       <div class="patch"><span class="rank">03</span><div class="body"><b>STOP_REASON token + <code>ledger.sh coverage</code></b><span>Kapalı-küme stop-nedeni; kısmi doğrulama jüriye ulaşamaz. En ucuz mekanik gate.</span></div><div class="tags"><span class="tag ship">önce</span><span class="tag">TEMPLATE·ledger.sh</span></div></div>
       <div class="patch"><span class="rank">04</span><div class="body"><b>Anchored-verdict dişleri</b><span>&lt;anti-accept&gt; komşu E-D#/hash/makine-assertion'ı olmayan verdict'i reddeder.</span></div><div class="tags"><span class="tag">TEMPLATE·LINT</span></div></div>
       <div class="patch"><span class="rank">05</span><div class="body"><b>Haiku brifingi savunmaları taşır</b><span>Numaralı-checklist eval-integrity + untrusted-DATA + körleme adımları kazanır.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
-      <div class="patch"><span class="rank">06</span><div class="body"><b>§DAL-C &amp; §Light condition fix'leri</b><span>HELD-kullanıcı-bekliyor-sağlar; üç slotun da tek-denetçi remap'ı.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
+      <div class="patch"><span class="rank">06</span><div class="body"><b>§RED-HOLD &amp; §Light condition fix'leri</b><span>HELD-kullanıcı-bekliyor-sağlar; üç slotun da tek-denetçi remap'ı.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
       <div class="patch"><span class="rank">07</span><div class="body"><b>ledger.sh fsck + kendini-iyileştiren lock</b><span>PID-in-lock steal; phantom-tail girdiyi FAIL et; byte-identik re-append bastır.</span></div><div class="tags"><span class="tag">ledger.sh</span></div></div>
       <div class="patch"><span class="rank">08</span><div class="body"><b>Acceptance-criteria hash-pinning</b><span>Check'leri implementasyondan önce dondur; gate re-hash'ler; drift = otomatik savcı S-finding.</span></div><div class="tags"><span class="tag">TEMPLATE·ledger.sh</span></div></div>
       <div class="patch"><span class="rank">09</span><div class="body"><b>Honest-ceiling public copy</b><span>README/TRACK-RECORD'u denetlenmiş iddiaya sıkılaştır (worker jüriyi self-report eder; tamper-kanıt, önleme değil).</span></div><div class="tags"><span class="tag">README·TRACK-RECORD</span></div></div>

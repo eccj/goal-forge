@@ -252,8 +252,8 @@
           <td class="loc">TEMPLATE anti-accept</td>
           <td>A fake/absent hash anchor isn't rejected. <div class="fix"><b>FIX</b> anti-accept line: unanchored verdict = NOT DONE.</div></td></tr>
         <tr><td class="sev"><span class="sevchip major">major</span></td>
-          <td>A legitimate §DAL-C HOLD can't satisfy its own condition</td>
-          <td class="loc">TEMPLATE §DAL-C</td>
+          <td>A legitimate §RED-HOLD HOLD can't satisfy its own condition</td>
+          <td class="loc">TEMPLATE §RED-HOLD</td>
           <td>&lt;condition&gt; demands an E-D# block + verdict for every D#. <div class="fix"><b>FIX</b> emit a HELD-satisfies-pending-user clause.</div></td></tr>
         <tr><td class="sev"><span class="sevchip major">major</span></td>
           <td>§Light remaps 1 of 3 juror slots</td>
@@ -277,7 +277,7 @@
       <div class="patch"><span class="rank">03</span><div class="body"><b>STOP_REASON token + <code>ledger.sh coverage</code></b><span>Closed-set stop reason; partial verification can't reach the jury. Cheapest mechanical gate.</span></div><div class="tags"><span class="tag ship">ship first</span><span class="tag">TEMPLATE·ledger.sh</span></div></div>
       <div class="patch"><span class="rank">04</span><div class="body"><b>Anchored-verdict teeth</b><span>&lt;anti-accept&gt; rejects any verdict lacking an adjacent E-D#/hash/machine assertion.</span></div><div class="tags"><span class="tag">TEMPLATE·LINT</span></div></div>
       <div class="patch"><span class="rank">05</span><div class="body"><b>Haiku brief carries the defenses</b><span>Numbered checklist gains eval-integrity + untrusted-DATA + blind steps.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
-      <div class="patch"><span class="rank">06</span><div class="body"><b>§DAL-C &amp; §Light condition fixes</b><span>HELD-satisfies-pending-user; single-auditor remap of all three slots.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
+      <div class="patch"><span class="rank">06</span><div class="body"><b>§RED-HOLD &amp; §Light condition fixes</b><span>HELD-satisfies-pending-user; single-auditor remap of all three slots.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
       <div class="patch"><span class="rank">07</span><div class="body"><b>ledger.sh fsck + self-healing lock</b><span>PID-in-lock steal; FAIL phantom-tail entries; suppress byte-identical re-appends.</span></div><div class="tags"><span class="tag">ledger.sh</span></div></div>
       <div class="patch"><span class="rank">08</span><div class="body"><b>Acceptance-criteria hash-pinning</b><span>Freeze checks before build; gate re-hashes; drift = auto prosecutor S-finding.</span></div><div class="tags"><span class="tag">TEMPLATE·ledger.sh</span></div></div>
       <div class="patch"><span class="rank">09</span><div class="body"><b>Honest-ceiling public copy</b><span>Tighten README/TRACK-RECORD to the audited claim (worker self-reports jury; tamper-evidence not prevention).</span></div><div class="tags"><span class="tag">README·TRACK-RECORD</span></div></div>

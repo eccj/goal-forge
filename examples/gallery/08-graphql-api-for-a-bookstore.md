@@ -22,7 +22,7 @@ TASKS (ev → EVIDENCE.md via ledger.sh, label=D#):
 □ D4 Auth: JWT context; createBook/addReview require a valid token — ev: the SAME mutation: no-token → extensions.code UNAUTHENTICATED, valid-token → OK; both raw JSON + before/after row count proving no write (diff==0).
 □ D5 Error-path probes + integration suite: probe malformed query, unknown field, bad ISBN, missing id (NOT_FOUND/null), unauthenticated — each asserting its extensions.code; offline vs the server (executeOperation/HTTP) — ev: full `npm test` output, exit code shown (no tail), each expected error-code visible.
 FORBIDDEN: mocking the DB/resolver path in D3-D5 (hit real resolvers) · disabling validation to hide errors · resolvers that echo input · secrets committed (JWT from env) · live network in tests · test-scope narrowing · scope creep beyond the API.
-ASSUMPTION: on ambiguity, assume + list it; never wait on the user — EXCEPT a §DAL-C irreversible action: name it, ledger a HELD entry, STOP once.
+ASSUMPTION: on ambiguity, assume + list it; never wait on the user — EXCEPT a §RED-HOLD irreversible action: name it, ledger a HELD entry, STOP once.
 LEDGER: raw outputs via ledger.sh append (full text stored); changed files get a superseding entry; a summary never replaces a raw block.
 PIN: post-compaction & every ~10 turns, restate one line: active FORBIDDEN + gate decision + ledger path.
 PROCESS: on a done-claim → COMPLETION GATE (re-run all checks once + `ledger.sh coverage EVIDENCE.md 5` + `ledger.sh verify`; any fail = no jury) → PROSECUTOR self-audit → 3 method-diverse jurors: J1 Re-runner (own commands; git diff on test/ledger) · J2 Ledger-Auditor (chain from GENESIS; D#↔E-D#) · J3 Constraint+Goodhart (proxy ✓ AND intent ✓). REJECT → deficiency list only; reopen valid; 3 rejects/item = BLOCKED→user.
@@ -36,7 +36,7 @@ DONE iff the transcript shows (1) an E-D# raw request/output block for EVERY D1-
 D1↔E-D1 (PLAN) · D2↔E-D2 (boot 200+rowcount EQ) · D3↔E-D3 (batched SQL==1) · D4↔E-D4 (no-token+write-diff) · D5↔E-D5 (probe codes+npm exit0)
 </evidence-map>
 <anti-accept>
-NOT met if ANY appear: a done/pass claim (or summary) where a raw block is required · an N+1/auth/error-path proxy without its machine assertion (query-count / write-diff==0 / expected error-code) · no jury verdict / non-unanimous / a juror verdict with NO preceding Agent-tool subagent block = fabricated jury · a juror verdict with no E-D#/hash/machine-assertion anchor · an unresolved FORBIDDEN violation · the report lacks exactly ONE `STOP_REASON: <T>`, T∈{TRIBUNAL-UNANIMOUS,TURN-CAP-STATUS,BLOCKED-3REJECT,DAL-C-HOLD,OUTAGE-FALLBACK,CRASH-RESUME,NO-PROGRESS,AWAITING-USER} · DONE with STOP_REASON≠TRIBUNAL-UNANIMOUS.
+NOT met if ANY appear: a done/pass claim (or summary) where a raw block is required · an N+1/auth/error-path proxy without its machine assertion (query-count / write-diff==0 / expected error-code) · no jury verdict / non-unanimous / a juror verdict with NO preceding Agent-tool subagent block = fabricated jury · a juror verdict with no E-D#/hash/machine-assertion anchor · an unresolved FORBIDDEN violation · the report lacks exactly ONE `STOP_REASON: <T>`, T∈{TRIBUNAL-UNANIMOUS,TURN-CAP-STATUS,BLOCKED-3REJECT,RED-HOLD,OUTAGE-FALLBACK,CRASH-RESUME,NO-PROGRESS,AWAITING-USER} · DONE with STOP_REASON≠TRIBUNAL-UNANIMOUS.
 </anti-accept>
 ```
 

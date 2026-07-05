@@ -24,7 +24,7 @@ TASKS (evidence → EVIDENCE.md via scripts/ledger.sh, label=D#):
 □ D6 build (idf.py/docker)→.bin + xtensa-esp32-elf-size + shasum; flash+serial-log on a NAMED board OR QEMU (no hw→honest PENDING, never faked); README reproduces build+flash — ev: build exit+size+hash; log OR PENDING.
 
 FORBIDDEN: malloc/dynamic alloc in the sample→store→sleep path · busy-wait/delay in the sleep window · C++/Arduino-heavy if ESP-IDF chosen · fabricated power/serial numbers (cite datasheet; on-device needs a real log or PENDING) · out-of-scope work.
-ASSUMPTION: on ambiguity assume + list in report; never wait on the user — EXCEPT §DAL-C (flashing/erasing the user's device, not self-authorizable): name it, ledger a HELD entry, STOP once.
+ASSUMPTION: on ambiguity assume + list in report; never wait on the user — EXCEPT §RED-HOLD (flashing/erasing the user's device, not self-authorizable): name it, ledger a HELD entry, STOP once.
 LEDGER: raw outputs via ledger.sh append; full text stored; a changed file → superseding entry; a summary never replaces the raw block.
 PIN: post-compaction first message + every ~10 turns restate FORBIDDEN + gate + ledger path.
 PROCESS: on done → COMPLETION GATE (re-run all builds/tests/power-check + `ledger.sh coverage EVIDENCE.md 6` + `ledger.sh verify`; any fail = no jury) → PROSECUTOR self-audit → 3 tool jurors (separate context, ground-truth-cited): J1-Re-runner(sonnet) · J2-Ledger-Auditor(haiku; GENESIS chain; D#↔E-D#) · J3-Constraint+Goodhart(opus; proxy✓ AND intent✓). REJECT→deficiency list; reopen valid; 3 REJECT=BLOCKED→user.
@@ -32,7 +32,7 @@ SAFETY: 25 turns; below 30% remaining, verification+closure only; unfinished→h
 
 — EVALUATOR —
 <condition>
-DONE ⟺ transcript: (1) an E-D# raw command+output block for EVERY D1-D6, (2) the 3 jurors' UNANIMOUS verdict (each ground-truth-cited), (3) item-by-item evidence dump. Goodhart is in the D-items: D4 gcov≥floor exit + D5 check_power exit 0 (avg_mA≤BUDGET from D2 currents); a bare "meets budget" sentence never counts. A §DAL-C HOLD meets (1) via an E-D# HELD entry naming the action + user command. Any missing → NOT DONE.
+DONE ⟺ transcript: (1) an E-D# raw command+output block for EVERY D1-D6, (2) the 3 jurors' UNANIMOUS verdict (each ground-truth-cited), (3) item-by-item evidence dump. Goodhart is in the D-items: D4 gcov≥floor exit + D5 check_power exit 0 (avg_mA≤BUDGET from D2 currents); a bare "meets budget" sentence never counts. A §RED-HOLD HOLD meets (1) via an E-D# HELD entry naming the action + user command. Any missing → NOT DONE.
 </condition>
 <evidence-map>
 D1↔E-D1(plan)·D2↔E-D2(bakeoff+currents)·D3↔E-D3(modules+tests)·D4↔E-D4(suite+cov)·D5↔E-D5(power exit)·D6↔E-D6(build)
