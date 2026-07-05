@@ -3,7 +3,7 @@ name: goal-forge
 description: Compiles evidence-based /goal contracts (and /loop recipes) with a tamper-evident Ledger and an adversarial Tribunal as the completion condition. Use when the user says "goal yaz", "goal-forge", "loop-forge", "loop yaz", "write a goal", "prepare a /goal", asks goal-vs-loop, or wants a campaign split.
 ---
 
-# Goal Forge 2.0 — a compiler for autonomous goals
+# Goal Forge 2.1 — a compiler for autonomous goals
 
 The /goal evaluator (small, fast) reads ONLY the transcript, runs no tools.
 Invariants: **(a) every deliverable carries transcript-visible evidence, (b)
@@ -46,7 +46,7 @@ models: prosecutor **Fable or Opus**; jurors **Opus/Sonnet/Haiku** mix
 7 **Tech/Approach** — fires per the CAPABILITY rule in
 [STACKS.md](STACKS.md) §Firing; "research decides" → stack-bakeoff (RECIPES)
 + roadmap PLAN (TEMPLATE §Roadmap).
-Consequential goals declare a KILL-CRITERIA + 1-line PREMORTEM at compile (TEMPLATE; decision hygiene; light-mode may skip). Future-user-input items: EXCLUDED → decide-list. A pre-filled confirm is
+Consequential goals declare KILL-CRITERIA + 1-line PREMORTEM at compile (TEMPLATE; light-mode may skip). Future-user-input items: EXCLUDED → decide-list. A pre-filled confirm is
 required EVEN WHEN answers are derivable from context; sole exception: the
 user explicitly enumerated the params in-session AND you say so in the report.
 
@@ -61,7 +61,7 @@ only when not derivable from D-items · <evidence-map> D#↔E-D# ·
 TYPE each □ D# at compile: **[M]achine** (evidence closes on exit-code /
 hash / diff / count alone) or **[J]udgment** (needs semantic assessment) —
 the type drives Tribunal effort routing (§5) and the G=1 fast path.
-An irreversible agent-unauthorized action → **§DAL-C terminal HOLD**: ledger names the action + exact user command, agent STOPS once (legitimate terminal state, not a waiting defect).
+An irreversible agent-unauthorized action → **§RED-HOLD terminal HOLD**: ledger names the action + exact user command, agent STOPS once (legitimate terminal state, not a waiting defect).
 Machine-greppable keys are ASCII-canon (RECIPES §Notation).
 
 ## 4. Evidence Ledger (during execution)
@@ -118,9 +118,9 @@ Archive contract+goal+score to `goals/goal-<date>-<slug>.md` (TEMPLATE
 §Archive) INCLUDING the **human-mirror**: a plain-language twin
 so the operator can review what they paste.
 Deliver ready-to-paste ` /goal ... ` + scorecard + decide-before-launch list
-+ a ≤5-line plain-language summary. Present finished; don't ask.
++ a ≤5-line plain summary AND a term legend (TEMPLATE §Plain-delivery). Present finished; don't ask.
 
 Anti-patterns (never emit): subjective finish lines · future-user-input
-items (except a §DAL-C terminal HOLD) · off-transcript evidence ·
+items (except a §RED-HOLD terminal HOLD) · off-transcript evidence ·
 summaries-as-evidence · no turn cap · one giant item · Goodhart traps ·
 8+ items (→campaign) · jury growth · jury-shopping.

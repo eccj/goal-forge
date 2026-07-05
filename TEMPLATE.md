@@ -1,4 +1,4 @@
-# Goal Skeleton + Ledger + Tribunal + Archive (2.0, full detail)
+# Goal Skeleton + Ledger + Tribunal + Archive (2.1, full detail)
 
 Produce the goal **in the user's language**. Ideal band 3000-4000 chars
 (hard limit 4000) — measured per LINT #9.
@@ -46,7 +46,7 @@ compression pass is a process defect — tighten the section budgets instead.
 ...
 FORBIDDEN: <untouchables> · <out-of-scope> · no work added outside scope.
 ASSUMPTION: on ambiguity make a reasonable assumption + list it in the report;
-never wait for the user — EXCEPT a §DAL-C case (an irreversible action the
+never wait for the user — EXCEPT a §RED-HOLD case (an irreversible action the
 agent must not self-authorize): name it, ledger a HELD entry, STOP once.
 LEDGER: raw outputs via ledger.sh append; full text stored; changed files get
 a superseding entry; a summary never replaces the raw block.
@@ -69,7 +69,7 @@ unfinished, honest status report.
 DONE if and only if the transcript shows (1) an E-D#-labeled raw command+output
 block for EVERY D1-D<n> item AND (2) the 3 jurors' UNANIMOUS verdict AND (3) an
 item-by-item evidence dump. [Only when not derivable from D-items: "<subjective
-wish>" = <measurable inequality>.] [If any D# is a §DAL-C terminal HOLD: it
+wish>" = <measurable inequality>.] [If any D# is a §RED-HOLD terminal HOLD: it
 satisfies clause (1) via its E-D# HELD entry, which MUST name the gated action
 AND the exact user command (a HELD entry has no execution output by design); a
 bare "HELD" naming neither = NOT DONE. Clauses (2)/(3) still apply to the goal.] If any is missing: NOT DONE.
@@ -89,7 +89,7 @@ deficiency-closure entry between the REJECT and the re-spawn (any NEW ledgered
 entry responsive to the named deficiency counts — an E-S#, a superseding E-D#,
 or a fresh E# closure) — silently re-rolling a verdict = jury-shopping · a D# never
 mentioned · an unresolved FORBIDDEN
-violation · turn cap exceeded without an honest status report · the final report lacks exactly ONE `STOP_REASON: <T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, DAL-C-HOLD, OUTAGE-FALLBACK, CRASH-RESUME, NO-PROGRESS, AWAITING-USER} — a missing/duplicated/illegal T voids the stop · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS (the sole done-token).
+violation · turn cap exceeded without an honest status report · the final report lacks exactly ONE `STOP_REASON: <T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, RED-HOLD, OUTAGE-FALLBACK, CRASH-RESUME, NO-PROGRESS, AWAITING-USER} — a missing/duplicated/illegal T voids the stop · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS (the sole done-token).
 </anti-accept>
 ```
 
@@ -261,7 +261,11 @@ Field-validated: a network drop killed all three tournament judges in the v6
 run; they were relaunched with identical prompts (recorded in
 the maintainer-private tournament record §Incident).
 
-## §DAL-C — irreversible-action terminal hold (stop-hook loop guard)
+## §RED-HOLD — a RED action, held for the operator (goal-side of the loop RED tier)
+(Plain: some actions are too dangerous for the agent to do on its own — spend
+money, deploy to production, delete data, publish. On those it does NOT act and
+does NOT loop; it HOLDs. "§RED-HOLD" is the goal-side name for exactly the RED
+risk tier used in loops — one concept, both places.)
 When a deliverable's ONLY forward path is an action the agent must NOT
 self-authorize — repo/branch delete, force-push, prod deploy, data drop,
 publish, billing — the worker neither performs it nor waits in a loop. It
@@ -279,7 +283,7 @@ budget: verification + closure only). Every LEGITIMATE stop is ONE of a CLOSED
 set — nothing else counts as a clean finish:
 crash/disconnect → RESUME CARD · evaluator-agent outage → §Fallback ·
 turn-cap reached → honest status report · same item REJECTed 3× → BLOCKED to
-the user · irreversible agent-unauthorized action → §DAL-C terminal HOLD.
+the user · irreversible agent-unauthorized action → §RED-HOLD terminal HOLD.
 A stop matching one of these is DONE-or-HELD, not unfinished; a stop matching
 NONE is incomplete work and the loop continues.
 
@@ -300,6 +304,41 @@ FIXED N=15 (LINT #5's 20-floor is waived for light — documented exception).
 REJECTs count PER ITEM and the strike counter CARRIES OVER on escalation
 (never resets): two REJECTs on one item → escalate to standard mode; the
 global 3-strikes BLOCKED valve still caps the same item at three total.
+
+## §Plain-delivery (make the output legible to a non-technical user)
+The compiled `/goal` is dense on purpose (it is a machine contract). So EVERY
+delivery to the user MUST carry, alongside the paste-ready block:
+1. **≤5-line "What this does"** — plain words, no jargon: what will be built and
+   how you'll know it's really done. (This is the §Archive human-mirror, surfaced.)
+2. **Term legend** — a one-line plain meaning for each jargon term that appears,
+   in the user's language. Canonical meanings (translate, keep them this simple):
+   · **D1, D2… (deliverable)** — one job to finish.
+   · **E-D# (evidence)** — the proof that job is done: a real command's output.
+   · **Tribunal / jury** — an AI panel that independently re-checks the work is
+     truly finished before it's allowed to stop (a checker, not the doer).
+   · **Ledger** — the proof file: every result recorded and hash-chained, so
+     tampering shows.
+   · **STOP_REASON** — one word for WHY it stopped (done / blocked / out of turns).
+   · **FORBIDDEN** — the hard "never do this" list.
+   · **§RED-HOLD** — a dangerous action (spend money, deploy, delete, publish) the
+     AI will NOT do on its own; it stops and hands you the exact command to run.
+Only include the terms that actually appear in this goal. A delivery with the
+dense block but no plain summary + legend is INCOMPLETE (LINT #9 scores it down).
+
+## §Plain-report (the final report, when the run finishes)
+The final report to the user OPENS with a plain-language **Result** block — the
+technical ledger/verdict dump comes AFTER it, never first:
+```
+## Result (plain)
+- What got done: <one line per deliverable, in normal words>
+- Verified? YES — an independent AI jury re-ran the checks and agreed / NO — <what failed>
+- What's next: <the next step, or "nothing — it's finished">
+```
+Only after this does the report show the per-item evidence ledger, hashes, and
+juror verdicts. A run that ends with only the technical dump and no plain Result
+block is an INCOMPLETE report (a non-technical user must be able to read the
+first screen and know what happened). This is the run-completion twin of
+§Plain-delivery (which covers the compile-time hand-off).
 
 ## §Shadow-test (promoting a new LINT/SKILL/TEMPLATE version)
 Before a changed rubric or skeleton becomes the default, SHADOW-test it: re-lint

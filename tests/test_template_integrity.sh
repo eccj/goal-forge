@@ -34,7 +34,7 @@ REQUIRED=(
   # -- 9 top-level "## §" sections (heading prefix must be present) --
   '## §Ledger'
   '## §Juror prompt core'
-  '## §DAL-C'
+  '## §RED-HOLD'
   '## §Fallback'
   '## §SAFETY'
   '## §Roadmap'

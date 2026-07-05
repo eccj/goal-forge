@@ -2,9 +2,11 @@
 
 **An evidence-based `/goal` compiler for Claude Code — faking "done" isn't cheap, and any fake is tamper-evident to a later re-runner.**
 
-![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 2.0](https://img.shields.io/badge/status-2.0-blue.svg) ![Dependencies: none](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum-brightgreen.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 2.1](https://img.shields.io/badge/status-2.1-blue.svg) ![Dependencies: none](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum-brightgreen.svg)
 
 Autonomous agents love declaring victory. They say *"all tests pass"* without pasting the test output, *"deployed"* without a live check, *"optimized"* with no numbers. Goal Forge compiles your task into a `/goal` contract under which **finishing is a verdict, not a feeling**: every deliverable must leave raw command output in a hash-chained evidence ledger, and an adversarial tribunal — a prosecutor whose job is to attack the work, plus three jurors who re-run the checks themselves — must reach a **unanimous** verdict before the agent is allowed to stop.
+
+> **New here, not a developer?** You don't need to read code to use this. Start with **[GLOSSARY.md](GLOSSARY.md)** — every term (D#, tribunal, ledger, §RED-HOLD…) explained in one plain line each. In short: you write a finish line, the AI works on its own until it can *prove* it's crossed — and a second, independent AI double-checks that proof before it's allowed to stop.
 
 ## How it works
 
@@ -80,6 +82,7 @@ The model that does the work is never the model that declares it finished — in
 | File | Role |
 |---|---|
 | [SKILL.md](SKILL.md) | the compiler pipeline (this is the skill) |
+| [GLOSSARY.md](GLOSSARY.md) | **every term in one plain line — start here if you're not a developer** |
 | [QUICKSTART.md](QUICKSTART.md) | 5-minute onboarding |
 | [TEMPLATE.md](TEMPLATE.md) | contract skeleton · ledger & juror rules · archive format |
 | [LINT.md](LINT.md) | 10 quality criteria every compile is scored against |

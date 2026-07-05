@@ -74,7 +74,7 @@ def numbered_heading(line):
 
 def name_words(name):
     """Tokenize a §name into lowercased word tokens (split on whitespace only;
-    hyphens kept so 'DAL-C' / 'No-external-dependency' stay single tokens)."""
+    hyphens kept so '§RED-HOLD' / 'No-external-dependency' stay single tokens)."""
     out = []
     for tok in name.split():
         tok = tok.strip(STRIP)
@@ -100,8 +100,8 @@ def extract_name(after):
 def word_prefix_match(a, b):
     """True if one word list is a (case-insensitive) word-prefix of the other.
     Handles both directions: short ref -> long anchor ('Notation' vs
-    'Notation standard') AND long ref-in-prose -> short anchor ('DAL-C terminal
-    HOLD' vs 'DAL-C')."""
+    'Notation standard') AND long ref-in-prose -> short anchor ('§RED-HOLD terminal
+    HOLD' vs '§RED-HOLD')."""
     n = min(len(a), len(b))
     if n == 0:
         return False

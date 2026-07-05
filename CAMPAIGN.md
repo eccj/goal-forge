@@ -41,7 +41,7 @@ milestone N's goal ends by *staging* milestone N+1.
    — but NOOP is NOT automatically final: in the sunset branch the
    prosecutor attacks the sunset rationale; if the refutation stands, the
    gate verdict REOPENS and is revised on evidence (field precedent: v9,
-   52-NOOP → appeal → 66-CONTINUE). The mandatory DAL-B prosecutor
+   52-NOOP → appeal → 66-CONTINUE). The mandatory §APPEAL prosecutor
    attack is PROCEDURE, not the appeal — the appeal right is consumed ONLY
    when a standing refutation triggers a REOPEN; a failed refutation leaves
    the NOOP final immediately. The SAME gate judge writes the revision
@@ -102,9 +102,9 @@ Engineer the task prompt with goal-grade discipline — this is what separates a
   · **RED** — money, production, outbound-to-a-customer, or any irreversible
     action. A RED action NEVER runs inside the autonomous loop: the loop
     prepares it, writes a `HELD: <action> · run: <exact command>` line to its
-    ledger, and STOPS for the operator. **RED ⊇ §DAL-C** — every §DAL-C
-    irreversible-action HOLD is a RED action; the tier generalizes DAL-C from
-    goals to loops (no contradiction: a RED loop-step is exactly a DAL-C HOLD).
+    ledger, and STOPS for the operator. **RED ⊇ §RED-HOLD** — every §RED-HOLD
+    irreversible-action HOLD is a RED action; the tier generalizes §RED-HOLD from
+    goals to loops (no contradiction: a RED loop-step is exactly a §RED-HOLD HOLD).
   A recipe with no tier is NOT DONE. The round-ledger RECORDS what the loop did
   so an operator (or a /goal evaluator reading it) can catch a RED action that
   executed instead of being HELD — it is not auto-blocked; enforcement is the

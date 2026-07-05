@@ -2,19 +2,19 @@
 DONE-MEANS (özet — tam tanım <condition>'da): her D# E-D# ham-kanıtlı · savcı S#→E-S# kapalı · 3 jüri OYBİRLİĞİ.
 
 — WORKER —
-MISSION: goal-forge'u 1.6'ya taşı: §DAL-C terminal-hold dalı + terminal-state taksonomisi + 2026-07-04 derslerini kodifiye + sürüm doc-hygiene, canlı örnek-goal ile kanıtlı.
+MISSION: goal-forge'u 1.6'ya taşı: §RED-HOLD terminal-hold dalı + terminal-state taksonomisi + 2026-07-04 derslerini kodifiye + sürüm doc-hygiene, canlı örnek-goal ile kanıtlı.
 
 TASKS (kanıt <ledger>'e ledger.sh ile, label=D#):
 □ D1 goals/PLAN-1.6.md oluştur; D2-D7 durumu dosyada — kanıt: ls -la + wc -l.
-□ D2 TEMPLATE'e §DAL-C: yegâne-yol geri-dönülmez ajan-yetkisiz-eylemse (repo-sil·force-push) → terminal HOLD: eylem-adı + gerekçe + kullanıcı-komutu + E-D# HELD girdisi + tek-STOP, re-poll YOK; ASSUMPTION "never wait" satırına carve-out — kanıt: grep §DAL-C + HOLD·HELD·STOP-once·no-repoll + carve-out.
-□ D3 §Fallback + §SAFETY → gerçek ## başlık (dangling "TEMPLATE Fallback" ref fix) + kapalı terminal-state listesi (crash·outage·turn-cap·3-strike·irreversible→DAL-C); LINT #4/#7 onur-durak istisnası + SKILL anti-pattern in-place muafiyeti — kanıt: grep başlık+liste+istisna + wc -l SKILL ≤97.
+□ D2 TEMPLATE'e §RED-HOLD: yegâne-yol geri-dönülmez ajan-yetkisiz-eylemse (repo-sil·force-push) → terminal HOLD: eylem-adı + gerekçe + kullanıcı-komutu + E-D# HELD girdisi + tek-STOP, re-poll YOK; ASSUMPTION "never wait" satırına carve-out — kanıt: grep §RED-HOLD + HOLD·HELD·STOP-once·no-repoll + carve-out.
+□ D3 §Fallback + §SAFETY → gerçek ## başlık (dangling "TEMPLATE Fallback" ref fix) + kapalı terminal-state listesi (crash·outage·turn-cap·3-strike·irreversible→§RED-HOLD); LINT #4/#7 onur-durak istisnası + SKILL anti-pattern in-place muafiyeti — kanıt: grep başlık+liste+istisna + wc -l SKILL ≤97.
 □ D4 2026-07-04 derslerini kodifiye (5 grep): haiku numaralı-komut jüri brifingi + sıfır-dış-API/insan-verdict notu (TEMPLATE) · rewrite-koruma + geçmiş-temiz=platform-API reçeteleri (RECIPES) · eksik GUARDRAILS satırı (S1) — kanıt: kavram başına 1 grep.
 □ D5 Stretch: interview tek-istisna cümlesi (SKILL in-place) · LINT #5 heavy +5 tur dalı · STACKS olgu-fixleri (CSS-only, GSAP-3D) — kanıt: grep her fix + wc -l SKILL ≤97.
 □ D6 Doc-hygiene: damgalar→1.6 (README·SKILL:6·TEMPLATE:1) · VERSIONS'a 1.5+1.6 · METRICS özeti tazele · ledger.sh TR-string fix · public EN-only — kanıt: grep "1.6" damgalar + VERSIONS 1.5&1.6 + ledger.sh TR=0 + public TR=0.
-□ D7 CANLI KANIT+push: yegâne-yolu geri-dönülmez kullanıcı-eylemi gerçek /goal derle+koştur; §DAL-C'nin E-D# HELD + tek-STOP (re-poll YOK) ürettiğini göster; sonra EN doc'ları branch'te commit+push (özel goals/ ignored, görünürlük sabit) — kanıt: HELD girdisi + STOP alıntısı + git log/status + push onayı + ls-files goals/=0.
+□ D7 CANLI KANIT+push: yegâne-yolu geri-dönülmez kullanıcı-eylemi gerçek /goal derle+koştur; §RED-HOLD'nin E-D# HELD + tek-STOP (re-poll YOK) ürettiğini göster; sonra EN doc'ları branch'te commit+push (özel goals/ ignored, görünürlük sabit) — kanıt: HELD girdisi + STOP alıntısı + git log/status + push onayı + ls-files goals/=0.
 
 FORBIDDEN: dış-API (jüri dahil) yok · iki geri-dönülmez gizlilik-eylemini (dangling-purge·noreply-recommit) YAPMA (yalnız dokümante) · repo görünürlüğü sabit, özel goals/ publish yok · SKILL ≤97 (in-place/geri-kazanım) · zaten-kodifiye Q7 greenfield'i açma · kapsam-dışı yok · ELLE SAYI YOK (ham-çıktı/komut).
-ASSUMPTION: belirsizlikte makul varsayım + raporda listele; bekleme — TEK istisna DAL-C vakası.
+ASSUMPTION: belirsizlikte makul varsayım + raporda listele; bekleme — TEK istisna §RED-HOLD vakası.
 LEDGER: ham çıktılar ledger.sh append; tam metin saklanır; değişen dosya superseding girdi; özet ham bloğun yerine geçmez.
 PIN: compaction-sonrası İLK mesaj + her ~10 tur, tek satır: aktif FORBIDDEN + gate-kararı + ledger-yolu.
 PROCESS: done-iddiada COMPLETION GATE (mekanik kontroller tek paso + ledger; hata = jüri yok) → PROSECUTOR bağımsız subagent (Opus; S1..Sn → E-S#) → 3 jüri (Sonnet, araçlı, doğrula-sonra-hüküm): J1-Re-runner · J2-Ledger-Denetçi (zincir GENESIS'ten; D#↔E-D#) · J3-Kısıt+Goodhart çift-imza (vekil ✓ VE niyet ✓). REJECT'te yalnız eksik-listesi; reopen meşru; 3 REJECT = BLOKE → kullanıcı.
@@ -22,11 +22,11 @@ SAFETY: 45 tur; son %30'da yalnız doğrulama+kapanış; bitmezse dürüst durum
 
 — EVALUATOR —
 <condition>
-DONE ancak ve ancak transcript: (1) her D1-D7 için E-D# ham komut+çıktı bloğu, (2) 3 jüri OYBİRLİĞİ, (3) madde-madde kanıt dökümü. GOODHART: "DAL-C çalışıyor" = geri-dönülmez-yegâne-yol örnek-goal E-D# HELD ÜRETİR VE ≤1 STOP + sıfır re-poll (grep YETMEZ). Eksikse: NOT DONE.
+DONE ancak ve ancak transcript: (1) her D1-D7 için E-D# ham komut+çıktı bloğu, (2) 3 jüri OYBİRLİĞİ, (3) madde-madde kanıt dökümü. GOODHART: "§RED-HOLD çalışıyor" = geri-dönülmez-yegâne-yol örnek-goal E-D# HELD ÜRETİR VE ≤1 STOP + sıfır re-poll (grep YETMEZ). Eksikse: NOT DONE.
 </condition>
 <evidence-map>
-D1↔E-D1(plan) · D2↔E-D2(§DAL-C) · D3↔E-D3(taksonomi+≤97) · D4↔E-D4(5 ders) · D5↔E-D5(stretch+≤97) · D6↔E-D6(sürüm) · D7↔E-D7(canlı HELD+push)
+D1↔E-D1(plan) · D2↔E-D2(§RED-HOLD) · D3↔E-D3(taksonomi+≤97) · D4↔E-D4(5 ders) · D5↔E-D5(stretch+≤97) · D6↔E-D6(sürüm) · D7↔E-D7(canlı HELD+push)
 </evidence-map>
 <anti-accept>
-Şunlardan biri varsa SAĞLANMAZ: "yapıldı" denip ham çıktı yok · ham blok yerine özet · jüri hükmü yok/oybirliği değil · bir D# hiç anılmamış · çözülmemiş FORBIDDEN ihlali (dış-API·gizlilik·SKILL>97·elle-sayı) · DAL-C canlı STOP olmadan grep'le "kanıtlanmış" · tur-tavanı dürüst rapor olmadan aşılmış.
+Şunlardan biri varsa SAĞLANMAZ: "yapıldı" denip ham çıktı yok · ham blok yerine özet · jüri hükmü yok/oybirliği değil · bir D# hiç anılmamış · çözülmemiş FORBIDDEN ihlali (dış-API·gizlilik·SKILL>97·elle-sayı) · §RED-HOLD canlı STOP olmadan grep'le "kanıtlanmış" · tur-tavanı dürüst rapor olmadan aşılmış.
 </anti-accept>
