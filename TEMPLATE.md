@@ -80,8 +80,9 @@ block (tool_use+tool_result) in the transcript — a prose-only seal with no
 spawned juror = fabricated jury · any juror verdict lacking an adjacent cited
 E-D#/E-S#, recomputed-hash, or machine-assertion line by its APPROVE/REJECT
 (unanchored verdict) · a juror role that REJECTED re-spawned with NO ledgered
-deficiency-closure entry (E-S# or superseding E-D#) between the REJECT and the
-re-spawn — silently re-rolling a verdict = jury-shopping · a D# never
+deficiency-closure entry between the REJECT and the re-spawn (any NEW ledgered
+entry responsive to the named deficiency counts — an E-S#, a superseding E-D#,
+or a fresh E# closure) — silently re-rolling a verdict = jury-shopping · a D# never
 mentioned · an unresolved FORBIDDEN
 violation · turn cap exceeded without an honest status report · the final report lacks exactly ONE `STOP_REASON: <T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, DAL-C-HOLD, OUTAGE-FALLBACK, CRASH-RESUME, NO-PROGRESS, AWAITING-USER} — a missing/duplicated/illegal T voids the stop · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS (the sole done-token).
 </anti-accept>
