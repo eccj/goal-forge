@@ -93,6 +93,20 @@ For recurring work, emit a `/loop` recipe instead of a goal:
 
 Engineer the task prompt with goal-grade discipline — this is what separates a
 "loop" from a "loop that quietly rots":
+- **Risk tier (declare one, first line of the recipe)** — every loop is
+  classified so autonomy matches blast radius:
+  · **GREEN** — reads only + writes to its own state/ledger files. Safe to run
+    unattended.
+  · **YELLOW** — drafts an artifact a human ships (reply, PR, page edit,
+    message). The loop MUST stop at the draft; shipping is a separate human act.
+  · **RED** — money, production, outbound-to-a-customer, or any irreversible
+    action. A RED action NEVER runs inside the autonomous loop: the loop
+    prepares it, writes a `HELD: <action> · run: <exact command>` line to its
+    ledger, and STOPS for the operator. **RED ⊇ §DAL-C** — every §DAL-C
+    irreversible-action HOLD is a RED action; the tier generalizes DAL-C from
+    goals to loops (no contradiction: a RED loop-step is exactly a DAL-C HOLD).
+  A recipe with no tier is NOT DONE; a RED action that executed inside the loop
+  (not HELD) is a FORBIDDEN breach, caught by the evaluator and the round-ledger.
 - **Per-iteration contract**: exactly what one iteration checks/does, with
   transcript evidence ("paste the failing job names", "report queue depth").
 - **No-op discipline**: "if nothing needs doing, say NOOP + one-line status" —
@@ -113,9 +127,27 @@ Engineer the task prompt with goal-grade discipline — this is what separates a
 - **Cadence advice**: match interval to how fast the watched thing changes;
   self-paced (no interval) lets the model choose — recommend it when change
   rate varies.
-- **Ledger for loops (v3)**: long-lived loops append each non-NOOP iteration's
-  evidence to a ledger via `scripts/ledger.sh` — the chain proves the loop's
-  history wasn't rewritten. NOOP iterations log one line, no ledger entry.
+- **One change per round** (frontier-researcher discipline): each iteration
+  fixes the SINGLE highest-priority thing it found, never everything at once —
+  change one thing, test it, keep it only if the check improved, write it down,
+  repeat. A round that touches many unrelated things is not a loop round, it is
+  scope creep; the round-ledger entry names the ONE change.
+- **Frozen same-check**: the iteration's success check is pinned by hash at loop
+  start (`scripts/ledger.sh` records the check-spec's sha256) and re-verified
+  each round. If the check itself drifts (the loop silently changing its own
+  metric = Goodhart), the hash mismatches and the round HALTS with a drift
+  report — this week's score stays comparable to last week's by construction.
+- **Cheap-first escalation (cost routing)**: routine rounds run on the cheap
+  model; the flagship is spent ONLY after a cheap-model failure is LOGGED to the
+  round-ledger (a `CHEAP-FAIL: <why>` entry gates the escalation). Distinct from
+  the human break-glass escalation below — this one controls the bill.
+- **Round-ledger (MANDATORY, not v3-optional)**: EVERY iteration — including
+  NOOP — appends one entry to the loop's `scripts/ledger.sh` chain (NOOP logs a
+  `NOOP · <status>` entry, still hash-chained). The chain is the loop's
+  tamper-evident state-file: `ledger.sh verify` proves the history wasn't
+  rewritten across sessions (closes the session-seam hole for loops). The
+  resuming session runs `verify` before its first round; a broken chain stops
+  the loop and alerts the operator.
 - **Reopen discipline**: a loop that flagged X as broken and later finds
   contrary evidence must revise its earlier report in the next iteration
   (same rule as the Tribunal's reopen clause — stale claims rot loops too).

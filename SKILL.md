@@ -3,7 +3,7 @@ name: goal-forge
 description: Compiles evidence-based /goal contracts (and /loop recipes) with a tamper-evident Ledger and an adversarial Tribunal as the completion condition. Use when the user says "goal yaz", "goal-forge", "loop-forge", "loop yaz", "write a goal", "prepare a /goal", asks goal-vs-loop, or wants a campaign split.
 ---
 
-# Goal Forge 1.9 — a compiler for autonomous goals
+# Goal Forge 2.0 — a compiler for autonomous goals
 
 The /goal evaluator (small, fast) reads ONLY the transcript, runs no tools.
 Invariants: **(a) every deliverable carries transcript-visible evidence, (b)
@@ -42,12 +42,11 @@ add a research item when §1 flagged a gap) · 3 **MUST-NOTs** ·
 5 **Turn budget** (formula: [LINT.md](LINT.md) #5) ·
 6 **Tribunal** — strictness (standard / heavy +prosecutor / light) AND
 models: prosecutor **Fable or Opus**; jurors **Opus/Sonnet/Haiku** mix
-(haiku is checklist-proven — the cheap lane; opus for the hardest verify;
-default sonnet) ·
+(haiku=checklist-proven cheap-lane; opus for hardest verify; default sonnet) ·
 7 **Tech/Approach** — fires per the CAPABILITY rule in
 [STACKS.md](STACKS.md) §Firing; "research decides" → stack-bakeoff (RECIPES)
 + roadmap PLAN (TEMPLATE §Roadmap).
-Future-user-input items: EXCLUDED → decide-list. A pre-filled confirm is
+Each goal declares a KILL-CRITERIA + 1-line PREMORTEM at compile (TEMPLATE; decision hygiene). Future-user-input items: EXCLUDED → decide-list. A pre-filled confirm is
 required EVEN WHEN answers are derivable from context; sole exception: the
 user explicitly enumerated the params in-session AND you say so in the report.
 
@@ -62,16 +61,13 @@ only when not derivable from D-items · <evidence-map> D#↔E-D# ·
 TYPE each □ D# at compile: **[M]achine** (evidence closes on exit-code /
 hash / diff / count alone) or **[J]udgment** (needs semantic assessment) —
 the type drives Tribunal effort routing (§5) and the G=1 fast path.
-An irreversible, agent-unauthorized action compiles to a **§DAL-C terminal
-HOLD**: the ledger names the gated action + exact user command, the agent
-STOPS once — a legitimate terminal state, not a waiting defect.
+An irreversible agent-unauthorized action → **§DAL-C terminal HOLD**: ledger names the action + exact user command, agent STOPS once (legitimate terminal state, not a waiting defect).
 Machine-greppable keys are ASCII-canon (RECIPES §Notation).
 
 ## 4. Evidence Ledger (during execution)
-The compiled goal instructs the executing agent to append every load-bearing
-raw output (command + stdout block) to an append-only ledger as it happens —
-preferably via `scripts/ledger.sh append/verify`, which computes the sha256
-chain and stores each entry's FULL text so jurors can recompute from GENESIS.
+The compiled goal appends every load-bearing raw output (command + stdout) to an
+append-only ledger via `scripts/ledger.sh append/verify` — sha256 chain, FULL
+entry text stored so jurors recompute from GENESIS.
 If a file changes after its entry, append a superseding entry with fresh
 measurements — never let a stale entry pose as current. Summaries never
 replace raw blocks — the Tribunal audits the ledger, not the narrative.

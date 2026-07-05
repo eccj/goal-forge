@@ -1,4 +1,4 @@
-# Goal Skeleton + Ledger + Tribunal + Archive (1.9, full detail)
+# Goal Skeleton + Ledger + Tribunal + Archive (2.0, full detail)
 
 Produce the goal **in the user's language**. Ideal band 3000-4000 chars
 (hard limit 4000) — measured per LINT #9.
@@ -20,6 +20,11 @@ E-D# raw-evidenced + UNANIMOUS jury verdict in the final report.
 
 ═══ WORKER LAYER ═══
 MISSION: <one sentence, observable finished state>.
+KILL-CRITERIA: <one line — what evidence would DISQUALIFY this goal / prove the
+  approach wrong> · PREMORTEM: <one line — "it is 12 months out and this failed;
+  the cause was ___"> (decision hygiene, declared at compile: an option with no
+  written kill-condition survives on inertia; a pre-mortem cheaply surfaces the
+  most likely failure before any tokens are spent).
 
 TASKS (evidence appended to <ledger> via scripts/ledger.sh, label=D#):
 TYPE each D# at compile — [M]achine: its evidence closes on exit-code/hash/
@@ -295,6 +300,15 @@ FIXED N=15 (LINT #5's 20-floor is waived for light — documented exception).
 REJECTs count PER ITEM and the strike counter CARRIES OVER on escalation
 (never resets): two REJECTs on one item → escalate to standard mode; the
 global 3-strikes BLOCKED valve still caps the same item at three total.
+
+## §Shadow-test (promoting a new LINT/SKILL/TEMPLATE version)
+Before a changed rubric or skeleton becomes the default, SHADOW-test it: re-lint
+(or re-judge) a sample of REAL past goals under both the old and new version and
+diff the verdicts. A change that flips a previously-good goal to fail — or a
+previously-bad goal to pass — must be explained before promotion. Testing a new
+prompt only on hand-picked examples proves it passed your imagination; the
+disagreements against real traffic are what actually decide. (Shadow-diff is the
+compile-time cousin of the round-ledger's frozen-check: catch drift before it ships.)
 
 ## §Archive — goals/goal-<date>-<slug>.md template + resume card
 
