@@ -15,7 +15,7 @@ own delivery legend explains.)
 | **Tribunal / jury** | An AI panel that independently re-checks the work is truly finished before it's allowed to stop. It's the *checker*, never the *doer* — the model that did the work isn't the one that declares it done. |
 | **Prosecutor** | An AI whose only job is to attack the work and try to prove it's NOT done. If it can't, that's a good sign. |
 | **Ledger** | The proof file. Every result is recorded and chained with a fingerprint (hash), so if someone edits the past, it shows. |
-| **Hash / hash-chain** | A digital fingerprint. Chaining them means you can't quietly rewrite an earlier step without breaking the chain. |
+| **Hash / hash-chain / sha256** | A digital fingerprint of some text ("sha256" is just the standard recipe for making one). Chaining them means you can't quietly rewrite an earlier step without breaking the chain. |
 | **STOP_REASON** | One word for *why* it stopped: `TRIBUNAL-UNANIMOUS` (done & verified), `BLOCKED`, `out of turns`, etc. |
 | **FORBIDDEN** | The hard "never do this" list baked into the goal (e.g. "don't touch production", "no schema changes"). |
 | **§RED-HOLD** | A dangerous action — spend money, deploy to production, delete data, publish — that the AI will **not** do on its own. It stops and hands you the exact command to run. (The "red" tier of the traffic-light below. Earlier versions called this same safety-hold by a different codename.) |
@@ -49,6 +49,7 @@ You don't operate it, but the words show up in reports:
 | **appeal-law** | In a multi-goal campaign, the rule that lets a "not worth doing" verdict be re-argued once if there's a real counter-argument. |
 | **compaction** | When a long conversation is auto-summarized to save space — which is why the AI re-PINs its rules afterward. |
 | **GOODHART** | The trap of hitting the number while missing the point. The checkers require *both* "metric passed" AND "intent actually met." |
+| **`<condition>` / `<evidence-map>` / `<anti-accept>`** | The checklist the checker-AI reads (the code-looking tags are just labels): what counts as truly done, which proof belongs to which job, and which patterns mean the work is *faking* done. You don't write these — the compiler does. |
 
 **The one idea behind all of it:** an AI saying "done" doesn't make it true. goal-forge
 turns "done" into *proof you can read* — and a second, independent AI confirms it
