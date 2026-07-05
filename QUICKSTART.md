@@ -26,7 +26,7 @@ usage line.
   archive + one telemetry row in `goals/METRICS.md`.
 
 ## Small task? Light mode
-≤3 deliverables AND ≤15 turns → one tool-equipped auditor replaces the
+≤3 deliverables (or ≤5 when every deliverable is machine-decidable) AND ≤15 turns → one tool-equipped auditor replaces the
 3-juror panel. Ledger, gate and archive are never lightened.
 
 ## Worked example
