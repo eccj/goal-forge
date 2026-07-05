@@ -105,8 +105,10 @@ Engineer the task prompt with goal-grade discipline — this is what separates a
     ledger, and STOPS for the operator. **RED ⊇ §DAL-C** — every §DAL-C
     irreversible-action HOLD is a RED action; the tier generalizes DAL-C from
     goals to loops (no contradiction: a RED loop-step is exactly a DAL-C HOLD).
-  A recipe with no tier is NOT DONE; a RED action that executed inside the loop
-  (not HELD) is a FORBIDDEN breach, caught by the evaluator and the round-ledger.
+  A recipe with no tier is NOT DONE. The round-ledger RECORDS what the loop did
+  so an operator (or a /goal evaluator reading it) can catch a RED action that
+  executed instead of being HELD — it is not auto-blocked; enforcement is the
+  HELD-and-stop discipline plus human review, not a hook.
 - **Per-iteration contract**: exactly what one iteration checks/does, with
   transcript evidence ("paste the failing job names", "report queue depth").
 - **No-op discipline**: "if nothing needs doing, say NOOP + one-line status" —
@@ -144,10 +146,12 @@ Engineer the task prompt with goal-grade discipline — this is what separates a
 - **Round-ledger (MANDATORY, not v3-optional)**: EVERY iteration — including
   NOOP — appends one entry to the loop's `scripts/ledger.sh` chain (NOOP logs a
   `NOOP · <status>` entry, still hash-chained). The chain is the loop's
-  tamper-evident state-file: `ledger.sh verify` proves the history wasn't
-  rewritten across sessions (closes the session-seam hole for loops). The
-  resuming session runs `verify` before its first round; a broken chain stops
-  the loop and alerts the operator.
+  tamper-EVIDENT state-file: `ledger.sh verify` catches any IN-PLACE edit of a
+  past round. HONEST LIMIT (keyless chain): a whole-ledger re-forge from GENESIS
+  still verifies clean — to actually close the session-seam, anchor the tip hash
+  externally each session (a git commit of the ledger, or an operator-kept note)
+  and compare on resume. The resuming session runs `verify` (and the external
+  compare, if set) before its first round; a mismatch stops the loop.
 - **Reopen discipline**: a loop that flagged X as broken and later finds
   contrary evidence must revise its earlier report in the next iteration
   (same rule as the Tribunal's reopen clause — stale claims rot loops too).

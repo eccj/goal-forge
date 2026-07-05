@@ -24,7 +24,7 @@ KILL-CRITERIA: <one line — what evidence would DISQUALIFY this goal / prove th
   approach wrong> · PREMORTEM: <one line — "it is 12 months out and this failed;
   the cause was ___"> (decision hygiene, declared at compile: an option with no
   written kill-condition survives on inertia; a pre-mortem cheaply surfaces the
-  most likely failure before any tokens are spent).
+  most likely failure before any tokens are spent; REQUIRED on consequential/yellow-red goals, optional on a green light-mode goal).
 
 TASKS (evidence appended to <ledger> via scripts/ledger.sh, label=D#):
 TYPE each D# at compile — [M]achine: its evidence closes on exit-code/hash/

@@ -46,7 +46,7 @@ models: prosecutor **Fable or Opus**; jurors **Opus/Sonnet/Haiku** mix
 7 **Tech/Approach** — fires per the CAPABILITY rule in
 [STACKS.md](STACKS.md) §Firing; "research decides" → stack-bakeoff (RECIPES)
 + roadmap PLAN (TEMPLATE §Roadmap).
-Each goal declares a KILL-CRITERIA + 1-line PREMORTEM at compile (TEMPLATE; decision hygiene). Future-user-input items: EXCLUDED → decide-list. A pre-filled confirm is
+Consequential goals declare a KILL-CRITERIA + 1-line PREMORTEM at compile (TEMPLATE; decision hygiene; light-mode may skip). Future-user-input items: EXCLUDED → decide-list. A pre-filled confirm is
 required EVEN WHEN answers are derivable from context; sole exception: the
 user explicitly enumerated the params in-session AND you say so in the report.
 
