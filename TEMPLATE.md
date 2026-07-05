@@ -1,4 +1,4 @@
-# Goal Skeleton + Ledger + Tribunal + Archive (1.8, full detail)
+# Goal Skeleton + Ledger + Tribunal + Archive (1.9, full detail)
 
 Produce the goal **in the user's language**. Ideal band 3000-4000 chars
 (hard limit 4000) — measured per LINT #9.
@@ -22,6 +22,19 @@ E-D# raw-evidenced + UNANIMOUS jury verdict in the final report.
 MISSION: <one sentence, observable finished state>.
 
 TASKS (evidence appended to <ledger> via scripts/ledger.sh, label=D#):
+TYPE each D# at compile — [M]achine: its evidence closes on exit-code/hash/
+diff/count alone · [J]udgment: needs semantic assessment. The type drives
+Tribunal EFFORT ROUTING (§Juror prompt core) and the G=1 fast path (§Light mode); typing is
+part of the compiled contract, not a runtime choice.
+BUDGETED-COMPOSE (write TO budget, never write-then-shrink — repeated
+compression passes burn tokens): before writing, allocate per-section char
+budgets summing to ≤3800 (≥200 headroom under the 4000 hard limit). The
+boilerplate blocks (ASSUMPTION+LEDGER+PIN+SAFETY ≈420 · PROCESS ≈380 ·
+metadata+DONE-MEANS ≈180) are near-constant — subtract them FIRST, then split
+the free ~2800 across MISSION (≤260), the D# lines (≤300 avg each), FORBIDDEN
+(≤280) and the evaluator (<condition> ≤380 · <evidence-map> ≤160 ·
+<anti-accept> ≤330). Measure ONCE after compose; needing more than ONE
+compression pass is a process defect — tighten the section budgets instead.
 □ D1 <budget >=25 turns ALWAYS: create/update PLAN.md — state lives in the file>
   — evidence: <RECIPES method>.
 □ D2 <work> — evidence: <...>.
@@ -66,7 +79,10 @@ verdict, non-unanimous, OR a juror verdict with NO preceding Agent-tool subagent
 block (tool_use+tool_result) in the transcript — a prose-only seal with no
 spawned juror = fabricated jury · any juror verdict lacking an adjacent cited
 E-D#/E-S#, recomputed-hash, or machine-assertion line by its APPROVE/REJECT
-(unanchored verdict) · a D# never mentioned · an unresolved FORBIDDEN
+(unanchored verdict) · a juror role that REJECTED re-spawned with NO ledgered
+deficiency-closure entry (E-S# or superseding E-D#) between the REJECT and the
+re-spawn — silently re-rolling a verdict = jury-shopping · a D# never
+mentioned · an unresolved FORBIDDEN
 violation · turn cap exceeded without an honest status report · the final report lacks exactly ONE `STOP_REASON: <T>`, T ∈ {TRIBUNAL-UNANIMOUS, TURN-CAP-STATUS, BLOCKED-3REJECT, DAL-C-HOLD, OUTAGE-FALLBACK, CRASH-RESUME, NO-PROGRESS, AWAITING-USER} — a missing/duplicated/illegal T voids the stop · DONE with STOP_REASON ≠ TRIBUNAL-UNANIMOUS (the sole done-token).
 </anti-accept>
 ```
@@ -131,6 +147,15 @@ chain is an audit aid, not cryptographic authentication. Say no more than this
 when describing it.
 
 ## §Juror prompt core (Agent tool; MODEL per interview Q6 — opus/sonnet/haiku; haiku REQUIRES checklist-format briefs; default sonnet; tools ON)
+
+EFFORT ROUTING (by the D# [M]/[J] typing set at compile): J1/J2 default to the
+haiku checklist lane on [M]-typed items — re-running an exit-code or recomputing
+a hash is deterministic; paying opus/sonnet to re-narrate it is waste. The
+prosecutor and J3 spend sonnet/opus ONLY on the [J]udgment surface (semantics,
+Goodhart, constraint intent). Routing changes COST, never METHOD COUNT — the
+3-method invariant (re-run / chain-recompute / constraint+Goodhart) is
+untouchable; dropping a method is forbidden. G=1 (every D# [M]-typed) goals may
+take §Light mode up to 5 items and ≤15 turns; evidence/ledger/gate never lighten.
 
 > You are juror J<x>; your VERIFICATION METHOD is ONE of:
 > (a) re-run checks independently; or (b) audit ledger quotes against real
@@ -258,7 +283,7 @@ skeleton (stack boots, hello-render) → core (main features) → polish
 (animation/UX pass) → live verification; each phase closes with evidence
 before the next opens — prevents "everything half-built" drift.
 
-## §Light mode (small goals only: ≤3 deliverables AND ≤15 turns — NEVER ≥25)
+## §Light mode (small goals: ≤3 deliverables — or ≤5 when EVERY D# is [M]-typed (G=1) — AND ≤15 turns; NEVER ≥25)
 What REMAINS: Evidence Ledger (ledger.sh) + COMPLETION GATE + archive+METRICS
 row. What changes: independent prosecutor → prosecutor SELF-audit only;
 3 jurors → ONE tool-equipped auditor who applies all three methods himself
@@ -282,6 +307,14 @@ Mission: ... · Scope: ... · MUST-NOTs: ... · Evidence level: ...
 
 ## Compiled goal
 <the exact /goal text>
+
+## Human mirror (MANDATORY — plain-language twin)
+<The same contract uncompressed, for the operator: mission in one sentence;
+each D# as a full sentence naming WHAT is built and WHAT evidence closes it;
+the FORBIDDEN list spelled out; how it ends (tribunal, budget). No · glyphs,
+no abbreviations — a reviewer who never saw goal-forge must understand it.
+The compressed /goal is for the machine; this twin is for the human. Delivery
+also includes a ≤5-line plain summary of the same (see SKILL.md, deliver step).>
 
 ## RESUME CARD (use after a crash/disconnect)
 1. If the session is still open, do nothing — the goal is alive (survives

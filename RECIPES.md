@@ -49,6 +49,11 @@ Jurors treat missing URLs or a single-source claim as unproven.
   traceability with ID-matching in automotive requirements research — RAG
   setting, analogous not identical to our case; arXiv 2504.15427).
 - `□` marks an open item; separators are `·` (compact, language-neutral).
+- ASCII-CANON: every machine-greppable key is pure ASCII — `D#`, `E-D#`, `S#`,
+  `STOP_REASON`, the metadata line, XML slot names. A non-ASCII word must never
+  be load-bearing for a mechanical check (a Turkish "kanıt" evidence-keyword
+  regex once byte-escaped wrong and false-failed a test); prose may be any
+  language, tripwires are ASCII.
 - Range tokens: write `D1-D<n>`, never a count spelled out in two places.
 - XML slots (`<condition>`, `<evidence-map>`, `<anti-accept>`) are the
   evaluator's contract — official Anthropic guidance: "XML tags help Claude

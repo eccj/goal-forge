@@ -36,6 +36,8 @@ MODULES=(
   "test_version_stamp_consistency.py|python3 %M \"\$SKILL\""
   "test_m2_recipe_fixtures.sh|bash %M"
   "test_goal_forge_smoke.sh|GF_SKILL_DIR=\"\$SKILL\" bash %M"
+  "test_skill_budget.sh|GF_SKILL_DIR=\"\$SKILL\" bash %M"
+  "test_invariant_xref.sh|GF_SKILL_DIR=\"\$SKILL\" bash %M"
 )
 
 pass=0; fail=0; missing=0; FAILED=()
