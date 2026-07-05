@@ -1,0 +1,24 @@
+$ Campaign 1.7 M2 D2 — CANLI domain-araştırması (5 domain best-practice; workflow wf_1991d577; opus; gerçek fetch)
+SOURCES (resmi-doc, canlı-fetch):
+  · https://scikit-learn.org/stable/modules/model_evaluation.html — scikit-learn model evaluation guide — classification_report, confusion_matrix, roc_auc_score, c
+  · https://arxiv.org/abs/1810.03993 — Model Cards for Model Reporting (Mitchell et al.) — recommended reporting sections: performance
+  · https://pypi.org/project/pip-audit/ — pip-audit — Python dependency CVE scanner; CLI flags (-r, -f json/markdown/cyclonedx), columnar
+  · https://bandit.readthedocs.io/en/latest/ — Bandit — Python SAST that builds an AST and runs plugins; bandit -r recursive scan; produces a 
+  · https://github.com/google/osv-scanner — OSV-Scanner — dependency/container vuln scanner; osv-scanner scan source -r, offline mode with 
+  · https://raw.githubusercontent.com/gitleaks/gitleaks/master/README.md — gitleaks — secret scanner; commands git/dir/stdin, --report-format json/csv/junit/sarif, exit c
+  · https://owasp.org/www-project-top-ten/ — OWASP Top 10 project page — self-described 'standard awareness document', 'broad consensus abou
+  · https://docs.getdbt.com/docs/build/data-tests — dbt data tests — `dbt test` command, PASS/WARN/ERROR/SKIP summary line, generic tests unique/no
+  · https://developer.android.com/studio/test/command-line — Android command-line testing — ./gradlew test and ./gradlew connectedAndroidTest, exact HTML/XM
+  · https://docs.scrapy.org/en/latest/topics/contracts.html — Scrapy spider contracts — @url/@returns/@scrapes/@cb_kwargs directives and `scrapy check` runne
+FINDINGS (domain-başı kanıt-yöntemi):
+  - ML EVAL: scikit-learn's canonical evaluation trio is classification_report (per-class precision/recall/F1/support), confusion_matrix (raw TP/TN/FP/FN via .ravel()), and roc_auc_score; reproducibility 
+  - ML EVAL: The Model Cards standard (Mitchell et al., arXiv 1810.03993) raises the bar beyond one number — it requires DISAGGREGATED/per-subgroup performance, documented evaluation procedures, and decis
+  - SECURITY: Purpose-built CLI scanners emit machine-readable, exit-coded evidence with NO LLM/paid API key: bandit -r (Python AST SAST, severity+confidence, fully offline/deterministic), gitleaks (secre
+  - SECURITY: gitleaks documents exact exit codes — 0 = no leaks, 1 = leaks or errors, 126 = unknown flag — and report formats json/csv/junit/sarif. An exit code is itself pasteable, non-forgeable evidenc
+  - SECURITY: OWASP Top 10:2025 is described by OWASP itself as 'a standard awareness document for developers and web application security' representing 'broad consensus about the most critical security r
+  - DATA PIPELINE: dbt `dbt test` produces a deterministic pass/fail summary line ('Done. PASS=2 WARN=0 ERROR=0 SKIP=0 TOTAL=2') and generic tests (unique, not_null, accepted_values, relationships) that S
+  - MOBILE: Android testing is fully CLI and pasteable: `./gradlew test` (local unit) and `./gradlew connectedAndroidTest` (instrumented, on emulator/device), with reports at EXACT paths — HTML at build/r
+  - WEB SCRAPER: Scrapy spider contracts (@url sample, @returns items/requests bounds, @scrapes field names) run via `scrapy check` give per-callback OK/FAIL evidence that the parser actually extracts the
+  - CROSS-CUTTING (skeptical): the tools that fit goal-forge's J1 re-runner pillar BEST are the offline-deterministic ones — bandit (pure AST), gitleaks (over committed history), dbt test on fixed input, 
+  - GENERALITY FIX: none of these five domains require a paid external LLM API, so they don't violate goal-forge's core diversity rule — but pip-audit/osv-scanner DO query a remote vuln service (a network
+RISK/APPLICABILITY: "1) J1-reproducibility tension is the biggest conflict: goal-forge's re-runner juror assumes a command re-runs to an identical output, but live vuln DBs (new CVEs published between run and re-check), changing scrape targets, and device farms all break byte-for-byte reproduction. Mitigation forces ex

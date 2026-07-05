@@ -1,0 +1,342 @@
+<title>goal-forge — Campaign 1.7 + Intelligence Sweep</title>
+<style>
+  :root{
+    --bg:#f3f4f6; --surface:#ffffff; --surface-2:#eceef1;
+    --ink:#15171c; --muted:#5a616b; --faint:#878e98;
+    --hair:#dde1e6; --hair-2:#ccd2d9;
+    --ember:#c24a08; --ember-soft:#f7e6d8;
+    --blocker:#d13438; --major:#c67a12; --minor:#6b7480; --good:#1f9d57;
+    --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+    --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --maxw:1080px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#0d0e11; --surface:#15171b; --surface-2:#1c1f24;
+      --ink:#e9ebee; --muted:#9aa1ab; --faint:#6b727c;
+      --hair:#24272d; --hair-2:#2f333a;
+      --ember:#ff7a33; --ember-soft:#3a2416;
+      --blocker:#f2555a; --major:#f5a524; --minor:#8b93a0; --good:#35c07a;
+    }
+  }
+  :root[data-theme="light"]{
+    --bg:#f3f4f6; --surface:#ffffff; --surface-2:#eceef1;
+    --ink:#15171c; --muted:#5a616b; --faint:#878e98; --hair:#dde1e6; --hair-2:#ccd2d9;
+    --ember:#c24a08; --ember-soft:#f7e6d8; --blocker:#d13438; --major:#c67a12; --minor:#6b7480; --good:#1f9d57;
+  }
+  :root[data-theme="dark"]{
+    --bg:#0d0e11; --surface:#15171b; --surface-2:#1c1f24;
+    --ink:#e9ebee; --muted:#9aa1ab; --faint:#6b727c; --hair:#24272d; --hair-2:#2f333a;
+    --ember:#ff7a33; --ember-soft:#3a2416; --blocker:#f2555a; --major:#f5a524; --minor:#8b93a0; --good:#35c07a;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px;}
+  a{color:var(--ember);text-decoration:none}
+  h1,h2,h3{text-wrap:balance;line-height:1.12;margin:0}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ember);font-weight:600}
+  .num{font-variant-numeric:tabular-nums}
+  code,.mono{font-family:var(--mono)}
+
+  /* hero */
+  header.hero{border-bottom:1px solid var(--hair);background:
+    radial-gradient(120% 90% at 88% -10%, var(--ember-soft) 0%, transparent 55%);}
+  .hero-inner{padding:56px 0 40px;}
+  .kicker{display:flex;align-items:center;gap:10px;margin-bottom:22px}
+  .kicker .mark{font-size:22px}
+  .kicker .name{font-family:var(--mono);font-weight:600;letter-spacing:.02em}
+  .kicker .ver{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--hair-2);
+    border-radius:999px;padding:2px 9px}
+  h1.title{font-size:clamp(30px,5vw,52px);font-weight:800;letter-spacing:-.02em;max-width:16ch}
+  .lede{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:60ch;margin-top:16px}
+  .statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--hair);
+    border:1px solid var(--hair);border-radius:12px;overflow:hidden;margin-top:34px}
+  .stat{background:var(--surface);padding:16px 18px}
+  .stat .v{font-family:var(--mono);font-size:26px;font-weight:700;letter-spacing:-.02em}
+  .stat .k{font-size:12.5px;color:var(--muted);margin-top:2px}
+  @media(max-width:720px){.statgrid{grid-template-columns:repeat(2,1fr)}}
+
+  section{padding:44px 0;border-bottom:1px solid var(--hair)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+  h2{font-size:clamp(21px,3vw,27px);font-weight:750;letter-spacing:-.015em}
+  .sec-head .note{color:var(--faint);font-size:13.5px;font-family:var(--mono)}
+
+  /* campaign cards */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:720px){.cards{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:18px;position:relative;overflow:hidden}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--good)}
+  .card.pending::before{background:var(--minor)}
+  .card h3{font-size:16.5px;font-weight:700;margin-bottom:6px;padding-left:2px}
+  .card .m{font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .card p{font-size:14px;color:var(--muted);margin:10px 0 0}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;
+    font-weight:600;letter-spacing:.03em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid transparent}
+  .pill.ok{color:var(--good);background:color-mix(in srgb,var(--good) 12%,transparent);border-color:color-mix(in srgb,var(--good) 30%,transparent)}
+  .pill.wait{color:var(--minor);background:color-mix(in srgb,var(--minor) 12%,transparent);border-color:color-mix(in srgb,var(--minor) 30%,transparent)}
+  .card .foot{margin-top:14px;font-family:var(--mono);font-size:11.5px;color:var(--faint);display:flex;justify-content:space-between}
+
+  /* big insight */
+  .insight{background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--ember);
+    border-radius:12px;padding:24px 26px}
+  .insight .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ember);font-weight:600}
+  .insight p{margin:12px 0 0;font-size:16.5px}
+  .converge{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+  .converge .c{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--hair-2);border-radius:7px;padding:4px 9px}
+
+  /* guarantee */
+  .guar{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.guar{grid-template-columns:1fr}}
+  .gbox{border:1px solid var(--hair);border-radius:12px;padding:18px;background:var(--surface)}
+  .gbox.proven{border-top:3px solid var(--good)}
+  .gbox.bluff{border-top:3px solid var(--major)}
+  .gbox h4{margin:0 0 10px;font-size:13px;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase}
+  .gbox.proven h4{color:var(--good)} .gbox.bluff h4{color:var(--major)}
+  .gbox ul{margin:0;padding-left:18px} .gbox li{font-size:14px;color:var(--muted);margin:7px 0}
+  .claim{grid-column:1/-1;background:var(--surface-2);border:1px solid var(--hair);border-radius:12px;padding:18px 20px;font-size:15.5px}
+  .claim b{color:var(--ink)}
+  .strike{text-decoration:line-through;color:var(--faint)}
+
+  /* register table */
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--hair);border-radius:12px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+  th{text-align:left;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--muted);font-weight:600;padding:12px 14px;border-bottom:1px solid var(--hair-2)}
+  td{padding:12px 14px;border-bottom:1px solid var(--hair);vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.sev{white-space:nowrap}
+  .sevchip{font-family:var(--mono);font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    padding:3px 8px;border-radius:6px;display:inline-block}
+  .sevchip.blocker{color:#fff;background:var(--blocker)}
+  .sevchip.major{color:#fff;background:var(--major)}
+  .sevchip.minor{color:var(--ink);background:var(--surface-2);border:1px solid var(--hair-2)}
+  td .loc{font-family:var(--mono);font-size:12px;color:var(--faint)}
+  td .fix{color:var(--muted);font-size:13px;margin-top:4px}
+  td .fix b{color:var(--good);font-family:var(--mono);font-size:11px;letter-spacing:.03em}
+
+  /* patch list */
+  .patches{display:grid;gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:12px;overflow:hidden}
+  .patch{background:var(--surface);padding:14px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center}
+  .patch .rank{font-family:var(--mono);font-size:13px;color:var(--faint);font-weight:600}
+  .patch .body b{font-size:14.5px}
+  .patch .body span{display:block;font-size:13px;color:var(--muted);margin-top:2px}
+  .patch .tags{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+  .tag{font-family:var(--mono);font-size:10.5px;padding:2px 7px;border-radius:5px;border:1px solid var(--hair-2);color:var(--muted);white-space:nowrap}
+  .tag.ship{color:var(--good);border-color:color-mix(in srgb,var(--good) 35%,transparent)}
+  @media(max-width:640px){.patch{grid-template-columns:auto 1fr}.patch .tags{grid-column:2;justify-content:flex-start}}
+
+  /* decision */
+  .decision{background:var(--surface);border:1px solid var(--hair);border-radius:12px;padding:22px 24px}
+  .verdict-line{font-family:var(--mono);font-size:clamp(15px,2.4vw,20px);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .verdict-line .gt{color:var(--faint)}
+  .verdict-line .win{color:var(--good)}
+  .decision ul{margin:16px 0 0;padding-left:18px}
+  .decision li{font-size:14.5px;color:var(--muted);margin:8px 0}
+  .decision li b{color:var(--ink)}
+
+  /* two-col lists */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+  @media(max-width:720px){.twocol{grid-template-columns:1fr}}
+  .lstitle{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
+  .backlog{list-style:none;margin:0;padding:0}
+  .backlog li{padding:11px 0;border-bottom:1px dashed var(--hair-2);font-size:14px}
+  .backlog li:last-child{border-bottom:none}
+  .backlog .e{font-family:var(--mono);font-size:10.5px;color:var(--faint);float:right;border:1px solid var(--hair-2);border-radius:5px;padding:1px 6px}
+  .prior li{padding:10px 0;border-bottom:1px dashed var(--hair-2);font-size:14px;color:var(--muted)}
+  .prior li:last-child{border-bottom:none}
+  .prior b{color:var(--ink)}
+
+  footer{padding:36px 0 60px;color:var(--faint);font-size:13px}
+  footer .mono{font-size:12px}
+  .lead-in{color:var(--muted);max-width:66ch;margin:0 0 22px;font-size:15px}
+  ::selection{background:var(--ember);color:#fff}
+</style>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div class="kicker">
+      <span class="mark">⚒️</span>
+      <span class="name">goal-forge</span>
+      <span class="ver">1.7 sealed · 1.8 shipped · v1.9 scoped</span>
+    </div>
+    <h1 class="title">1.8 shipped. A 20-example gallery. And three more swarms that agree on v1.9.</h1>
+    <p class="lede">The evidence-based <code>/goal</code> compiler, hardened release by release. Campaign 1.7 sealed, <strong>1.8 shipped to the <code>goal-forge-1.8</code> branch</strong> (its own tribunal unanimous, a fresh-clone 10/10 test-suite), and eleven independent audit &amp; research swarms — every verdict command-verified or research-cited, the honest limits stated not hidden.</p>
+    <div class="statgrid num">
+      <div class="stat"><div class="v" style="color:var(--good)">1.8 ✓</div><div class="k">shipped · unanimous tribunal · fresh-clone 10/10 suite</div></div>
+      <div class="stat"><div class="v">~185</div><div class="k">opus/sonnet agents across 11 swarms</div></div>
+      <div class="stat"><div class="v">3 → 1</div><div class="k">R&amp;D groups converged on one v1.9 direction</div></div>
+      <div class="stat"><div class="v">0</div><div class="k">external-API deps · SKILL.md held at 97/97</div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="status"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Campaign 1.7</span><h2>Milestone status</h2>
+      <span class="note">each: own ledger · heavy tribunal · CHAIN INTACT</span></div>
+    <div class="cards">
+      <div class="card"><div style="display:flex;justify-content:space-between;align-items:start"><h3>M1 — Ground-Truth-Anchored &amp; Tamper-Hardened Tribunal</h3></div>
+        <div class="m">jury-independence + tamper · L</div>
+        <p>Re-founded independence on ground truth (not model diversity), blind+CoT J3, untrusted-DATA rule, transcript-anchor, machine-tripwire doctrine — and stated the honest in-family ceiling.</p>
+        <div class="foot"><span class="pill ok">achieved 3/3</span><span>4 minor · reopen 0 · gate 79</span></div></div>
+      <div class="card"><h3>M2 — Domain Evidence Recipes</h3>
+        <div class="m">generality · ML·security·data·mobile·scraper · M</div>
+        <p>5 pattern-based RECIPES rows, each with a real exit-code tripwire + anti-Goodhart hook. 3 live pure-python fixtures, byte-reproducible, that flip to exit 1 on forced failure. 2 tool-gated, honestly documented.</p>
+        <div class="foot"><span class="pill ok">achieved 3/3</span><span>3 minor · reopen 0 · gate 69</span></div></div>
+      <div class="card"><h3>M3 — Calibration-Anchor Scoring</h3>
+        <div class="m">internal-only · public LINT unchanged · M</div>
+        <p>Anchored the pessimistic self-score to frozen external exemplars (constant offset, n=1 — no fitted curve), a drift column, and a juror-variance gate that only ever rounds <em>down</em>. Honestly states its n=1 limit rather than overselling.</p>
+        <div class="foot"><span class="pill ok">achieved 3/3</span><span>5 findings · reopen 0 · gate 77</span></div></div>
+    </div>
+  </div></section>
+
+  <section id="insight"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">The headline</span><h2>Five swarms, one agenda</h2></div>
+    <div class="insight">
+      <span class="lbl">Convergence signal</span>
+      <p>The gap-hunt (20 agents), the guarantee audit (10), the ideation sweep (10), and the v1.9–2.0 research (10) never talked to each other — and independently arrived at the same conclusion: <b>the completion gate is not mechanically enforceable enough.</b> A worker can still self-report a fabricated jury, LINT is a gameable unweighted sum, and the anchored-verdict rule has no teeth at the transcript-only evaluator. The next release should be a <b>hardening pass (v1.8)</b>, and its contents are already designed.</p>
+      <div class="converge">
+        <span class="c">STOP_REASON token + ledger.sh coverage</span>
+        <span class="c">tool-block-required jury</span>
+        <span class="c">acceptance-criteria hash-pinning</span>
+        <span class="c">compile-time framing lock</span>
+        <span class="c">deterministic stall tripwire</span>
+        <span class="c">reversibility-tiered human gate</span>
+      </div>
+    </div>
+  </div></section>
+
+  <section id="guarantee"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Guarantee audit · 10 opus lenses</span><h2>What it actually proves</h2></div>
+    <p class="lead-in">Mechanism design, game theory, probability, and security lenses on the core promise. The result tightens the claim — and it's more honest than the old headline.</p>
+    <div class="guar">
+      <div class="gbox proven"><h4>Proven (≈prob 1, correlation-independent)</h4><ul>
+        <li>In-place ledger tamper → <code>verify</code> cascades <b>CHAIN BROKEN</b> from the edit forward (reduces to SHA-256).</li>
+        <li>Fabricated/failing <b>mechanical</b> evidence → J1 re-runs by its <em>own</em> command &amp; pastes git-diff; a shimmed test is caught.</li>
+        <li>Structural omission / bare "done, passed" → completion gate + <code>&lt;anti-accept&gt;</code> reject it.</li>
+      </ul></div>
+      <div class="gbox bluff"><h4>Bluff (weak / probabilistic)</h4><ul>
+        <li><b>Semantic Goodhart gap</b> — a passing-but-vacuous assertion survives; est. <span class="mono">13–45%</span> per subtle deliverable, in-family-bounded.</li>
+        <li><b>Juror capture</b> — the worker spawns its own jury; it can stage inputs so real jurors approve a curated view.</li>
+        <li><b>Weak prosecutor</b> &amp; <b>compaction erosion</b> of non-harness FORBIDDEN constraints.</li>
+      </ul></div>
+      <div class="claim">
+        <div style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Tightest honest claim</div>
+        <span class="strike">"A self-interested agent can't say done without proving it."</span><br>
+        <b>→ A non-strategic worker cannot cheaply over-claim a mechanically-decidable deliverable, and all fakery is tamper-evident to a later external re-runner.</b> Tamper-<em>evidence</em>, not prevention; ex-post auditability, not autonomous credibility. This exactly validates the honest-ceiling ethos.
+      </div>
+    </div>
+  </div></section>
+
+  <section id="register"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Gap register · 117 findings → ranked</span><h2>Real holes found</h2>
+      <span class="note">20-agent adversarial audit, deduped</span></div>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>Sev</th><th>Gap</th><th>Where</th><th>Failure &amp; fix</th></tr></thead>
+      <tbody>
+        <tr><td class="sev"><span class="sevchip blocker">blocker</span></td>
+          <td><b>Worker self-reports the whole Tribunal</b></td>
+          <td class="loc">SKILL:8 · README:3</td>
+          <td>Evaluator checks verdict <em>strings</em>, not real spawns → a prose "J1·J2·J3: APPROVE" seal passes. <div class="fix"><b>FIX</b> require genuine Agent tool_use/tool_result blocks per verdict.</div></td></tr>
+        <tr><td class="sev"><span class="sevchip blocker">blocker</span></td>
+          <td><b>Haiku juror brief drops every defense</b></td>
+          <td class="loc">TEMPLATE §Juror</td>
+          <td>The numbered checklist omits eval-integrity, untrusted-DATA, style-blind → a shimmed test slips past a haiku J1. <div class="fix"><b>FIX</b> carry defenses into the steps, or restrict haiku to J2.</div></td></tr>
+        <tr><td class="sev"><span class="sevchip blocker">blocker</span></td>
+          <td><b>LINT is a floor-less sum</b></td>
+          <td class="loc">LINT:3</td>
+          <td>A goal scores ≥80 while #2/#10 (the load-bearing criteria) are gutted. <div class="fix"><b>FIX</b> veto: #2 &amp; #10 each ≥8, no criterion &lt;5.</div></td></tr>
+        <tr><td class="sev"><span class="sevchip major">major</span></td>
+          <td>Anchored-verdict has no teeth at the evaluator</td>
+          <td class="loc">TEMPLATE anti-accept</td>
+          <td>A fake/absent hash anchor isn't rejected. <div class="fix"><b>FIX</b> anti-accept line: unanchored verdict = NOT DONE.</div></td></tr>
+        <tr><td class="sev"><span class="sevchip major">major</span></td>
+          <td>A legitimate §DAL-C HOLD can't satisfy its own condition</td>
+          <td class="loc">TEMPLATE §DAL-C</td>
+          <td>&lt;condition&gt; demands an E-D# block + verdict for every D#. <div class="fix"><b>FIX</b> emit a HELD-satisfies-pending-user clause.</div></td></tr>
+        <tr><td class="sev"><span class="sevchip major">major</span></td>
+          <td>§Light remaps 1 of 3 juror slots</td>
+          <td class="loc">TEMPLATE §Light</td>
+          <td>A light-mode goal fails its own "3 jurors unanimous" condition. <div class="fix"><b>FIX</b> remap &lt;condition&gt;/&lt;anti-accept&gt; to single-auditor.</div></td></tr>
+        <tr><td class="sev"><span class="sevchip minor">reliability</span></td>
+          <td>ledger.sh: SIGKILL bricks the lock; phantom-tail reads INTACT</td>
+          <td class="loc">scripts/ledger.sh</td>
+          <td>Crash leaves a stale lockdir; an unterminated entry counts as intact. <div class="fix"><b>FIX</b> PID-in-lock + kill-0 steal; FAIL unterminated entries.</div></td></tr>
+      </tbody>
+    </table></div>
+  </div></section>
+
+  <section id="patchset"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">v1.8 hardening · SHIPPED ✓</span><h2>Applied &amp; sealed</h2>
+      <span class="note">on the goal-forge-1.8 branch · unanimous tribunal · red-team-verified</span></div>
+    <p class="lead-in">All ten landed in 1.8 and passed the compiler's own tribunal (prosecutor + 3 jurors, unanimous). The three blockers below are proven to <em>actually fire</em>: an isolated red-team fed a fake prose-only jury (→ NOT DONE) and a goal scoring 85/100 with a gutted evidence floor (→ FAIL lint), both correctly rejected by the shipped clauses — not grep-decoration. Plus a 10-module regression suite that runs 10/10 on a fresh clone.</p>
+    <div class="patches">
+      <div class="patch"><span class="rank">01</span><div class="body"><b>Tool-block-required jury verdict</b><span>&lt;anti-accept&gt;: a JX verdict with no preceding Agent subagent block = fabricated jury = NOT DONE.</span></div><div class="tags"><span class="tag ship">ship first</span><span class="tag">TEMPLATE</span></div></div>
+      <div class="patch"><span class="rank">02</span><div class="body"><b>LINT hard-floor veto</b><span>#2 &amp; #10 each ≥8, no criterion &lt;5 — a ≥80 total with a gutted floor is a FALSE PASS.</span></div><div class="tags"><span class="tag ship">ship first</span><span class="tag">LINT</span></div></div>
+      <div class="patch"><span class="rank">03</span><div class="body"><b>STOP_REASON token + <code>ledger.sh coverage</code></b><span>Closed-set stop reason; partial verification can't reach the jury. Cheapest mechanical gate.</span></div><div class="tags"><span class="tag ship">ship first</span><span class="tag">TEMPLATE·ledger.sh</span></div></div>
+      <div class="patch"><span class="rank">04</span><div class="body"><b>Anchored-verdict teeth</b><span>&lt;anti-accept&gt; rejects any verdict lacking an adjacent E-D#/hash/machine assertion.</span></div><div class="tags"><span class="tag">TEMPLATE·LINT</span></div></div>
+      <div class="patch"><span class="rank">05</span><div class="body"><b>Haiku brief carries the defenses</b><span>Numbered checklist gains eval-integrity + untrusted-DATA + blind steps.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
+      <div class="patch"><span class="rank">06</span><div class="body"><b>§DAL-C &amp; §Light condition fixes</b><span>HELD-satisfies-pending-user; single-auditor remap of all three slots.</span></div><div class="tags"><span class="tag">TEMPLATE</span></div></div>
+      <div class="patch"><span class="rank">07</span><div class="body"><b>ledger.sh fsck + self-healing lock</b><span>PID-in-lock steal; FAIL phantom-tail entries; suppress byte-identical re-appends.</span></div><div class="tags"><span class="tag">ledger.sh</span></div></div>
+      <div class="patch"><span class="rank">08</span><div class="body"><b>Acceptance-criteria hash-pinning</b><span>Freeze checks before build; gate re-hashes; drift = auto prosecutor S-finding.</span></div><div class="tags"><span class="tag">TEMPLATE·ledger.sh</span></div></div>
+      <div class="patch"><span class="rank">09</span><div class="body"><b>Honest-ceiling public copy</b><span>Tighten README/TRACK-RECORD to the audited claim (worker self-reports jury; tamper-evidence not prevention).</span></div><div class="tags"><span class="tag">README·TRACK-RECORD</span></div></div>
+      <div class="patch"><span class="rank">10</span><div class="body"><b>Go + Rust deliverable recipes</b><span>RECIPES rows so Q7's Go/Rust options emit native evidence (go test -race/govulncheck; cargo test/llvm-cov/audit).</span></div><div class="tags"><span class="tag">RECIPES</span></div></div>
+    </div>
+  </div></section>
+
+  <section id="language"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">python vs Go vs Rust · 20 opus agents</span><h2>Language decision</h2></div>
+    <div class="decision">
+      <div class="verdict-line"><span class="win">bash / python</span><span class="gt">&gt;</span><span>Go</span><span class="gt">&gt;</span><span>Rust</span></div>
+      <ul>
+        <li><b>Core &amp; trust path stay bash + shasum.</b> The ledger's value is "the artifact you run <em>is</em> the source you read" — J2 recomputes the chain by hand. A compiled binary is un-auditable-without-a-toolchain and un-installable-by-default; it detonates the trust story. Go and Rust are both barred here.</li>
+        <li><b>Rust is worse than Go for this skill</b> — no stdlib crypto (a sha2 crate = the exact dependency creep GUARDRAILS forbids), a 1–1.5 GB toolchain, slowest compile, least readable.</li>
+        <li><b>New explicit invariant:</b> "no opaque compiled artifact in the completion-trust path; hand-auditable with universal built-ins."</li>
+        <li><b>Additive (not migration):</b> add Go &amp; Rust <em>deliverable</em> recipes so a user's Go/Rust project emits native evidence. If bash write-time fragility ever bites, the escape hatch is Go — never Rust — with bash retained as the readable reference.</li>
+      </ul>
+    </div>
+  </div></section>
+
+  <section id="future"><div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Beyond the hardening pass</span><h2>v1.9–2.0 backlog &amp; the landscape</h2></div>
+    <div style="border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:18px 20px;margin-bottom:26px;background:var(--card)">
+      <div style="font-family:var(--mono,monospace);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">30 fresh opus agents · 3 groups · converged</div>
+      <p style="margin:0 0 10px"><strong>v1.9 direction — "bind the seams."</strong> Three independent 10-agent groups (capability R&amp;D · external research · red-team) arrived at one diagnosis from three angles: 1.8 secured the <em>interior</em> of a single chain, but every place trust must <em>cross a boundary</em> is still authored by the worker — the protocol's own adversary.</p>
+      <ul style="margin:0;padding-left:18px;line-height:1.6">
+        <li><b>The live core hole (capability):</b> the ledger chains from a literal <code>GENESIS</code> with no session/identity binding — so a resumed or compaction-amnesiac session reloads from disk and a full re-forge still prints <code>CHAIN INTACT</code>. J2's from-GENESIS recompute can't catch it; a re-forged chain is internally consistent. → <b>session-seam braid to a git-content witness.</b></li>
+        <li><b>The research consensus:</b> verification over evaluation — shrink the LLM-judgment surface to deterministic, ledger-anchored oracle checks; push the completion gate toward a harness Stop-hook, not the worker's own turn.</li>
+        <li><b>The red-team consensus:</b> every 1.8 anchor is written/resolved/invoked <em>by the worker</em> — oracle-poisoning, near-free re-forge, jury-shopping. The fix is <b>attestation</b>: bind each anchor to something the worker can't quietly control, and ship an executable attack fixture that flips red pre-fix / green on HEAD.</li>
+      </ul>
+      <p style="margin:10px 0 0;font-size:.85rem;color:var(--muted,#888)">All three keep the invariants: keyless · bash + shasum + git · zero external-API · SKILL ≤ 97. This is the first real structural answer to the honest ceiling 1.8 could not close — the worker convening its own jury.</p>
+    </div>
+    <div class="twocol">
+      <div>
+        <div class="lstitle">Research-grounded backlog (top ideas)</div>
+        <ul class="backlog">
+          <li><span class="e">Ambig-DS</span><b>Compile-time framing lock</b> — resolve/record the 2–3 plausible mission readings before compiling. Ambiguous runs misframe silently 39–63% of the time; the ledger is blind to it.</li>
+          <li><span class="e">S</span><b>Auditable completion gate</b> — STOP_REASON grammar + coverage assertion. Cheapest, most mechanical win.</li>
+          <li><span class="e">RHB</span><b>Verifier-artifact + hash-pinning</b> — freeze acceptance checks at D1; drift is a non-overridable S-finding.</li>
+          <li><span class="e">HITL</span><b>Reversibility-tiered human gate</b> — Tier-4 irreversible actions require a human-relayed verdict; the only true out-of-family decorrelator.</li>
+          <li><span class="e">2509</span><b>Deterministic stall tripwire</b> — <code>ledger.sh stall</code> catches byte-identical loop spinning without embeddings.</li>
+          <li><span class="e">viz</span><b>Proof capsule</b> — export a bundle + generated <code>verify.sh</code> so any party re-verifies "done" in one command.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="lstitle">Prior art · 58 projects scanned</div>
+        <ul class="prior">
+          <li><b>Loki Mode</b> — the one genuine core competitor: blind 3-reviewer completion council with veto + fact-only receipt. Diverges on external-API + no hash-chain.</li>
+          <li><b>Ralph Wiggum</b> — direct competitor on the <em>/loop</em> axis only; same Stop-hook substrate, but self-emitted "done", no adversary, no ledger.</li>
+          <li><b>Magentic-One</b> — independently invented a Ledger as the completion spine, but mutable, unilateral self-reflection.</li>
+          <li><b>Reproducible Builds / git fsck</b> — the philosophical cousins: trust replaced by independent re-execution + keyless digest.</li>
+          <li style="color:var(--good)"><b>Differentiation holds</b> — nothing else combines evidence-ledger + unanimous method-diverse jury + keyless tamper-evidence + zero external dependency.</li>
+        </ul>
+      </div>
+    </div>
+  </div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="mono">goal-forge · 1.7 sealed (M1·M2·M3) · 1.8 shipped to goal-forge-1.8 (unanimous, fresh-clone 10/10) · 20-example gallery · 11 swarms ~185 agents: gap-hunt · guarantee-audit · ideation · v1.9-2.0 research · prior-art · Go · Rust · test-suite · v1.8 patch-set · 30-opus R&amp;D · 20-theme gallery</div>
+  <div style="margin-top:8px">Every claim on this page is command-verified against the skill or cited to a fetched source. Limits are stated, not hidden — the same rule the tool enforces on its own agents.</div>
+</div></footer>

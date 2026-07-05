@@ -1,0 +1,18 @@
+$ Campaign 1.7 M3 D2 — CANLI kalibrasyon araştırması (gf-17-research self-calibration açısı; opus; gerçek fetch)
+FEATURE: Calibration-Anchor scoring for LINT.md: convert the pessimistic self-score from a free-floating pointwise numb
+SOURCES (canlı-fetch):
+  · https://aclanthology.org/2024.trustnlp-1.13/ — 'Overconfidence is Key: Verbalized Uncertainty Evaluation in LLMs and VLMs' (ACL 2024 TrustNLP). Establishes s
+  · https://arxiv.org/abs/2402.11436 — 'Pride and Prejudice: LLM Amplifies Self-Bias in Self-Refinement' (Xu et al., ACL 2024). Self-refinement ampli
+  · https://arxiv.org/html/2506.22316v1 — 'Evaluating Scoring Bias in LLM-as-a-Judge' (2025). Pointwise judge scores unstable under perturbation; refere
+  · https://arxiv.org/abs/2502.06233 — 'Confidence Improves Self-Consistency in LLMs' (CISC). Agreement/dispersion across sampled paths is a ground-t
+FINDINGS:
+  - Overconfidence is the default failure mode of LLM self-scoring, and it is DIRECTIONAL. The ACL TrustNLP paper 'Overconfidence is Key' finds LLMs (GPT-4/3.5, LLaMA2, PaLM2) 'have a high calibration err
+  - Self-evaluation loops AMPLIFY bias rather than correct it. 'Pride and Prejudice: LLM Amplifies Self-Bias in Self-Refinement' (self-bias prevalent in all six models tested: GPT-4/3.5, Gemini, LLaMA2, M
+  - Reference-anchored scoring stabilizes and improves judge accuracy. 'Evaluating Scoring Bias in LLM-as-a-Judge' finds pointwise judge scores are unstable under trivial perturbations (rubric order, scor
+  - Self-consistency (agreement/dispersion across independent samples) is a usable, ground-truth-free confidence signal. 'Confidence Improves Self-Consistency in LLMs' (CISC) and related work show agreeme
+  - Pointwise 0-10 rubric scoring (exactly what LINT does today) is the most bias-prone protocol — vulnerable to halo/attribute-bundling and large judge-to-judge variance — whereas forced-choice AGAINST a
+  - goal-forge's own data is consistent with the literature but the sample is n=1: self-score ~7.29-7.61 vs a single external GPT-5.5 anchor of 7.0 rated 'accurate.' The gap (~0.3-0.6, within rounding) me
+APPLICABILITY: Maps cleanly onto goal-forge's existing machinery WITHOUT any runtime external API, because the 'external anchor' is captured ONCE (human-mediated, like the GPT-5.5 rating already done) and then FROZEN into the repo as a calibration fixture. Concretely: (1) LINT.md gains a §Calibration-Anchor block holding 2-3 past goals + their externally-validate
+EK KAYNAKLAR (M3-worker canlı-fetch, WebFetch-doğrulandı):
+  · https://arxiv.org/abs/2207.05221 — 'Language Models (Mostly) Know What They Know' (Kadavath/Anthropic, 35 yazar): büyük LM'ler P(True) öz-doğruluk-tahmininde iyi kalibre — öz-farkındalık gerçek ama boyut-bağımlı [güvenilirlik: yüksek, Anthropic, çok-atıflı]
+  · https://arxiv.org/abs/1706.04599 — 'On Calibration of Modern Neural Networks' (Guo/Pleiss/Sun/Weinberger): modern NN'ler kötü-kalibre; temperature-scaling (tek-parametre) etkili; ECE'nin temeli [güvenilirlik: yüksek, ICML'17 foundational]

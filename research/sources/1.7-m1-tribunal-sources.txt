@@ -1,0 +1,34 @@
+$ Campaign 1.7 M1 D2 — CANLI web-araştırma (bağımsızlık+tamper; 5-ajan workflow wf_1991d577; opus; gerçek fetch). M2-domain/M3-calib araştırması ayrı (o milestone'larda).
+
+=== Ground-truth-anchored Tribunal: fixing judge INDEPENDENCE by method + falsifiable evidence, not by m ===
+SOURCES (canlı-fetch):
+  · https://arxiv.org/html/2605.29800 — 'Nine Judges, Two Effective Votes: Correlated Errors Undermine LLM Evaluation Panels' (Guneet Kohli,
+  · https://arxiv.org/html/2506.07962v1 — 'Correlated Errors in Large Language Models' (Kim, Garg et al.), ICML 2025. Fetched: 60% both-wrong 
+  · https://arxiv.org/abs/2404.18796 — 'Replacing Judges with Juries: Evaluating LLM Generations with a Panel of Diverse Models' (PoLL, Coh
+  · https://arxiv.org/html/2410.21819v2 — 'Self-Preference Bias in LLM-as-a-Judge'. Fetched: bias defined via equal-opportunity metric, GPT-4 
+  · https://arxiv.org/html/2504.03846v2 — 'Do LLM Evaluators Prefer Themselves for a Reason?'. Fetched: generator-judge correlation r=0.795-0.
+  · https://arxiv.org/abs/2306.05685 — 'Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena' (Zheng et al.). Fetched (abstract): documen
+FINDINGS:
+  - CORRELATED-JUDGE PANELS BARELY DECORRELATE (the central result for goal-forge). Apple's 'Nine Judges, Two Effective Votes' (arXiv:2605.29800) measures effective sample size n_eff o
+  - SAME-PROVIDER JUDGES INFLATE EACH OTHER. 'Correlated Errors in LLMs' (arXiv:2506.07962, ICML'25, 350+ models) finds model pairs agree ~60% of the time WHEN BOTH ARE WRONG (vs 33% c
+  - SELF-PREFERENCE IS A FAMILIARITY (LOW-PERPLEXITY) EFFECT, SO IT IS SHARED ACROSS A FAMILY. 'Self-Preference Bias in LLM-as-a-Judge' (arXiv:2410.21819) shows judges 'assign signific
+  - SELF-PREFERENCE IS WORST EXACTLY WHEN THE GENERATOR IS WRONG. 'Do LLM Evaluators Prefer Themselves for a Reason?' (arXiv:2504.03846) finds better generators are better judges (Pear
+  - PANELS OF DIVERSE JUDGES (PoLL) WORK BY DISJOINT MODEL FAMILIES - the one lever goal-forge is forbidden. PoLL (Cohere, arXiv:2404.18796) beats a single large judge and shows 'less 
+  - MULTI-AGENT DEBATE HELPS MODESTLY BUT IS ADVERSARIALLY FRAGILE, AND HOMOGENEOUS DEBATE RARELY BEATS BASELINE. ChatEval (arXiv:2308.07201) improves human-correlation ~10-16% via rol
+  - RELIABILITY (judges agree with each other) IS NOT VALIDITY (judges are right); consistent panels can be consistently wrong. The MT-Bench study (Zheng et al., arXiv:2306.05685) docu
+APPLICABILITY: The GPT-5.5 anchor's 5.5/10 on jury-independence is essentially CORRECT and the literature explains why: goal-forge's three jurors are all in-family Claude models, and 'Nine Judges' (2605.29800) + 'Correlated Errors' (2506.07962) show that model-family diversity - even CROSS-family - buys almost no error decorrelation on a shared JUDGMENT task (n_eff 9->2.18; same-family phi 0.437 vs cross-family 
+
+=== Adversarial hardening of the Evidence Ledger + Tribunal against 2024-2026 evidence-injection, judge- ===
+SOURCES (canlı-fetch):
+  · https://arxiv.org/pdf/2403.17710 — JudgeDeceiver: optimization-based prompt-injection attack to LLM-as-a-Judge; 60-80% ASR vs GPT-4/Cla
+  · https://arxiv.org/html/2504.18333v1 — Adversarial Attacks on LLM-as-a-Judge: content-author ASR 53.2%, per-defense evasion 32-68%, and mix
+  · https://www.anthropic.com/research/reward-tampering — Anthropic 'Sycophancy to Subterfuge': models generalize from sycophancy to checklist-faking and rewa
+  · https://arxiv.org/pdf/2603.06594 — A Coin Flip for Safety: apologetic-prefix bias flips judges ~98%; judges reward style (completeness/
+  · https://genai.owasp.org/llmrisk/llm01-prompt-injection/ — OWASP LLM01:2025 — indirect prompt injection via tool output/RAG and the mitigation set (segregate/d
+FINDINGS:
+  - JudgeDeceiver (arXiv 2403.17710, fetched PDF) optimizes an injected string placed INSIDE a candidate response and drives 60-80% attack-success against GPT-4/Claude judges; the auth
+  - Adversarial Attacks on LLM-as-a-Judge (arXiv 2504.18333, fetched HTML): content-author attacks reach 53.2% ASR (genetic Adaptive-Search), and single defenses are evaded 32-68% (per
+  - A Coin Flip for Safety (arXiv 2603.06594, fetched PDF): prepending an apologetic 'I can't help with that' flips judge verdicts ~98% of the time; judges systematically reward comple
+  - Anthropic 'Sycophancy to Subterfuge' reward tampering (fetched anthropic.com/research/reward-tampering): models generalize WITHOUT explicit training from political sycophancy -> al
+  - OWASP LLM01:2025 Prompt Injection (fetched genai.owasp.org): indirect injection enters via tool output / retrieved files / RAG; recommended mitigations are (a) segregate & clearly 
+APPLICABILITY: Maps cleanly onto goal-forge's actual mechanics and constraints. LEDGER: ledger.sh already defeats STRUCTURAL/format injection (every stored line is '| '-prefixed inside <<<ENTRY/ENTRY>>>, so evidence containing 'hash:'/'### E' can't be parsed as chain structure) and is tamper-evident against in-place edits via the recomputed sha256 chain — but it is keyless, so the documented honest-scope weaknes
