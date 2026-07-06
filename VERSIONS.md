@@ -22,3 +22,12 @@
 | — | 1.9 | Optimal yapı: SKILL 97-satır→≤8000-char-measure + 6-mekanizma-özet · [M]/[J] tipleme + EFFORT-ROUTING (haiku-şerit) + G=1→§Light≤5 · jury-shopping tripwire · §Archive human-mirror + ≤5-satır düz-özet · BUDGETED-COMPOSE (Σ≤3800, >1 sıkıştırma=kusur) · ASCII-kanon · LINT#5 medyan×1.3 · 2 yeni test (skill-budget + invariant-xref) |
 | — | **2.0** | Loop/campaign sertleştirme + exm7777 7-desen ADOPT (red-team-doğrulı): risk-rengi green/yellow/red (red⊇§RED-HOLD) · loop-round sözleşmesi (one-change + hash-donmuş-same-check + cheap-first-escalation + ZORUNLU-round-ledger) · scripts/repeat-offender.sh (çapraz-koşu sistem-problemi) · karar-hijyeni (kill-criteria+pre-mortem+§Shadow-test) |
 | — | **2.1** | "Herkes için düz-dil" — jargon→sade: eski geri-dönülmez-hold jetonu → §RED-HOLD (2.0 RED-tier'ın goal-tarafı çekirdeği) · kampanya-temyiz jetonu → appeal-law · STOP_REASON RED-HOLD; her teslim düz-özet+terim-legend (TEMPLATE §Plain-delivery); koşu-sonrası rapor düz-dil Result-blok-başlar (§Plain-report); public GLOSSARY.md (18-terim) + README teknik-olmayan-giriş; teknik-olmayan-persona jüri doğrulaması |
+
+## 3.0 (2026-07-06) — telemetri + mekanik-disiplin sürümü
+- tokens.sh (mark/report): goal-başına TOKEN-RAPORU — TOTAL+model-başına $ (requestId-dedup, placeholder-dürüstlük-notu, subagent-mtime-filtresi, resmî-fiyat-gömülü)
+- lint.sh: LINT-skoru script-üretimi (mekanik alt-küme, placeholder→cap-79)
+- state.sh + goals/STATE.md: canlı-ilerleme (script-üretimi)
+- GUARDRAILS-OTO: TEMPLATE §Post-mortem (oto-yakalama + overlap-keskinleştirme) + derleme-önkoşulu "GUARDRAILS uygulandı:" beyanı (3-ısırık dersi mekanikleşti)
+- Röportaj: HER koşulda zorunlu (sayım-istisnası İPTAL; tek-istisna açık "röportajsız") + ADAPTİF çok-aşama (≤3 cevap-türevi takip-turu) + Q6 ROL-BAŞINA jüri-modeli
+- Jüri: anchored-discrete confidence 0/25/50/75/100 (APPROVE≥75) + 2.-REJECT'te kök-neden-protokolü
+- Araştırma: ≥25 canlı-kaynak (EVIDENCE-30 K1-K26); ertelenen: seal-sonrası-izleme(presence-tarzı), tam-hook-zorlama, dashboard
