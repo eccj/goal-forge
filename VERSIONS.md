@@ -23,8 +23,13 @@
 | — | **2.0** | Loop/campaign sertleştirme + exm7777 7-desen ADOPT (red-team-doğrulı): risk-rengi green/yellow/red (red⊇§RED-HOLD) · loop-round sözleşmesi (one-change + hash-donmuş-same-check + cheap-first-escalation + ZORUNLU-round-ledger) · scripts/repeat-offender.sh (çapraz-koşu sistem-problemi) · karar-hijyeni (kill-criteria+pre-mortem+§Shadow-test) |
 | — | **2.1** | "Herkes için düz-dil" — jargon→sade: eski geri-dönülmez-hold jetonu → §RED-HOLD (2.0 RED-tier'ın goal-tarafı çekirdeği) · kampanya-temyiz jetonu → appeal-law · STOP_REASON RED-HOLD; her teslim düz-özet+terim-legend (TEMPLATE §Plain-delivery); koşu-sonrası rapor düz-dil Result-blok-başlar (§Plain-report); public GLOSSARY.md (18-terim) + README teknik-olmayan-giriş; teknik-olmayan-persona jüri doğrulaması |
 | — | **3.0** | telemetri+mekanik-disiplin: tokens.sh TOKEN-RAPORU (model-başına $) · lint.sh script-skoru · STATE.md · GUARDRAILS-OTO · röportaj-her-koşulda+adaptif+Q6-rol-başına · anchored-confidence (ayrıntı: aşağıdaki 3.0 bölümü)
+| — | 3.1.2 | bağlam-diyeti: yalnız-ek dersler + plugin/skill ölçüm+öneri (RED-HOLD)
 | — | 3.0.1 | rapor-zenginleştirme: süre + kod-değişimi satırları (aşağıdaki bölüm)
 | — | **3.1** | optimizasyon: xref-testi GATE-şartı · §Resume taze-oturum-devri (state.sh resume-card) · marker-kalıcılığı · retro.sh seal-sonrası-tarama · TEMPLATE-budama %8 (aşağıdaki 3.1 bölümü)
+
+## 3.1.2 (2026-07-06) — bağlam-diyeti (yalnız-ek)
+- GUARDRAILS dersi + TEMPLATE §Resume CONTEXT-DIET eki: büyük-dosya işi subagent-bağlamında · ana-bağlam Read'leri offset/limit · kanıt transcript'e TAIL'li (tam-metin ledger'a)
+- plugin/skill always-on ÖLÇÜMÜ (claude plugin details; toplam ≈17.3k tok/istek, KAPAT-önerisi ≈15k) + arşiv-aday listeleri — uygulama §RED-HOLD ile kullanıcıya bırakıldı (ayar ajanca değişmedi)
 
 ## 3.1.1 (2026-07-06) — rapor-görünümü (operatör-isteği)
 - tokens.sh report --md: TOKEN-RAPORU'nun GFM-tablo çıktısı (terminal+mobil render; sayılar yine %100 script-üretimi); ham mod ledger için birebir korunur

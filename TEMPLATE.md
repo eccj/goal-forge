@@ -352,6 +352,15 @@ ledger path+count, the next unchecked PLAN item, the token-marker location
 old-session tokens reported from the marker, new-session from 0). Compiled
 heavy goals SHOULD include "milestone'da resume-card yenile" so the card is
 never stale when a handoff happens.
+CONTEXT-DIET (v3.1.2, additive — the in-session twin of this section): the
+same cache economics tax EVERY in-session request, so (1) whole-file work —
+full reads, pruning passes, audits — runs in a subagent's OWN context (the
+official example: a 6,100-token read returns ~420 tokens to the main
+context); (2) main-context Reads are targeted offset/limit slices, never
+full-file re-reads; (3) evidence enters the transcript TAIL-trimmed — the
+FULL text lives in the ledger file, which is what the Tribunal audits.
+(Observed: a /context audit found Read-results alone ≈180k of a 325k
+session.)
 
 ## §Post-mortem — GUARDRAILS automation (v3.0; both halves mandatory)
 Prior-art: compound-engineering's lesson loop; the flat file failed us 3× on
