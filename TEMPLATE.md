@@ -359,9 +359,14 @@ block is an INCOMPLETE report (a non-technical user must be able to read the
 first screen and know what happened). This is the run-completion twin of
 §Plain-delivery (which covers the compile-time hand-off).
 
-**TOKEN-RAPORU (mandatory in every final report, v3.0):** at goal arming run
-`scripts/tokens.sh mark <session.jsonl> <marker>`; in the final report paste the
-raw output of `scripts/tokens.sh report <session.jsonl> <marker> <tasks-dir>/*.output`
+**TOKEN-RAPORU (mandatory in every final report, v3.0; +süre/kod-özeti v3.0.1):**
+at goal arming run `scripts/tokens.sh mark <session.jsonl> <marker> [proj-dir]`
+(proj-dir'li mark git-HEAD'i kaydeder); in the final report paste the raw
+output of `scripts/tokens.sh report <session.jsonl> <marker> <tasks-dir>/*.output`
+— it now also prints wall-clock DURATION (goal-start→report) and, when the
+marker has a git-sha, the CODE-CHANGE line (files/+ins/−del · commit count).
+The plain "what changed" PROSE stays the §Plain-report Result block's job —
+the script supplies the numbers, the narrative stays human-readable.
 — TOTAL tokens+$ on top, then the per-model breakdown (fable/opus/sonnet/haiku,
 subagents included, input/output/cache split). The numbers come ONLY from the
 script (hand-written totals violate ELLE-SAYI-YOK); it prints its own honesty

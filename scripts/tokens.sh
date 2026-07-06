@@ -13,8 +13,12 @@ set -euo pipefail
 CMD="${1:-}"; shift || true
 case "$CMD" in
   mark)
-    SES="$1"; MARK="$2"
-    { echo "session=$SES"; echo "line=$(grep -c '' "$SES")"; echo "utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"; } > "$MARK"
+    SES="$1"; MARK="$2"; PROJ="${3:-}"
+    { echo "session=$SES"; echo "line=$(grep -c '' "$SES")"; echo "utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+      if [ -n "$PROJ" ] && git -C "$PROJ" rev-parse HEAD >/dev/null 2>&1; then
+        echo "proj=$PROJ"; echo "git=$(git -C "$PROJ" rev-parse HEAD)"
+      fi
+    } > "$MARK"
     echo "marked: $(cat "$MARK" | tr '\n' ' ')" ;;
   report)
     SES="$1"; MARKARG="$2"; shift 2 || true
@@ -23,7 +27,12 @@ case "$CMD" in
       [ -n "$START" ] || START=$(tr -dc '0-9' < "$MARKARG")   # düz-sayı marker da kabul
     else START="$MARKARG"; fi
     [ -n "$START" ] || { echo "HATA: start-line çözülemedi" >&2; exit 1; }
-    MARKUTC=""; [ -f "$MARKARG" ] && MARKUTC=$(grep '^utc=' "$MARKARG" 2>/dev/null | cut -d= -f2 || true)
+    MARKUTC=""; MPROJ=""; MGIT=""
+    if [ -f "$MARKARG" ]; then
+      MARKUTC=$(grep '^utc=' "$MARKARG" 2>/dev/null | cut -d= -f2 || true)
+      MPROJ=$(grep '^proj=' "$MARKARG" 2>/dev/null | cut -d= -f2- || true)
+      MGIT=$(grep '^git=' "$MARKARG" 2>/dev/null | cut -d= -f2 || true)
+    fi
     export GF_MARK_UTC="$MARKUTC"
     python3 - "$SES" "$START" "$@" <<'PYEOF'
 import json, sys, glob, os, calendar, time
@@ -101,6 +110,18 @@ print("not: in/out streaming-placeholder-riskli (issue#28197) → requestId-dedu
 if unmatched: print(f"UYARI: eşleşmeyen model(ler) 'other'a fable-fiyatıyla yazıldı: {sorted(unmatched)}")
 print("fiyat-kaynağı: platform.claude.com/docs/en/about-claude/pricing (2026-07-06)")
 PYEOF
+    # süre (goal-start → şimdi)
+    if [ -n "$MARKUTC" ]; then
+      S_EP=$(python3 -c "import calendar,time;print(calendar.timegm(time.strptime('$MARKUTC','%Y-%m-%dT%H:%M:%SZ')))")
+      EL=$(( $(date -u +%s) - S_EP )); H=$((EL/3600)); M=$(((EL%3600)/60))
+      echo "süre: ${H}sa ${M}dk (goal-start $MARKUTC → rapor-anı; duvar-saati, ajan-aktif-süresi değil)"
+    fi
+    # kod-değişim-özeti (marker git-sha'lıysa)
+    if [ -n "$MGIT" ] && [ -n "$MPROJ" ] && git -C "$MPROJ" rev-parse "$MGIT" >/dev/null 2>&1; then
+      ST=$(git -C "$MPROJ" diff --shortstat "$MGIT"..HEAD 2>/dev/null | sed 's/^ *//')
+      NC=$(git -C "$MPROJ" log --oneline "$MGIT"..HEAD 2>/dev/null | grep -c '' || true)
+      echo "kod-değişimi ($MPROJ): ${ST:-değişiklik-yok} · $NC commit (git $(echo $MGIT|cut -c1-7)..HEAD)"
+    fi
     ;;
   *) echo "usage: tokens.sh mark <session.jsonl> <marker> | report <session.jsonl> <marker|start-line> [extra-globs...]"; exit 1 ;;
 esac

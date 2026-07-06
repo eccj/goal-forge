@@ -23,6 +23,9 @@
 | — | **2.0** | Loop/campaign sertleştirme + exm7777 7-desen ADOPT (red-team-doğrulı): risk-rengi green/yellow/red (red⊇§RED-HOLD) · loop-round sözleşmesi (one-change + hash-donmuş-same-check + cheap-first-escalation + ZORUNLU-round-ledger) · scripts/repeat-offender.sh (çapraz-koşu sistem-problemi) · karar-hijyeni (kill-criteria+pre-mortem+§Shadow-test) |
 | — | **2.1** | "Herkes için düz-dil" — jargon→sade: eski geri-dönülmez-hold jetonu → §RED-HOLD (2.0 RED-tier'ın goal-tarafı çekirdeği) · kampanya-temyiz jetonu → appeal-law · STOP_REASON RED-HOLD; her teslim düz-özet+terim-legend (TEMPLATE §Plain-delivery); koşu-sonrası rapor düz-dil Result-blok-başlar (§Plain-report); public GLOSSARY.md (18-terim) + README teknik-olmayan-giriş; teknik-olmayan-persona jüri doğrulaması |
 
+## 3.0.1 (2026-07-06) — rapor-zenginleştirme (operatör-isteği)
+- tokens.sh report: SÜRE satırı (goal-start→rapor duvar-saati) + KOD-DEĞİŞİMİ satırı (git-shortstat + commit-sayısı; mark artık opsiyonel proj-dir ile git-HEAD kaydeder)
+
 ## 3.0 (2026-07-06) — telemetri + mekanik-disiplin sürümü
 - tokens.sh (mark/report): goal-başına TOKEN-RAPORU — TOTAL+model-başına $ (requestId-dedup, placeholder-dürüstlük-notu, subagent-mtime-filtresi, resmî-fiyat-gömülü)
 - lint.sh: LINT-skoru script-üretimi (mekanik alt-küme, placeholder→cap-79)
