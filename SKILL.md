@@ -3,7 +3,7 @@ name: goal-forge
 description: Compiles evidence-based /goal contracts (and /loop recipes) with a tamper-evident Ledger and an adversarial Tribunal as the completion condition. Use when the user says "goal yaz", "goal-forge", "loop-forge", "loop yaz", "write a goal", "prepare a /goal", asks goal-vs-loop, or wants a campaign split.
 ---
 
-# Goal Forge 3.0 — a compiler for autonomous goals
+# Goal Forge 3.1 — a compiler for autonomous goals
 
 The /goal evaluator (small, fast) reads ONLY the transcript, runs no tools.
 Invariants: **(a) every deliverable carries transcript-visible evidence, (b)
@@ -85,8 +85,8 @@ dual sign-off**: proxy ✓ AND intent ✓). Briefs/verdict format:
 EFFORT ROUTING (§3 types): J1/J2 take the haiku checklist lane on [M] items;
 prosecutor+J3 spend sonnet/opus only on the [J] surface. Routing changes COST,
 NEVER method count — the 3-method invariant is untouchable.
-**G=1:** ALL-[M] goals may use TEMPLATE §Light (one auditor, all 3 methods)
-≤5 items & ≤15 turns; evidence/ledger/gate never lighten.
+**G=1:** ALL-[M] goals may use TEMPLATE §Light (one auditor, 3 methods)
+up to 5 items & ≤15 turns; evidence/ledger/gate never lighten.
 Order: COMPLETION GATE (mechanical checks re-run +
 `ledger.sh coverage` + `verify` + xref-test (skill-dev); failure = no jury) → prosecutor
 (self-audit; heavy adds an independent subagent; S#↔E-S# closures) → jurors.

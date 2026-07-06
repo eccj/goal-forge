@@ -1,4 +1,4 @@
-# Goal Skeleton + Ledger + Tribunal + Archive (2.1, full detail)
+# Goal Skeleton + Ledger + Tribunal + Archive (3.1, full detail)
 
 Produce the goal **in the user's language**. Ideal band 3000-4000 chars
 (hard limit 4000) — measured per LINT #9.

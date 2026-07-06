@@ -22,6 +22,9 @@
 | — | 1.9 | Optimal yapı: SKILL 97-satır→≤8000-char-measure + 6-mekanizma-özet · [M]/[J] tipleme + EFFORT-ROUTING (haiku-şerit) + G=1→§Light≤5 · jury-shopping tripwire · §Archive human-mirror + ≤5-satır düz-özet · BUDGETED-COMPOSE (Σ≤3800, >1 sıkıştırma=kusur) · ASCII-kanon · LINT#5 medyan×1.3 · 2 yeni test (skill-budget + invariant-xref) |
 | — | **2.0** | Loop/campaign sertleştirme + exm7777 7-desen ADOPT (red-team-doğrulı): risk-rengi green/yellow/red (red⊇§RED-HOLD) · loop-round sözleşmesi (one-change + hash-donmuş-same-check + cheap-first-escalation + ZORUNLU-round-ledger) · scripts/repeat-offender.sh (çapraz-koşu sistem-problemi) · karar-hijyeni (kill-criteria+pre-mortem+§Shadow-test) |
 | — | **2.1** | "Herkes için düz-dil" — jargon→sade: eski geri-dönülmez-hold jetonu → §RED-HOLD (2.0 RED-tier'ın goal-tarafı çekirdeği) · kampanya-temyiz jetonu → appeal-law · STOP_REASON RED-HOLD; her teslim düz-özet+terim-legend (TEMPLATE §Plain-delivery); koşu-sonrası rapor düz-dil Result-blok-başlar (§Plain-report); public GLOSSARY.md (18-terim) + README teknik-olmayan-giriş; teknik-olmayan-persona jüri doğrulaması |
+| — | **3.0** | telemetri+mekanik-disiplin: tokens.sh TOKEN-RAPORU (model-başına $) · lint.sh script-skoru · STATE.md · GUARDRAILS-OTO · röportaj-her-koşulda+adaptif+Q6-rol-başına · anchored-confidence (ayrıntı: aşağıdaki 3.0 bölümü)
+| — | 3.0.1 | rapor-zenginleştirme: süre + kod-değişimi satırları (aşağıdaki bölüm)
+| — | **3.1** | optimizasyon: xref-testi GATE-şartı · §Resume taze-oturum-devri (state.sh resume-card) · marker-kalıcılığı · retro.sh seal-sonrası-tarama · TEMPLATE-budama %8 (aşağıdaki 3.1 bölümü)
 
 ## 3.1 (2026-07-06) — optimizasyon sürümü (tam-yetkili öz-akıl-yürütme)
 - D1: tests/test_xref_anchors.py çapraz-dosya numaralı-referans desteği ("SKILL.md §2" marker'ı hedef-dosyayı seçer) → YEŞİL; COMPLETION-GATE'e kalıcı bağlandı (TEMPLATE PROCESS + SKILL §5: skill-.md dokunulduysa xref-testi gate-şartı)
