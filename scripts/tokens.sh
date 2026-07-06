@@ -7,13 +7,23 @@
 # (github.com/anthropics/claude-code/issues/28197) → dedup by requestId, keep max per field;
 # cache fields are reliable. Numbers are ESTIMATES, not billing data.
 # Usage:
-#   tokens.sh mark <session.jsonl> <marker-file>       # record start line
-#   tokens.sh report <session.jsonl> <marker-file|0> [extra-transcript-glob ...]
+#   tokens.sh mark <session.jsonl> <marker>            # record start line
+#   tokens.sh report <session.jsonl> <marker|0> [extra-transcript-glob ...]
+# <marker> (v3.1): a DIRECTORY or a ledger .md path resolves to
+# <that-dir>/.tokens-marker (persistent, survives /tmp cleanup — the 3.0 run
+# lost its /tmp marker to a cleanup pass). An explicit file path or a bare
+# start-line number keeps the old behavior unchanged.
 set -euo pipefail
+resolve_marker() {  # dir → dir/.tokens-marker · ledger.md → sibling marker · else verbatim
+  local a="$1"
+  if [ -d "$a" ]; then echo "$a/.tokens-marker"
+  elif [[ "$a" == *.md ]]; then echo "$(dirname "$a")/.tokens-marker"
+  else echo "$a"; fi
+}
 CMD="${1:-}"; shift || true
 case "$CMD" in
   mark)
-    SES="$1"; MARK="$2"; PROJ="${3:-}"
+    SES="$1"; MARK="$(resolve_marker "$2")"; PROJ="${3:-}"
     { echo "session=$SES"; echo "line=$(grep -c '' "$SES")"; echo "utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"
       if [ -n "$PROJ" ] && git -C "$PROJ" rev-parse HEAD >/dev/null 2>&1; then
         echo "proj=$PROJ"; echo "git=$(git -C "$PROJ" rev-parse HEAD)"
@@ -21,7 +31,7 @@ case "$CMD" in
     } > "$MARK"
     echo "marked: $(cat "$MARK" | tr '\n' ' ')" ;;
   report)
-    SES="$1"; MARKARG="$2"; shift 2 || true
+    SES="$1"; MARKARG="$(resolve_marker "$2")"; shift 2 || true
     if [ -f "$MARKARG" ]; then
       START=$(grep '^line=' "$MARKARG" 2>/dev/null | cut -d= -f2 || true)
       [ -n "$START" ] || START=$(tr -dc '0-9' < "$MARKARG")   # düz-sayı marker da kabul

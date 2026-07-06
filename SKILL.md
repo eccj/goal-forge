@@ -9,8 +9,8 @@ The /goal evaluator (small, fast) reads ONLY the transcript, runs no tools.
 Invariants: **(a) every deliverable carries transcript-visible evidence, (b)
 raw evidence accumulates in a tamper-evident Ledger, (c) the stop condition
 is a Tribunal verdict the evaluator can trivially check.**
-THIS FILE's budget: ≤8000 chars (`ledger.sh measure`) AND an honest summary of
-every load-bearing TEMPLATE mechanism (chars — not lines — are the metric).
+THIS FILE's budget: ≤8000 chars (`ledger.sh measure` — the canonical metric)
+AND an honest summary of every load-bearing TEMPLATE mechanism.
 This file SUMMARIZES and POINTS; canonical text: TEMPLATE.md / LINT.md /
 RECIPES.md — on conflict TEMPLATE.md wins.
 Pipeline: intent → interview → contract → lint → compiled /goal (+archive)
@@ -30,12 +30,12 @@ COLD START: empty scan → open with "Describe the project and the finish line
 in 2-3 sentences". Never present empty/generic options.
 
 ## 2. Interview (MANDATORY in EVERY case — user's language)
-PRECONDITION (mechanical, v3.0): `cat goals/GUARDRAILS.md` FIRST; the delivery
-must carry a "GUARDRAILS uygulandı: <dersler|hiçbiri+neden>" line (TEMPLATE
-§Post-mortem) — no line = invalid delivery.
-The interview fires in EVERY condition; the ONLY skip is the user explicitly
-saying "röportajsız" — the old enumerated-params exception is REVOKED
-(drifted 3×).
+PRECONDITION (mechanical): `cat goals/GUARDRAILS.md` + `retro.sh check`
+(v3.1 seal-range revert/amend scan; warning→lesson-candidate);
+delivery must carry a "GUARDRAILS uygulandı: <dersler|hiçbiri+neden>" line
+(TEMPLATE §Post-mortem) — no line = invalid delivery.
+The interview fires in EVERY condition; ONLY skip: the user's explicit
+"röportajsız" — the enumerated-params exception is REVOKED (drifted 3×).
 ROUND 1 (AskUserQuestion, pre-filled from scan): 1 **Mission** · 2 **Scope**
 (multi-select; add research item on §1 gap) · 3 **MUST-NOTs** · 4 **Evidence
 level** (live+measurements/live/local) · 5 **Turn budget** (LINT #5) ·
@@ -44,7 +44,7 @@ prosecutor (Fable/Opus), then J1, J2, J3 each (Opus/Sonnet; Haiku only on the
 user's explicit pick) · 7 **Tech/Approach** ([STACKS.md](STACKS.md) §Firing;
 "research decides" → stack-bakeoff + roadmap PLAN).
 ADAPTIVE DEPTH (v3.0): if round-1 answers leave design-driving unknowns (new
-product / broad domain — e.g. "mobil app" → platform/offline/data/auth), run
+product / broad domain — "mobil app" → platform/offline/data/auth), run
 answer-derived follow-up rounds, ≤3, one theme per round, until the remaining
 unknowns are assumption-safe; simple goals stay SINGLE-round (bureaucracy ban).
 Consequential goals declare KILL-CRITERIA + 1-line PREMORTEM (light may skip).
@@ -87,8 +87,8 @@ prosecutor+J3 spend sonnet/opus only on the [J] surface. Routing changes COST,
 NEVER method count — the 3-method invariant is untouchable.
 **G=1:** ALL-[M] goals may use TEMPLATE §Light (one auditor, all 3 methods)
 ≤5 items & ≤15 turns; evidence/ledger/gate never lighten.
-Order: COMPLETION GATE (all mechanical checks re-run in one pass +
-`ledger.sh coverage` + `verify`; any failure = no jury) → prosecutor
+Order: COMPLETION GATE (mechanical checks re-run +
+`ledger.sh coverage` + `verify` + xref-test (skill-dev); failure = no jury) → prosecutor
 (self-audit; heavy adds an independent subagent; S#↔E-S# closures) → jurors.
 ANTI-FABRICATION (TEMPLATE <anti-accept>): verdict without a preceding
 Agent-tool block = **fabricated jury**; without an adjacent E-D#/hash citation

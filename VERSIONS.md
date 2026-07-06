@@ -23,6 +23,14 @@
 | — | **2.0** | Loop/campaign sertleştirme + exm7777 7-desen ADOPT (red-team-doğrulı): risk-rengi green/yellow/red (red⊇§RED-HOLD) · loop-round sözleşmesi (one-change + hash-donmuş-same-check + cheap-first-escalation + ZORUNLU-round-ledger) · scripts/repeat-offender.sh (çapraz-koşu sistem-problemi) · karar-hijyeni (kill-criteria+pre-mortem+§Shadow-test) |
 | — | **2.1** | "Herkes için düz-dil" — jargon→sade: eski geri-dönülmez-hold jetonu → §RED-HOLD (2.0 RED-tier'ın goal-tarafı çekirdeği) · kampanya-temyiz jetonu → appeal-law · STOP_REASON RED-HOLD; her teslim düz-özet+terim-legend (TEMPLATE §Plain-delivery); koşu-sonrası rapor düz-dil Result-blok-başlar (§Plain-report); public GLOSSARY.md (18-terim) + README teknik-olmayan-giriş; teknik-olmayan-persona jüri doğrulaması |
 
+## 3.1 (2026-07-06) — optimizasyon sürümü (tam-yetkili öz-akıl-yürütme)
+- D1: tests/test_xref_anchors.py çapraz-dosya numaralı-referans desteği ("SKILL.md §2" marker'ı hedef-dosyayı seçer) → YEŞİL; COMPLETION-GATE'e kalıcı bağlandı (TEMPLATE PROCESS + SKILL §5: skill-.md dokunulduysa xref-testi gate-şartı)
+- D2: state.sh resume-card → goals/RESUME.md (misyon+PIN+ledger+sıradaki-D#+devir-talimatı) + TEMPLATE §Resume — bağlam-şişkinliği (>100k/istek) taze-oturum-devriyle çözülür
+- D3: tokens.sh marker-kalıcılığı — <marker> olarak DİZİN veya ledger-.md verilirse <dizin>/.tokens-marker (açık-yol + çıplak-satır-no geriye-uyumlu; /tmp-silinme-kazası biter)
+- D4: scripts/retro.sh (seal/check, minimal — daemon YOK): seal commit-aralığını arşivler; SONRAKİ derleme-önkoşulunda revert/amend taraması 1-satır (SKILL §2 PRECONDITION'a eklendi)
+- D5: TEMPLATE-budama %8.04 (30713→28244 char; örtüşme/tekrar ayıklandı) — koruma: silinen-çapa=0, shadow-test flip-YOK (99/100/95→aynı), xref-yeşil
+- ÇIKARILAN yanlışlar: dil-politikası çift-anlatımı, el-ile-hash tarifi (kanonik ledger.sh varken), RED-HOLD çift-anlatım, hardening-bullet↔haiku-checklist kopyası, arşiv-resume↔§Resume örtüşmesi
+
 ## 3.0.1 (2026-07-06) — rapor-zenginleştirme (operatör-isteği)
 - tokens.sh report: SÜRE satırı (goal-start→rapor duvar-saati) + KOD-DEĞİŞİMİ satırı (git-shortstat + commit-sayısı; mark artık opsiyonel proj-dir ile git-HEAD kaydeder)
 

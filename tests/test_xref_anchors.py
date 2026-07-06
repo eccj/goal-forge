@@ -162,10 +162,13 @@ def resolve(ref, anchors_by_file, numbered_by_file, all_anchor_words):
     """Return (ok: bool, target_desc: str, reason: str)."""
     if ref["kind"] == "num":
         n = ref["val"]
-        src = ref["src"]
-        if n in numbered_by_file.get(src, set()):
-            return True, "%s ## %d." % (src, n), "numbered section present"
-        return False, "%s ## %d." % (src, n), "no '## %d.' section in %s" % (n, src)
+        # Cross-file numbered ref: an inline file marker ("SKILL.md §2") names
+        # the target file; only markerless numbered refs resolve in the source
+        # file (the 3.0-era false-positive class: TEMPLATE citing SKILL §2).
+        target = ref["marker"] or ref["src"]
+        if n in numbered_by_file.get(target, set()):
+            return True, "%s ## %d." % (target, n), "numbered section present"
+        return False, "%s ## %d." % (target, n), "no '## %d.' section in %s" % (n, target)
 
     words = ref["val"]
     # documented external anchor (no heading by design)
