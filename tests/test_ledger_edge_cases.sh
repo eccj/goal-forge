@@ -21,7 +21,7 @@
 #      and a clean append leaves no lock behind
 #   4. usage / missing-file errors exit non-zero with the right message
 
-REAL_DEFAULT="/Users/emrew/.claude/skills/goal-forge/scripts/ledger.sh"
+REAL_DEFAULT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/scripts/ledger.sh"
 SRC="${LEDGER_SH:-$REAL_DEFAULT}"
 [ -f "$SRC" ] || { echo "FATAL: ledger.sh not found at $SRC" >&2; exit 2; }
 

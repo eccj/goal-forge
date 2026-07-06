@@ -37,7 +37,7 @@
 # =============================================================================
 set -u
 
-DEFAULT_SRC="/private/tmp/claude-501/-Users-emrew-Desktop-goal-forger/cd464dc9-5061-4677-ac0d-25f17de3b176/scratchpad/m2-synth"
+DEFAULT_SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/fixtures/m2-synth"
 SRC="${GF_FIXTURE_DIR:-$DEFAULT_SRC}"
 
 FIX_ML="fixture_ml-eval.py"

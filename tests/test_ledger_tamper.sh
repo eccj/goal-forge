@@ -18,7 +18,7 @@
 
 set -uo pipefail   # NOT -e: we deliberately run commands that exit nonzero (broken verify)
 
-SKILL="${1:-/Users/emrew/.claude/skills/goal-forge}"
+SKILL="${1:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 LEDGER="$SKILL/scripts/ledger.sh"
 
 [ -f "$LEDGER" ] || { echo "SETUP-FAIL: no ledger.sh at $LEDGER"; exit 2; }

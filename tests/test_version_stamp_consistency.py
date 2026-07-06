@@ -21,7 +21,7 @@ import os
 import re
 import sys
 
-DEFAULT_SKILL = "/Users/emrew/.claude/skills/goal-forge"
+DEFAULT_SKILL = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # portable: tests/..
 # major.minor with optional patch, e.g. 1.6 or 1.6.2
 VER = r"(\d+\.\d+(?:\.\d+)?)"
 

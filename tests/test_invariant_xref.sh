@@ -24,7 +24,7 @@
 
 set -u
 export LC_ALL=C.UTF-8
-SKILL_DIR="${GF_SKILL_DIR:-/Users/emrew/.claude/skills/goal-forge}"
+SKILL_DIR="${GF_SKILL_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 S="$SKILL_DIR/SKILL.md"; T="$SKILL_DIR/TEMPLATE.md"; L="$SKILL_DIR/LINT.md"
 
 fail() { echo "TEST-FAIL: $*" >&2; exit 1; }

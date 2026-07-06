@@ -2,7 +2,7 @@
 
 **An evidence-based `/goal` compiler for Claude Code — faking "done" isn't cheap, and any fake is tamper-evident to a later re-runner.**
 
-![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 3.1](https://img.shields.io/badge/status-3.1-blue.svg) ![Dependencies: none](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum-brightgreen.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg) ![Status: 3.1](https://img.shields.io/badge/status-3.1-blue.svg) ![Dependencies: minimal](https://img.shields.io/badge/dependencies-bash%20%2B%20shasum%20%2B%20python3-brightgreen.svg)
 
 Autonomous agents love declaring victory. They say *"all tests pass"* without pasting the test output, *"deployed"* without a live check, *"optimized"* with no numbers. Goal Forge compiles your task into a `/goal` contract under which **finishing is a verdict, not a feeling**: every deliverable must leave raw command output in a hash-chained evidence ledger, and an adversarial tribunal — a prosecutor whose job is to attack the work, plus three jurors who re-run the checks themselves — must reach a **unanimous** verdict before the agent is allowed to stop.
 
@@ -22,7 +22,7 @@ flowchart LR
 ```
 
 1. **Interview** — say *"write a goal"*. The compiler scans your project and asks up to 7 prefilled questions: mission, scope, must-nots, evidence level, turn budget, tribunal strictness **and models** (prosecutor: Fable/Opus; jurors: Opus/Sonnet/Haiku), and — on greenfield builds — a **tech-stack question** with per-option trade-offs ([STACKS.md](STACKS.md)).
-2. **Contract** — a two-layer `/goal` block (≤4000 chars, linted against [10 criteria](LINT.md)): a worker layer (tasks with inline evidence requirements, FORBIDDEN list, safety valve) and an evaluator layer (`<condition>`, `<evidence-map>`, `<anti-accept>`).
+2. **Contract** — a two-layer `/goal` block (≤4000 chars, linted against [10 criteria](LINT.md)): a worker layer (tasks with inline evidence requirements, FORBIDDEN list, safety valve) and an evaluator layer (`<condition>`, `<evidence-map>`, `<anti-accept>`). *(Layer note: "the evaluator runs no tools" describes the /goal stop-hook judge only; worker-side helper scripts — `state.sh`, `retro.sh`, `tokens.sh` — legitimately shell out to `git`/`date`.)*
 3. **Ledger** — during execution, every load-bearing output is appended to a tamper-evident sha256 chain via [`scripts/ledger.sh`](scripts/ledger.sh) (`append` / `verify` / `measure`). In-place edits break the chain mechanically.
 4. **Tribunal** — on a done-claim: completion gate → prosecutor (numbered findings, each must be closed with evidence) → three jurors diversified by *verification method*, with tool access. Rejection comes with a deficiency list; three consecutive rejections hand the goal back to you as BLOCKED. Deadlock is impossible; so is rubber-stamping.
 
@@ -50,7 +50,7 @@ raw block · no unanimous verdict · a D# never mentioned ...</anti-accept>
 git clone https://github.com/eccj/goal-forge ~/.claude/skills/goal-forge
 ```
 
-Then in any Claude Code session: just say **"write a goal"** (or `/goal-forge`). Requires Claude Code ≥ 2.1.139 (`/goal` support). Zero dependencies beyond bash + shasum. Full walkthrough: [QUICKSTART.md](QUICKSTART.md).
+Then in any Claude Code session: just say **"write a goal"** (or `/goal-forge`). Requires Claude Code ≥ 2.1.139 (`/goal` support). Zero dependencies beyond bash + shasum + python3 (stdlib only — used by lint.sh/tokens.sh and the test suite). Full walkthrough: [QUICKSTART.md](QUICKSTART.md).
 
 ## FAQ
 
@@ -95,7 +95,7 @@ The model that does the work is never the model that declares it finished — in
 | [scripts/ledger.sh](scripts/ledger.sh) | append / verify / measure — the evidence chain |
 | [examples/](examples/) | annotated case studies |
 
-**Language policy:** repo docs are English; the trigger works in any language. Compiled contracts follow the *operator's* language (headings translate; `D#`/`E-D#`/`S#` labels, the metadata line and XML slot names never do) — jurors are instructed to judge content language-independently.
+**Language policy:** core repo docs are English (deliberate exceptions: VERSIONS.md and script/CLI output are operator-facing and currently Turkish); the trigger works in any language. Compiled contracts follow the *operator's* language (headings translate; `D#`/`E-D#`/`S#` labels, the metadata line and XML slot names never do) — jurors are instructed to judge content language-independently.
 
 ## License
 

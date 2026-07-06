@@ -73,8 +73,8 @@ A changed file gets a superseding entry — stale data never poses as current.
 Summaries never replace raw blocks — the Tribunal audits the ledger, not the
 narrative. `ledger.sh coverage <ledger> <n>` is the COMPLETION GATE's presence
 check: every D1..D# ledgered before any jury. Format: [TEMPLATE.md](TEMPLATE.md)
-§Ledger. `state.sh update` regenerates goals/STATE.md at every milestone (live
-progress: items-done/ledger-count/last-evidence; script-made, not hand-edited).
+§Ledger. `state.sh update` regenerates goals/STATE.md at every milestone
+(live progress; script-made, not hand-edited).
 
 ## 5. Tribunal (the stop condition)
 Three jurors diversified by VERIFICATION METHOD, not count (correlated

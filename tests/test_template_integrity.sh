@@ -24,7 +24,7 @@
 set -u
 export LC_ALL=C   # byte-level matching so multibyte "§"/"·" compare literally
 
-SKILL_DIR="${GOAL_FORGE_DIR:-/Users/emrew/.claude/skills/goal-forge}"
+SKILL_DIR="${GOAL_FORGE_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 
 SCRATCH=""                                   # global so the EXIT trap can see it
 trap 'rm -rf "${SCRATCH:-}"' EXIT            # cleanup fires even under set -u

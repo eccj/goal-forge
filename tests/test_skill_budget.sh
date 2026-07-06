@@ -17,7 +17,7 @@
 # skill; fixtures live in mktemp scratch. Exit 0 = pass.
 
 set -u
-SKILL_DIR="${GF_SKILL_DIR:-/Users/emrew/.claude/skills/goal-forge}"
+SKILL_DIR="${GF_SKILL_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 LED="$SKILL_DIR/scripts/ledger.sh"
 SKILL="$SKILL_DIR/SKILL.md"
 LIMIT=8000

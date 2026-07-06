@@ -32,7 +32,7 @@ import re
 import sys
 
 # ---- locate the skill dir (read-only target) -------------------------------
-INSTALLED = "/Users/emrew/.claude/skills/goal-forge"
+INSTALLED = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # portable: tests/..
 if len(sys.argv) > 1:
     ROOT = sys.argv[1]
 elif os.environ.get("GOAL_FORGE_DIR"):

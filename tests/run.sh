@@ -17,7 +17,7 @@
 set -u
 
 TESTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILL="${1:-${GF_SKILL_DIR:-/Users/emrew/.claude/skills/goal-forge}}"
+SKILL="${1:-${GF_SKILL_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}}"
 SKILL="$(cd "$SKILL" 2>/dev/null && pwd || echo "$SKILL")"
 LED="$SKILL/scripts/ledger.sh"
 

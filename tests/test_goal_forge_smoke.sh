@@ -19,7 +19,7 @@
 
 set -uo pipefail
 
-SKILL="${GF_SKILL_DIR:-/Users/emrew/.claude/skills/goal-forge}"
+SKILL="${GF_SKILL_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 REAL_LEDGER="$SKILL/scripts/ledger.sh"
 BREAK="${GF_SMOKE_BREAK:-none}"
 

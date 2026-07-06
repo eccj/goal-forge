@@ -19,7 +19,7 @@
 
 set -u
 
-LEDGER="${1:-${LEDGER_SH:-/Users/emrew/.claude/skills/goal-forge/scripts/ledger.sh}}"
+LEDGER="${1:-${LEDGER_SH:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/scripts/ledger.sh}}"
 [ -f "$LEDGER" ] || { echo "FATAL: ledger.sh not found: $LEDGER" >&2; exit 2; }
 command -v python3 >/dev/null 2>&1 || { echo "FATAL: python3 required (oracle)" >&2; exit 2; }
 

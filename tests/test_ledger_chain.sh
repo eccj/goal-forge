@@ -18,7 +18,7 @@
 
 set -u
 
-SKILL_LEDGER="${LEDGER_SH:-/Users/emrew/.claude/skills/goal-forge/scripts/ledger.sh}"
+SKILL_LEDGER="${LEDGER_SH:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)/scripts/ledger.sh}"
 
 fail() { echo "TEST-FAIL: $*" >&2; exit 1; }
 pass() { echo "TEST-PASS: $*"; }

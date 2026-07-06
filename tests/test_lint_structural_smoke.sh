@@ -28,7 +28,7 @@
 export LC_ALL=C   # deterministic byte-level matching for the box / Turkish glyphs
 set -u
 
-SKILL_DIR="${GF_SKILL_DIR:-/Users/emrew/.claude/skills/goal-forge}"
+SKILL_DIR="${GF_SKILL_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 
 # Known-good set. GF_GOOD_FILE overrides the whole set with a single file
 # (used by the RED harness to point the test at a deliberately broken copy).
