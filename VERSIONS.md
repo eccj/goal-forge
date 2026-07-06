@@ -23,9 +23,15 @@
 | — | **2.0** | Loop/campaign sertleştirme + exm7777 7-desen ADOPT (red-team-doğrulı): risk-rengi green/yellow/red (red⊇§RED-HOLD) · loop-round sözleşmesi (one-change + hash-donmuş-same-check + cheap-first-escalation + ZORUNLU-round-ledger) · scripts/repeat-offender.sh (çapraz-koşu sistem-problemi) · karar-hijyeni (kill-criteria+pre-mortem+§Shadow-test) |
 | — | **2.1** | "Herkes için düz-dil" — jargon→sade: eski geri-dönülmez-hold jetonu → §RED-HOLD (2.0 RED-tier'ın goal-tarafı çekirdeği) · kampanya-temyiz jetonu → appeal-law · STOP_REASON RED-HOLD; her teslim düz-özet+terim-legend (TEMPLATE §Plain-delivery); koşu-sonrası rapor düz-dil Result-blok-başlar (§Plain-report); public GLOSSARY.md (18-terim) + README teknik-olmayan-giriş; teknik-olmayan-persona jüri doğrulaması |
 | — | **3.0** | telemetri+mekanik-disiplin: tokens.sh TOKEN-RAPORU (model-başına $) · lint.sh script-skoru · STATE.md · GUARDRAILS-OTO · röportaj-her-koşulda+adaptif+Q6-rol-başına · anchored-confidence (ayrıntı: aşağıdaki 3.0 bölümü)
+| — | 3.1.3 | taşınabilirlik: test-yolları göreli + fixture-vendor + rozet/dil düzeltmeleri
 | — | 3.1.2 | bağlam-diyeti: yalnız-ek dersler + plugin/skill ölçüm+öneri (RED-HOLD)
 | — | 3.0.1 | rapor-zenginleştirme: süre + kod-değişimi satırları (aşağıdaki bölüm)
 | — | **3.1** | optimizasyon: xref-testi GATE-şartı · §Resume taze-oturum-devri (state.sh resume-card) · marker-kalıcılığı · retro.sh seal-sonrası-tarama · TEMPLATE-budama %8 (aşağıdaki 3.1 bölümü)
+
+## 3.1.3 (2026-07-06) — taşınabilirlik + doküman-tutarlılığı (dış-inceleme: Opus-4.8-cloud, 5 bulgu)
+- tests: 12 dosyadaki makineye-gömülü mutlak yol → BASH_SOURCE/__file__ türevi; m2-fixture'lar repoya vendor'landı (tests/fixtures/m2-synth) — temiz-klonda 13/13 kanıtlı
+- README: bağımlılık rozeti bash+shasum+python3; dil-politikası istisnası beyan; evaluator-vs-worker araç-katmanı notu
+- SKILL: nefes-payı 16→55 char (7945/8000)
 
 ## 3.1.2 (2026-07-06) — bağlam-diyeti (yalnız-ek)
 - GUARDRAILS dersi + TEMPLATE §Resume CONTEXT-DIET eki: büyük-dosya işi subagent-bağlamında · ana-bağlam Read'leri offset/limit · kanıt transcript'e TAIL'li (tam-metin ledger'a)
