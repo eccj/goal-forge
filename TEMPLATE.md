@@ -184,6 +184,21 @@ take §Light mode up to 5 items and ≤15 turns; evidence/ledger/gate never ligh
 > verdict is a protocol violation, revision is not. (Field-proven: in the v3
 > self-upgrade run a juror's partial REJECT was correctly reversed once raw
 > evidence and a recomputable hash chain were re-presented.)
+> CONFIDENCE (v3.0, anchored-discrete — continuous scores cluster on round
+> numbers; prior-art: compound-engineering ported from an Anthropic pattern):
+> tag your verdict with ONE of 0/25/50/75/100 —
+> 100=every check re-run & matched · 75=checks pass, one minor unverifiable
+> claim (name it) · 50=evidence mixed, would not bet either way (NOT a valid
+> final state: dig until ≥75 or ≤25) · 25=material claim failed verification ·
+> 0=fabrication/broken chain. APPROVE requires ≥75; REJECT requires ≤50.
+
+ROOT-CAUSE PROTOCOL (v3.0; prior-art: superpowers/systematic-debugging): after
+a SECOND consecutive REJECT on the SAME D-item, the worker may not simply retry
+— it must first ledger a root-cause entry: (1) symptom vs underlying cause,
+(2) why fix-#1 failed, (3) the check that will prove the cause is gone; only
+then attempt #3. A third REJECT still → BLOCKED (unchanged). This fills the
+empty space between "REJECT→fix" and "3-REJECT→BLOCKED" with diagnosis instead
+of thrashing.
 
 INDEPENDENCE MODEL (research-founded — arXiv:2605.29800: in-family panels do
 NOT decorrelate, n_eff 9→~2.18, family diversity barely helps). Independence
@@ -352,6 +367,25 @@ script (hand-written totals violate ELLE-SAYI-YOK); it prints its own honesty
 notes (list-price ESTIMATE; input/output placeholder risk per issue#28197 —
 requestId-dedup applied; cache fields reliable; goal-öncesi transcripts excluded
 by mtime).
+
+## §Post-mortem — GUARDRAILS automation (v3.0; both halves mandatory)
+Prior-art: compound-engineering's lesson loop (auto-capture at completion +
+planning must READ the store) — the flat append-only file failed us 3× on the
+same interview lesson because APPLICATION depended on memory.
+**(1) AUTO-CAPTURE (after every SEAL or BLOCKED):** before the final report,
+extract candidate lessons from (a) prosecutor findings, (b) juror REJECT
+reasons, (c) operator corrections mid-run. For each: OVERLAP-CHECK against
+existing GUARDRAILS lines first (same error class → sharpen the existing line,
+citing the new bite-count, instead of appending a near-duplicate); genuinely
+new → append one `<date> · <error class> → <rule>` line. Zero lessons is a
+legitimate outcome — say so in the report rather than minting filler.
+**(2) MECHANICAL APPLICATION (at every compile):** step 1 of §2's interview is
+now preceded by a hard precondition — `cat goals/GUARDRAILS.md`, then the
+delivery MUST contain a "GUARDRAILS uygulandı:" line naming which lessons
+shaped THIS goal (or "hiçbiri tetiklenmedi" + why). A delivered goal without
+that line is an invalid delivery (same class as a missing term-legend). The
+declaration is what makes application checkable from the transcript — memory
+is no longer the carrier.
 
 ## §Shadow-test (promoting a new LINT/SKILL/TEMPLATE version)
 Before a changed rubric or skeleton becomes the default, SHADOW-test it: re-lint
