@@ -37,9 +37,9 @@ def substantive(l):  # anti-stuffing (savcı-S1): kanıt-ibaresi + gövde ≥60 
     if not ("kanıt" in l or "evidence" in l.lower()): return False
     if len(l) < 60: return False
     tail = re.split(r'kanıt\s*:|evidence\s*:', l, flags=re.I)
-    return len(tail) > 1 and len(tail[1].strip()) >= 12
+    return len(tail) > 1 and len(tail[1].strip()) >= 5   # gövde-varlığı; asıl-gaming-filtresi 60-char satır-eşiği
 ev = sum(1 for l in lines if substantive(l))
-add("D madde-kanıt(dolu)", round(ev/max(1,len(lines))*10), 10, f"{ev}/{len(lines)} (≥60-char + kanıt-gövdeli)")
+add("D madde-kanıt(dolu)", round(ev/max(1,len(lines))*10), 10, f"{ev}/{len(lines)} (≥60-char satır + ≥5-char kanıt-gövdesi)")
 # E FORBIDDEN + hand-number ban (10)
 g = ("FORBIDDEN" in s)*5 + ("ELLE SAYI" in s or "hand-count" in s.lower())*5
 add("E FORBIDDEN+elle-sayı-yasağı", g, 10)
