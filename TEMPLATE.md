@@ -327,6 +327,9 @@ at goal arming run `scripts/tokens.sh mark <session.jsonl> <marker> [proj-dir]`
 output of `scripts/tokens.sh report <session.jsonl> <marker> <tasks-dir>/*.output`
 — it now also prints wall-clock DURATION (goal-start→report) and, when the
 marker has a git-sha, the CODE-CHANGE line (files/+ins/−del · commit count).
+RENDER (v3.1.1): in the CHAT final report use `tokens.sh report --md ...` and
+paste it OUTSIDE any code fence — the GFM table renders in both the terminal
+and mobile; the plain (fence-safe) format stays for ledger entries.
 The plain "what changed" PROSE stays the §Plain-report Result block's job —
 the script supplies the numbers, the narrative stays human-readable.
 — TOTAL tokens+$ on top, then the per-model breakdown (fable/opus/sonnet/haiku,

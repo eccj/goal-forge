@@ -26,6 +26,9 @@
 | — | 3.0.1 | rapor-zenginleştirme: süre + kod-değişimi satırları (aşağıdaki bölüm)
 | — | **3.1** | optimizasyon: xref-testi GATE-şartı · §Resume taze-oturum-devri (state.sh resume-card) · marker-kalıcılığı · retro.sh seal-sonrası-tarama · TEMPLATE-budama %8 (aşağıdaki 3.1 bölümü)
 
+## 3.1.1 (2026-07-06) — rapor-görünümü (operatör-isteği)
+- tokens.sh report --md: TOKEN-RAPORU'nun GFM-tablo çıktısı (terminal+mobil render; sayılar yine %100 script-üretimi); ham mod ledger için birebir korunur
+
 ## 3.1 (2026-07-06) — optimizasyon sürümü (tam-yetkili öz-akıl-yürütme)
 - D1: tests/test_xref_anchors.py çapraz-dosya numaralı-referans desteği ("SKILL.md §2" marker'ı hedef-dosyayı seçer) → YEŞİL; COMPLETION-GATE'e kalıcı bağlandı (TEMPLATE PROCESS + SKILL §5: skill-.md dokunulduysa xref-testi gate-şartı)
 - D2: state.sh resume-card → goals/RESUME.md (misyon+PIN+ledger+sıradaki-D#+devir-talimatı) + TEMPLATE §Resume — bağlam-şişkinliği (>100k/istek) taze-oturum-devriyle çözülür

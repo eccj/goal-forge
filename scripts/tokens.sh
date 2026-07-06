@@ -31,6 +31,7 @@ case "$CMD" in
     } > "$MARK"
     echo "marked: $(cat "$MARK" | tr '\n' ' ')" ;;
   report)
+    MD=0; [ "${1:-}" = "--md" ] && { MD=1; shift; }   # v3.1.1: --md = GFM-tablo (chat/rapor için; ham mod ledger için değişmedi)
     SES="$1"; MARKARG="$(resolve_marker "$2")"; shift 2 || true
     if [ -f "$MARKARG" ]; then
       START=$(grep '^line=' "$MARKARG" 2>/dev/null | cut -d= -f2 || true)
@@ -43,7 +44,7 @@ case "$CMD" in
       MPROJ=$(grep '^proj=' "$MARKARG" 2>/dev/null | cut -d= -f2- || true)
       MGIT=$(grep '^git=' "$MARKARG" 2>/dev/null | cut -d= -f2 || true)
     fi
-    export GF_MARK_UTC="$MARKUTC"
+    export GF_MARK_UTC="$MARKUTC" GF_MD="$MD"
     python3 - "$SES" "$START" "$@" <<'PYEOF'
 import json, sys, glob, os, calendar, time
 ses, start = sys.argv[1], int(sys.argv[2])
@@ -104,39 +105,62 @@ n_sub = sum(scan(p) for p in extra if os.path.isfile(p))
 def cost(b, d):
     pin, pout = PRICE.get(b, (10,50))  # unknown → EN-PAHALI(fable)-fiyatı: gerçek muhafazakârlık
     return (d["in"]*pin + d["out"]*pout + d["cw5"]*pin*1.25 + d["cw1"]*pin*2 + d["cr"]*pin*0.1)/1e6
-tot = {"in":0,"out":0,"cw5":0,"cw1":0,"cr":0}; tc = 0.0
+tot = {"in":0,"out":0,"cw5":0,"cw1":0,"cr":0}; tc = 0.0; tmsg = 0
 rows = []
 for b, d in sorted(agg.items(), key=lambda x: -cost(x[0],x[1])):
-    c = cost(b,d); tc += c
+    c = cost(b,d); tc += c; tmsg += d["msgs"]
     for f in tot: tot[f] += d[f]
     rows.append((b,d,c))
 tt = sum(tot.values())
-print("TOKEN-RAPORU (script-üretimi; TAHMİN — liste-fiyat, fatura değil)")
-print(f"TOPLAM: {tt:,} token · ~${tc:.2f}   [in {tot['in']:,} · out {tot['out']:,} · cache-wr {tot['cw5']+tot['cw1']:,} · cache-rd {tot['cr']:,}]")
-for b,d,c in rows:
-    print(f"  {b:<7} {d['in']+d['out']+d['cw5']+d['cw1']+d['cr']:>12,} tok → ${c:>8.2f}   [in {d['in']:,} · out {d['out']:,} · cw {d['cw5']+d['cw1']:,} · cr {d['cr']:,} · {d['msgs']} mesaj]")
-print(f"kapsam: ana-oturum satır>{start} ({n_main} istek) + {len([p for p in extra if os.path.isfile(p)])} subagent-dosya ({n_sub} istek)" + (f" · goal-öncesi {skipped_old} dosya mtime-filtresiyle HARİÇ" if skipped_old else ""))
+MD = os.environ.get("GF_MD","0") == "1"
+kapsam = f"ana-oturum satır>{start} ({n_main} istek) + {len([p for p in extra if os.path.isfile(p)])} subagent-dosya ({n_sub} istek)" + (f" · goal-öncesi {skipped_old} dosya mtime-filtresiyle HARİÇ" if skipped_old else "")
 nreq = n_main + n_sub
-if nreq:
-    avg = tot["cr"] / nreq
-    line = f"teşhis: ortalama-bağlam/istek ≈ {avg:,.0f} tok (cache-read÷istek)"
-    if avg > 100_000: line += " → BAĞLAM-ŞİŞKİN: goal'e temiz-oturum/compact ile başlamayı düşün (cache-read = bağlam×istek)"
-    print(line)
-print("not: in/out streaming-placeholder-riskli (issue#28197) → requestId-dedup uygulandı; cache-alanları güvenilir.")
-if unmatched: print(f"UYARI: eşleşmeyen model(ler) 'other'a fable-fiyatıyla yazıldı: {sorted(unmatched)}")
-print("fiyat-kaynağı: platform.claude.com/docs/en/about-claude/pricing (2026-07-06)")
+avg = tot["cr"] / nreq if nreq else 0
+sisik = avg > 100_000
+if MD:
+    # GFM-tablo: Claude Code terminali de mobil de bunu çizgili tablo olarak render eder.
+    print("### 💰 TOKEN-RAPORU  ·  script-üretimi · TAHMİN (liste-fiyat, fatura değil)")
+    print()
+    print("| model | toplam token | maliyet | input | output | cache-wr | cache-rd | mesaj |")
+    print("|:------|-------------:|--------:|------:|-------:|---------:|---------:|------:|")
+    print(f"| **TOPLAM** | **{tt:,}** | **~${tc:.2f}** | {tot['in']:,} | {tot['out']:,} | {tot['cw5']+tot['cw1']:,} | {tot['cr']:,} | {tmsg} |")
+    for b,d,c in rows:
+        print(f"| {b} | {d['in']+d['out']+d['cw5']+d['cw1']+d['cr']:,} | ${c:.2f} | {d['in']:,} | {d['out']:,} | {d['cw5']+d['cw1']:,} | {d['cr']:,} | {d['msgs']} |")
+    print()
+    if nreq:
+        t = f"- 🩺 **teşhis:** ortalama-bağlam/istek ≈ **{avg:,.0f} tok**"
+        if sisik: t += " → ⚠️ **BAĞLAM-ŞİŞKİN** — sonraki ağır goal'e temiz-oturum/§Resume ile başla (cache-read = bağlam×istek)"
+        print(t)
+    print(f"- 📦 **kapsam:** {kapsam}")
+    if unmatched: print(f"- ⚠️ **UYARI:** eşleşmeyen model(ler) 'other'a fable-fiyatıyla yazıldı: {sorted(unmatched)}")
+    print("- ℹ️ in/out placeholder-riskli (issue#28197) → requestId-dedup; cache-alanları güvenilir · fiyat: platform.claude.com/docs/en/about-claude/pricing (2026-07-06)")
+else:
+    print("TOKEN-RAPORU (script-üretimi; TAHMİN — liste-fiyat, fatura değil)")
+    print(f"TOPLAM: {tt:,} token · ~${tc:.2f}   [in {tot['in']:,} · out {tot['out']:,} · cache-wr {tot['cw5']+tot['cw1']:,} · cache-rd {tot['cr']:,}]")
+    for b,d,c in rows:
+        print(f"  {b:<7} {d['in']+d['out']+d['cw5']+d['cw1']+d['cr']:>12,} tok → ${c:>8.2f}   [in {d['in']:,} · out {d['out']:,} · cw {d['cw5']+d['cw1']:,} · cr {d['cr']:,} · {d['msgs']} mesaj]")
+    print(f"kapsam: {kapsam}")
+    if nreq:
+        line = f"teşhis: ortalama-bağlam/istek ≈ {avg:,.0f} tok (cache-read÷istek)"
+        if sisik: line += " → BAĞLAM-ŞİŞKİN: goal'e temiz-oturum/compact ile başlamayı düşün (cache-read = bağlam×istek)"
+        print(line)
+    print("not: in/out streaming-placeholder-riskli (issue#28197) → requestId-dedup uygulandı; cache-alanları güvenilir.")
+    if unmatched: print(f"UYARI: eşleşmeyen model(ler) 'other'a fable-fiyatıyla yazıldı: {sorted(unmatched)}")
+    print("fiyat-kaynağı: platform.claude.com/docs/en/about-claude/pricing (2026-07-06)")
 PYEOF
     # süre (goal-start → şimdi)
     if [ -n "$MARKUTC" ]; then
       S_EP=$(python3 -c "import calendar,time;print(calendar.timegm(time.strptime('$MARKUTC','%Y-%m-%dT%H:%M:%SZ')))")
       EL=$(( $(date -u +%s) - S_EP )); H=$((EL/3600)); M=$(((EL%3600)/60))
-      echo "süre: ${H}sa ${M}dk (goal-start $MARKUTC → rapor-anı; duvar-saati, ajan-aktif-süresi değil)"
+      if [ "$MD" = "1" ]; then echo "- ⏱️ **süre:** ${H}sa ${M}dk (goal-start $MARKUTC → rapor-anı; duvar-saati)"
+      else echo "süre: ${H}sa ${M}dk (goal-start $MARKUTC → rapor-anı; duvar-saati, ajan-aktif-süresi değil)"; fi
     fi
     # kod-değişim-özeti (marker git-sha'lıysa)
     if [ -n "$MGIT" ] && [ -n "$MPROJ" ] && git -C "$MPROJ" rev-parse "$MGIT" >/dev/null 2>&1; then
       ST=$(git -C "$MPROJ" diff --shortstat "$MGIT"..HEAD 2>/dev/null | sed 's/^ *//')
       NC=$(git -C "$MPROJ" log --oneline "$MGIT"..HEAD 2>/dev/null | grep -c '' || true)
-      echo "kod-değişimi ($MPROJ): ${ST:-değişiklik-yok} · $NC commit (git $(echo $MGIT|cut -c1-7)..HEAD)"
+      if [ "$MD" = "1" ]; then echo "- 🔧 **kod-değişimi:** ${ST:-değişiklik-yok} · $NC commit (\`$(echo $MGIT|cut -c1-7)..HEAD\`)"
+      else echo "kod-değişimi ($MPROJ): ${ST:-değişiklik-yok} · $NC commit (git $(echo $MGIT|cut -c1-7)..HEAD)"; fi
     fi
     ;;
   *) echo "usage: tokens.sh mark <session.jsonl> <marker> | report <session.jsonl> <marker|start-line> [extra-globs...]"; exit 1 ;;
