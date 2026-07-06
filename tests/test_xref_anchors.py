@@ -10,6 +10,15 @@
 #   - SKILL "[RECIPES.md](RECIPES.md) §Notation" -> RECIPES.md "## §Notation standard ..."
 #   - SKILL/TEMPLATE "TEMPLATE §Fallback" -> TEMPLATE.md "## §Fallback ..."
 #
+# KNOWN LIMITS (3.1 savcı-S5, adversarially demonstrated — accepted, documented):
+#   (1) marker = LAST file basename left of the § on the line; prose that merely
+#       MENTIONS another file ("Unlike SKILL.md, ... §2") mis-targets → false OK
+#       (or safe-direction false DANGLE). Mitigation: keep file-marker + § adjacent.
+#   (2) named-anchor match is word-PREFIX: "§Light mode <anything>" resolves to
+#       the "Light mode" anchor. Mitigation: prefer exact anchor names in refs.
+# Both fail toward noise only in adversarial constructions; real-file corpus is
+# covered by the anti-vacuous MIN_REFS guard + injected-dangle self-test.
+#
 # Deps: python3 stdlib ONLY (no shasum needed here). Deterministic. READ-ONLY:
 # it never writes to or mutates any skill file. Point it at a scratch COPY to
 # test a break. Exit 0 = all references resolve; non-zero = a dangling anchor.

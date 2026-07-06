@@ -16,7 +16,7 @@ if [ "$CMD" = "resume-card" ]; then
   MISSION="${6:?mission gerekli}"; PIN="${7:-}"
   ENTRIES=$(grep -c '^### E' "$LED" 2>/dev/null || true)
   LAST=$(grep '^### E' "$LED" 2>/dev/null | tail -1 | sed 's/^### //')
-  NEXT=$(grep -m1 '^\- \[ \]' "$PLAN" 2>/dev/null | sed 's/^\- \[ \] *//')
+  NEXT=$(grep -m1 '^\- \[ \]' "$PLAN" 2>/dev/null | sed 's/^\- \[ \] *//' || true)  # all-done/boş-plan: pipefail'i öldürmesin (savcı-S4)
   MDIR=$(cd "$(dirname "$LED")" && pwd)
   {
     echo "# RESUME — $LABEL (taze-oturum devir-kartı; script-üretimi, elle düzenlenmez)"

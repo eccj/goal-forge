@@ -30,8 +30,9 @@ COLD START: empty scan → open with "Describe the project and the finish line
 in 2-3 sentences". Never present empty/generic options.
 
 ## 2. Interview (MANDATORY in EVERY case — user's language)
-PRECONDITION (mechanical): `cat goals/GUARDRAILS.md` + `retro.sh check`
-(v3.1 seal-range revert/amend scan; warning→lesson-candidate);
+PRECONDITION (mechanical): `cat goals/GUARDRAILS.md` +
+`scripts/retro.sh check goals/RETRO-LOG.md .` (v3.1 seal-range revert/amend
+scan; warning→lesson-candidate; SEAL tarafı: TEMPLATE §Post-mortem);
 delivery must carry a "GUARDRAILS uygulandı: <dersler|hiçbiri+neden>" line
 (TEMPLATE §Post-mortem) — no line = invalid delivery.
 The interview fires in EVERY condition; ONLY skip: the user's explicit
@@ -39,11 +40,11 @@ The interview fires in EVERY condition; ONLY skip: the user's explicit
 ROUND 1 (AskUserQuestion, pre-filled from scan): 1 **Mission** · 2 **Scope**
 (multi-select; add research item on §1 gap) · 3 **MUST-NOTs** · 4 **Evidence
 level** (live+measurements/live/local) · 5 **Turn budget** (LINT #5) ·
-6 **Tribunal** — strictness AND models PER-ROLE, asked INDIVIDUALLY (v3.0):
+6 **Tribunal** — strictness AND models PER-ROLE, asked INDIVIDUALLY:
 prosecutor (Fable/Opus), then J1, J2, J3 each (Opus/Sonnet; Haiku only on the
 user's explicit pick) · 7 **Tech/Approach** ([STACKS.md](STACKS.md) §Firing;
 "research decides" → stack-bakeoff + roadmap PLAN).
-ADAPTIVE DEPTH (v3.0): if round-1 answers leave design-driving unknowns (new
+ADAPTIVE DEPTH: if round-1 answers leave design-driving unknowns (new
 product / broad domain — "mobil app" → platform/offline/data/auth), run
 answer-derived follow-up rounds, ≤3, one theme per round, until the remaining
 unknowns are assumption-safe; simple goals stay SINGLE-round (bureaucracy ban).
@@ -95,11 +96,11 @@ Agent-tool block = **fabricated jury**; without an adjacent E-D#/hash citation
 = **unanchored**; re-spawning a REJECTing juror without a ledgered closure =
 **jury-shopping** — each voids DONE.
 Verdicts carry anchored-discrete CONFIDENCE 0/25/50/75/100 (APPROVE≥75,
-REJECT≤50 — TEMPLATE §Juror; continuous scores cluster, v3.0).
+REJECT≤50 — TEMPLATE §Juror).
 On REJECT: reasoned deficiency list; close ONLY that list. **Reopen clause:**
 no juror may defend a prior verdict against irrefutable new evidence.
 A 2nd consecutive REJECT on the SAME item forces a ledgered ROOT-CAUSE entry
-before retry (TEMPLATE §Root-cause, v3.0); 3 consecutive → BLOCKED, handed to
+before retry (TEMPLATE §Root-cause); 3 consecutive → BLOCKED, handed to
 the user. Crashed juror →
 relaunch ONCE, then report; the worker NEVER simulates its own jury
 (TEMPLATE §Fallback).
@@ -109,12 +110,12 @@ Stop sentence: "Do not stop until the Tribunal's UNANIMOUS verdict and the
 per-item evidence ledger appear in the final report."
 
 ## 6. Lint, archive, deliver
-Score with `scripts/lint.sh <draft>` (v3.0: the NUMBER is script-made —
-mechanical subset of [LINT.md](LINT.md), /100, threshold 80, placeholder→cap-79;
-semantic criteria stay a manual overlay; turn estimate LINT #5).
+Score with `scripts/lint.sh <draft>` (script-made NUMBER — mechanical subset
+of [LINT.md](LINT.md), /100, threshold 80, placeholder→cap-79; semantics stay
+a manual overlay; turn estimate LINT #5).
 **HARD FLOORS (veto):** LINT #2/#10 each ≥8 AND none <5.
 Char band (lint.sh A): hard 4000, ideal 3000-4000 — never cut Tribunal/valve.
-TOKEN-RAPORU (v3.0): at arming run `tokens.sh mark`; the final report ENDS
+TOKEN-RAPORU: at arming run `tokens.sh mark`; the final report ENDS
 with raw `tokens.sh report` output — TOTAL then per-model $ (subagents incl.;
 TEMPLATE §Plain-report).
 Archive contract+goal+score to `goals/goal-<date>-<slug>.md` (TEMPLATE

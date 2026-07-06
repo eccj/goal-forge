@@ -31,7 +31,7 @@
 - D2: state.sh resume-card → goals/RESUME.md (misyon+PIN+ledger+sıradaki-D#+devir-talimatı) + TEMPLATE §Resume — bağlam-şişkinliği (>100k/istek) taze-oturum-devriyle çözülür
 - D3: tokens.sh marker-kalıcılığı — <marker> olarak DİZİN veya ledger-.md verilirse <dizin>/.tokens-marker (açık-yol + çıplak-satır-no geriye-uyumlu; /tmp-silinme-kazası biter)
 - D4: scripts/retro.sh (seal/check, minimal — daemon YOK): seal commit-aralığını arşivler; SONRAKİ derleme-önkoşulunda revert/amend taraması 1-satır (SKILL §2 PRECONDITION'a eklendi)
-- D5: TEMPLATE-budama %8.04 (30713→28244 char; örtüşme/tekrar ayıklandı) — koruma: silinen-çapa=0, shadow-test flip-YOK (99/100/95→aynı), xref-yeşil
+- D5: TEMPLATE-budama %8.05 goal-başı-commit-tabanına göre (29577→27197 char; savcı-S1 sonrası taban commit-çıpalı — working-tree ara-tabana göre %11.45) — koruma: silinen-çapa=0 + xref-yeşil + template-integrity (lint-shadow bağlayıcı DEĞİL: lint.sh TEMPLATE'i okumaz, savcı-S2 dürüstlük-notu §Shadow-test'e işlendi)
 - ÇIKARILAN yanlışlar: dil-politikası çift-anlatımı, el-ile-hash tarifi (kanonik ledger.sh varken), RED-HOLD çift-anlatım, hardening-bullet↔haiku-checklist kopyası, arşiv-resume↔§Resume örtüşmesi
 
 ## 3.0.1 (2026-07-06) — rapor-zenginleştirme (operatör-isteği)
