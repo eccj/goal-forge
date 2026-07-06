@@ -192,7 +192,8 @@ take §Light mode up to 5 items and ≤15 turns; evidence/ledger/gate never ligh
 > final state: dig until ≥75 or ≤25) · 25=material claim failed verification ·
 > 0=fabrication/broken chain. APPROVE requires ≥75; REJECT requires ≤50.
 
-ROOT-CAUSE PROTOCOL (v3.0; prior-art: superpowers/systematic-debugging): after
+## §Root-cause — protocol (v3.0)
+Prior-art: superpowers/systematic-debugging. After
 a SECOND consecutive REJECT on the SAME D-item, the worker may not simply retry
 — it must first ledger a root-cause entry: (1) symptom vs underlying cause,
 (2) why fix-#1 failed, (3) the check that will prove the cause is gone; only

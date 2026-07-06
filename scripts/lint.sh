@@ -33,8 +33,13 @@ else:
     add("C D# 1-7+tip", 5 if unt else 0, 10, f"tipli={n_items}, tipsiz={unt}")
 # D per-item evidence (10)
 lines = re.findall(r'^□ D\d+.*$', s, re.M)
-ev = sum(1 for l in lines if ("kanıt" in l or "evidence" in l.lower()))
-add("D madde-başına-kanıt", round(ev/max(1,len(lines))*10), 10, f"{ev}/{len(lines)}")
+def substantive(l):  # anti-stuffing (savcı-S1): kanıt-ibaresi + gövde ≥60 + kanıt-sonrası ≥12 char
+    if not ("kanıt" in l or "evidence" in l.lower()): return False
+    if len(l) < 60: return False
+    tail = re.split(r'kanıt\s*:|evidence\s*:', l, flags=re.I)
+    return len(tail) > 1 and len(tail[1].strip()) >= 12
+ev = sum(1 for l in lines if substantive(l))
+add("D madde-kanıt(dolu)", round(ev/max(1,len(lines))*10), 10, f"{ev}/{len(lines)} (≥60-char + kanıt-gövdeli)")
 # E FORBIDDEN + hand-number ban (10)
 g = ("FORBIDDEN" in s)*5 + ("ELLE SAYI" in s or "hand-count" in s.lower())*5
 add("E FORBIDDEN+elle-sayı-yasağı", g, 10)
@@ -55,12 +60,15 @@ em = re.search(r'<evidence-map>(.*?)</evidence-map>', s, re.S)
 mapped = len(re.findall(r'D\d+↔', em.group(1))) if em else 0
 add("J map-kapsamı", 5 if mapped >= n_items and n_items>0 else (2 if mapped else 0), 5, f"map={mapped}, D#={n_items}")
 tot = sum(g for _,g,_,_ in rows); mx = sum(m for _,_,m,_ in rows)
-capped = False
-if ph and tot > 79: tot, capped = 79, True
+capped = False; capwhy = []
+if ph and tot > 79: tot, capped = 79, True; capwhy.append("placeholder")
+# anti-stuffing sert-kapak (savcı-S1): maddelerin yarısından azı dolu-kanıtlıysa PASS olamaz
+if n_items > 0 and ev < max(1, (n_items+1)//2) and tot > 79:
+    tot, capped = 79, True; capwhy.append(f"dolu-kanıt {ev}/{n_items}<yarı")
 print(f"LINT (mekanik alt-küme) — {f}")
 for n,g,m,note in rows: print(f"  {n:<28} {g:>3}/{m:<3} {note}")
-print(f"  {'TOPLAM':<28} {tot:>3}/{mx}" + ("  [placeholder-CAP 79]" if capped else ""))
-print(f"  SONUÇ: {'PASS (≥80)' if tot>=80 else 'FAIL (<80)'}")
+print(f"  {'TOPLAM':<28} {tot:>3}/{mx}" + (f"  [CAP-79: {'+'.join(capwhy)}]" if capped else ""))
+print(f"  SONUÇ: {'PASS (≥80) — MEKANİK-ALT-KÜME, kalite-hükmü DEĞİL' if tot>=80 else 'FAIL (<80)'}")
 print("  not: anlamsal kriterler (Goodhart-kalitesi, misyon-uyumu) derleyici-değerlendirmesinde kalır.")
 sys.exit(0 if tot>=80 else 1)
 PYEOF

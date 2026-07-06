@@ -14,7 +14,7 @@ CMD="${1:-}"; shift || true
 case "$CMD" in
   mark)
     SES="$1"; MARK="$2"
-    { echo "session=$SES"; echo "line=$(wc -l < "$SES" | tr -d ' ')"; echo "utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"; } > "$MARK"
+    { echo "session=$SES"; echo "line=$(grep -c '' "$SES")"; echo "utc=$(date -u +%Y-%m-%dT%H:%M:%SZ)"; } > "$MARK"
     echo "marked: $(cat "$MARK" | tr '\n' ' ')" ;;
   report)
     SES="$1"; MARKARG="$2"; shift 2 || true
@@ -38,10 +38,12 @@ for g in sys.argv[3:]:
 # price table (USD per MTok): input, output; cache: write5m=1.25x in, write1h=2x in, read=0.1x in
 # source: platform.claude.com/docs/en/about-claude/pricing (2026-07-06)
 PRICE = {"fable":(10,50), "mythos":(10,50), "opus":(5,25), "sonnet":(2,10), "haiku":(1,5)}
+unmatched = set()
 def bucket(model):
     m = (model or "").lower()
     for k in PRICE:
         if k in m: return k
+    unmatched.add(model or "(boş)")
     return "other"
 agg = {}  # bucket -> dict
 def add(b, f, v):
@@ -81,7 +83,7 @@ def scan(path, main=False):
 n_main = scan(ses, main=True)
 n_sub = sum(scan(p) for p in extra if os.path.isfile(p))
 def cost(b, d):
-    pin, pout = PRICE.get(b, (5,25))  # unknown → opus-fiyatı (muhafazakâr)
+    pin, pout = PRICE.get(b, (10,50))  # unknown → EN-PAHALI(fable)-fiyatı: gerçek muhafazakârlık
     return (d["in"]*pin + d["out"]*pout + d["cw5"]*pin*1.25 + d["cw1"]*pin*2 + d["cr"]*pin*0.1)/1e6
 tot = {"in":0,"out":0,"cw5":0,"cw1":0,"cr":0}; tc = 0.0
 rows = []
@@ -96,6 +98,7 @@ for b,d,c in rows:
     print(f"  {b:<7} {d['in']+d['out']+d['cw5']+d['cw1']+d['cr']:>12,} tok → ${c:>8.2f}   [in {d['in']:,} · out {d['out']:,} · cw {d['cw5']+d['cw1']:,} · cr {d['cr']:,} · {d['msgs']} mesaj]")
 print(f"kapsam: ana-oturum satır>{start} ({n_main} istek) + {len([p for p in extra if os.path.isfile(p)])} subagent-dosya ({n_sub} istek)" + (f" · goal-öncesi {skipped_old} dosya mtime-filtresiyle HARİÇ" if skipped_old else ""))
 print("not: in/out streaming-placeholder-riskli (issue#28197) → requestId-dedup uygulandı; cache-alanları güvenilir.")
+if unmatched: print(f"UYARI: eşleşmeyen model(ler) 'other'a fable-fiyatıyla yazıldı: {sorted(unmatched)}")
 print("fiyat-kaynağı: platform.claude.com/docs/en/about-claude/pricing (2026-07-06)")
 PYEOF
     ;;
