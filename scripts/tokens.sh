@@ -106,6 +106,12 @@ print(f"TOPLAM: {tt:,} token · ~${tc:.2f}   [in {tot['in']:,} · out {tot['out'
 for b,d,c in rows:
     print(f"  {b:<7} {d['in']+d['out']+d['cw5']+d['cw1']+d['cr']:>12,} tok → ${c:>8.2f}   [in {d['in']:,} · out {d['out']:,} · cw {d['cw5']+d['cw1']:,} · cr {d['cr']:,} · {d['msgs']} mesaj]")
 print(f"kapsam: ana-oturum satır>{start} ({n_main} istek) + {len([p for p in extra if os.path.isfile(p)])} subagent-dosya ({n_sub} istek)" + (f" · goal-öncesi {skipped_old} dosya mtime-filtresiyle HARİÇ" if skipped_old else ""))
+nreq = n_main + n_sub
+if nreq:
+    avg = tot["cr"] / nreq
+    line = f"teşhis: ortalama-bağlam/istek ≈ {avg:,.0f} tok (cache-read÷istek)"
+    if avg > 100_000: line += " → BAĞLAM-ŞİŞKİN: goal'e temiz-oturum/compact ile başlamayı düşün (cache-read = bağlam×istek)"
+    print(line)
 print("not: in/out streaming-placeholder-riskli (issue#28197) → requestId-dedup uygulandı; cache-alanları güvenilir.")
 if unmatched: print(f"UYARI: eşleşmeyen model(ler) 'other'a fable-fiyatıyla yazıldı: {sorted(unmatched)}")
 print("fiyat-kaynağı: platform.claude.com/docs/en/about-claude/pricing (2026-07-06)")
