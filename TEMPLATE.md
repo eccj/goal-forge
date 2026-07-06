@@ -343,6 +343,16 @@ block is an INCOMPLETE report (a non-technical user must be able to read the
 first screen and know what happened). This is the run-completion twin of
 §Plain-delivery (which covers the compile-time hand-off).
 
+**TOKEN-RAPORU (mandatory in every final report, v3.0):** at goal arming run
+`scripts/tokens.sh mark <session.jsonl> <marker>`; in the final report paste the
+raw output of `scripts/tokens.sh report <session.jsonl> <marker> <tasks-dir>/*.output`
+— TOTAL tokens+$ on top, then the per-model breakdown (fable/opus/sonnet/haiku,
+subagents included, input/output/cache split). The numbers come ONLY from the
+script (hand-written totals violate ELLE-SAYI-YOK); it prints its own honesty
+notes (list-price ESTIMATE; input/output placeholder risk per issue#28197 —
+requestId-dedup applied; cache fields reliable; goal-öncesi transcripts excluded
+by mtime).
+
 ## §Shadow-test (promoting a new LINT/SKILL/TEMPLATE version)
 Before a changed rubric or skeleton becomes the default, SHADOW-test it: re-lint
 (or re-judge) a sample of REAL past goals under both the old and new version and
