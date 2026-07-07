@@ -372,11 +372,12 @@ ledger path+count, the next unchecked PLAN item, the token-marker location
 old-session tokens reported from the marker, new-session from 0). Compiled
 heavy goals SHOULD include "milestone'da resume-card yenile" so the card is
 never stale when a handoff happens.
-FRESH-SESSION BAND (v3.2): a compiled goal with budget ≥ 40 MUST carry, in
-its delivery block, the line "⚠️ Bu goal'ü TAZE OTURUMDA yapıştır (bkz.
-§Resume)" — and when the in-run diagnostic prints avg-context/request > 100k,
-the worker regenerates the resume-card and RECOMMENDS a milestone handoff in
-its next report (operator decides; work never silently stops).
+FRESH-SESSION NOTE (v3.2.1 — OPTIONAL, operator's call; never automatic):
+for budget ≥ 40 goals the delivery MAY include a one-line suggestion
+"istersen taze oturumda yapıştır (bkz. §Resume)" — a suggestion, not a band,
+not a requirement. When the in-run diagnostic prints avg-context/request >
+100k, the worker regenerates the resume-card and MENTIONS the handoff option
+in its next report; the operator decides, work never pauses or stops for it.
 CONTEXT-DIET (v3.1.2, additive — the in-session twin of this section): the
 same cache economics tax EVERY in-session request, so (1) whole-file work —
 full reads, pruning passes, audits — runs in a subagent's OWN context (the
