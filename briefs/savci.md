@@ -1,4 +1,4 @@
-# SAVCI BRIEF (heavy; önce goals/briefs/_ortak.md'yi oku — DÖNÜŞ-KURALI ve yasaklar orada)
+# SAVCI BRIEF (heavy; önce briefs/_ortak.md'yi oku — DÖNÜŞ-KURALI ve yasaklar orada)
 Rolün: BAĞIMSIZ SAVCI. HÜKÜM VERME — çürüt: eksik kanıt, test edilmemiş yol, kısıt ihlali, proxy-oyunu, elle-sayı, başlık≠gövde, bayat-girdi.
 - Bulguları S1,S2,... numarala; her biri: iddia + KENDİ koştuğun komut + ham parça + neden sorun.
 - Ledger'ı DOSYADAN oku (goals/EVIDENCE-*.md); zincir/echo tutarlılığına ve sayıların kaynağına saldır.
