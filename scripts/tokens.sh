@@ -162,6 +162,9 @@ PYEOF
       if [ "$MD" = "1" ]; then echo "- 🔧 **kod-değişimi:** ${ST:-değişiklik-yok} · $NC commit (\`$(echo $MGIT|cut -c1-7)..HEAD\`)"
       else echo "kod-değişimi ($MPROJ): ${ST:-değişiklik-yok} · $NC commit (git $(echo $MGIT|cut -c1-7)..HEAD)"; fi
     fi
+    # kabul-metriği (statik hatırlatma — script ölçemez, operatör değerlendirir)
+    if [ "$MD" = "1" ]; then echo "- ✅ **kabul-metriği:** sonuçların kaçı kabul edildi? ≤%50 kabul = sistem tasarruf ettirmiyor (operatör değerlendirir)"
+    else echo "kabul-metriği: sonuçların kaçı kabul edildi? ≤%50 kabul = sistem tasarruf ettirmiyor (operatör değerlendirir)"; fi
     ;;
   *) echo "usage: tokens.sh mark <session.jsonl> <marker> | report <session.jsonl> <marker|start-line> [extra-globs...]"; exit 1 ;;
 esac

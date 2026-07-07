@@ -8,33 +8,34 @@ description: Compiles evidence-based /goal contracts (and /loop recipes) with a 
 The /goal evaluator (small, fast) reads ONLY the transcript, runs no tools.
 Invariants: **(a) every deliverable carries transcript-visible evidence, (b)
 raw evidence accumulates in a tamper-evident Ledger, (c) the stop condition
-is a Tribunal verdict the evaluator can trivially check.**
-THIS FILE's budget: ≤8000 chars (`ledger.sh measure` — the canonical metric)
-AND an honest summary of every load-bearing TEMPLATE mechanism.
-This file SUMMARIZES and POINTS; canonical text: TEMPLATE.md / LINT.md /
+is a Tribunal verdict the evaluator trivially checks.**
+THIS FILE's budget ≤8000 chars (`ledger.sh measure`, canonical metric) AND
+an honest summary of every load-bearing TEMPLATE mechanism.
+This file SUMMARIZES and POINTS; canonical: TEMPLATE.md / LINT.md /
 RECIPES.md — on conflict TEMPLATE.md wins.
 Pipeline: intent → interview → contract → lint → compiled /goal (+archive)
 
 ## 0. Mode selection (goal vs loop vs campaign)
 Definable "done" → **single goal**; recurring/monitoring → **loop recipe**;
 8+ items → **campaign** ([CAMPAIGN.md](CAMPAIGN.md)). State choice+why;
+LOOP-FITNESS (all 4 or stay goal): ≥weekly repeat · automated reject-gate · end-to-end feasible · objective done.
 USER OVERRIDE: a named mode wins (note a poor fit in one line).
 
 ## 1. Scan the project (fuel for the interview)
 Read README, manifests, dir tree, last ~10 commits, TODOs, test/deploy state,
 conversation history. Build a lifecycle checklist (research → implement →
-test → perf → security → docs → deploy → live verification).
+test → perf → security → docs → deploy → live-verify).
 KNOWLEDGE-GAP: staleness-prone ground? → RESEARCH deliverable, ≥N live URLs
 + findings ([RECIPES.md](RECIPES.md)).
 COLD START: empty scan → open with "Describe the project and the finish line
-in 2-3 sentences". Never present empty/generic options.
+in 2-3 sentences". Never emit empty/generic options.
 
 ## 2. Interview (MANDATORY in EVERY case — user's language)
 PRECONDITION (mechanical): `cat goals/GUARDRAILS.md` +
 `scripts/retro.sh check goals/RETRO-LOG.md .` (v3.1 seal-range revert/amend
 scan; warning→lesson-candidate; SEAL tarafı: TEMPLATE §Post-mortem);
 delivery must carry a "GUARDRAILS uygulandı: <dersler|hiçbiri+neden>" line
-(TEMPLATE §Post-mortem) — no line = invalid delivery.
+— no line = invalid delivery.
 The interview fires in EVERY condition; ONLY skip: the user's explicit
 "röportajsız" — the enumerated-params exception is REVOKED (drifted 3×).
 ROUND 1 (AskUserQuestion, pre-filled from scan): 1 **Mission** · 2 **Scope**
@@ -46,7 +47,7 @@ user's explicit pick) · 7 **Tech/Approach** ([STACKS.md](STACKS.md) §Firing;
 "research decides" → stack-bakeoff + roadmap PLAN).
 ADAPTIVE DEPTH: if round-1 answers leave design-driving unknowns (new
 product / broad domain — "mobil app" → platform/offline/data/auth), run
-answer-derived follow-up rounds, ≤3, one theme per round, until the remaining
+answer-derived follow-up rounds, ≤3, one theme each, until remaining
 unknowns are assumption-safe; simple goals stay SINGLE-round (bureaucracy ban).
 Consequential goals declare KILL-CRITERIA + 1-line PREMORTEM (light may skip).
 Future-user-input items: EXCLUDED → decide-list.
@@ -78,7 +79,7 @@ check: every D1..D# ledgered before any jury. Format: [TEMPLATE.md](TEMPLATE.md)
 
 ## 5. Tribunal (the stop condition)
 Three jurors diversified by VERIFICATION METHOD, not count (correlated
-panels collapse — literature-backed): **J1 Re-runner** ·
+panels collapse): **J1 Re-runner** ·
 **J2 Ledger Auditor** (recomputes the chain from GENESIS; broken chain or
 unproven claim = REJECT) · **J3 Constraint Warden** (MUST-NOTs + **Goodhart
 dual sign-off**: proxy ✓ AND intent ✓). Briefs/verdict format:
@@ -95,14 +96,14 @@ ANTI-FABRICATION (TEMPLATE <anti-accept>): verdict without a preceding
 Agent-tool block = **fabricated jury**; without an adjacent E-D#/hash citation
 = **unanchored**; re-spawning a REJECTing juror without a ledgered closure =
 **jury-shopping** — each voids DONE.
-Verdicts carry anchored-discrete CONFIDENCE 0/25/50/75/100 (APPROVE≥75,
+Verdicts carry discrete CONFIDENCE 0/25/50/75/100 (APPROVE≥75,
 REJECT≤50 — TEMPLATE §Juror).
 On REJECT: reasoned deficiency list; close ONLY that list. **Reopen clause:**
 no juror may defend a prior verdict against irrefutable new evidence.
 A 2nd consecutive REJECT on the SAME item forces a ledgered ROOT-CAUSE entry
 before retry (TEMPLATE §Root-cause); 3 consecutive → BLOCKED, handed to
-the user. Crashed juror →
-relaunch ONCE, then report; the worker NEVER simulates its own jury
+user. Crashed juror → relaunch ONCE, then report; the worker NEVER
+simulates its own jury
 (TEMPLATE §Fallback).
 The final report carries exactly ONE `STOP_REASON: <T>` token (closed set, TEMPLATE
 §SAFETY); **TRIBUNAL-UNANIMOUS is the sole done-token**.
@@ -110,9 +111,9 @@ Stop sentence: "Do not stop until the Tribunal's UNANIMOUS verdict and the
 per-item evidence ledger appear in the final report."
 
 ## 6. Lint, archive, deliver
-Score with `scripts/lint.sh <draft>` (script-made NUMBER — mechanical subset
-of [LINT.md](LINT.md), /100, threshold 80, placeholder→cap-79; semantics stay
-a manual overlay; turn estimate LINT #5).
+Score with `scripts/lint.sh <draft>` (script NUMBER — subset of
+[LINT.md](LINT.md), /100, threshold 80, placeholder→cap-79; semantics stay
+manual; turn estimate LINT #5).
 **HARD FLOORS (veto):** LINT #2/#10 each ≥8 AND none <5.
 Char band (lint.sh A): hard 4000, ideal 3000-4000 — never cut Tribunal/valve.
 TOKEN-RAPORU: at arming run `tokens.sh mark`; the final report ENDS
