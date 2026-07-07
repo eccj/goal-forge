@@ -29,6 +29,13 @@ TYPE each D# at compile — [M]achine: its evidence closes on exit-code/hash/
 diff/count alone · [J]udgment: needs semantic assessment. The type drives
 Tribunal EFFORT ROUTING (§Juror prompt core) and the G=1 fast path
 (§Light mode) — compiled contract, not a runtime choice.
+EXECUTION MODEL (v3.2 ince-orkestra): [M]-typed items run BY DEFAULT in a
+subagent's OWN context (explicit model stated; the worker reads what it needs,
+executes, appends its own ledger entry, and returns a ≤10-line MARKER summary
+to the main context); [J]-typed items run in the MAIN context (design nuance
+stays with the strongest model). Escalation: the SAME item failing twice in a
+worker is taken over by the main context — nuance-leak insurance. Evidence
+discipline is identical in both lanes (full text → ledger; marker → transcript).
 BUDGETED-COMPOSE (write TO budget, never write-then-shrink): allocate
 per-section char budgets summing to ≤3800 (≥200 headroom). Boilerplate
 (ASSUMPTION+LEDGER+PIN+SAFETY ≈420 · PROCESS ≈380 · metadata+DONE-MEANS ≈180)
@@ -43,8 +50,10 @@ FORBIDDEN: <untouchables> · <out-of-scope> · no work added outside scope.
 ASSUMPTION: on ambiguity make a reasonable assumption + list it in the report;
 never wait for the user — EXCEPT a §RED-HOLD case (an irreversible action the
 agent must not self-authorize): name it, ledger a HELD entry, STOP once.
-LEDGER: raw outputs via ledger.sh append; full text stored; changed files get
-a superseding entry; a summary never replaces the raw block.
+LEDGER: raw outputs via ledger.sh append — FULL text lives in the ledger FILE;
+the transcript carries only the MARKER echo (`E# + tip-hash + ≤1-line result`,
+v3.2 işaret-diyeti); changed files get a superseding entry; a summary never
+replaces the ledger's raw block (jurors verify the FILE, not the scroll).
 PIN: in the FIRST message after compaction AND every ~10 turns, restate in one
 line: active FORBIDDEN list + governing gate decision + ledger path
 (compaction can silently evict in-context rules — arXiv 2606.22528;
@@ -63,8 +72,10 @@ unfinished, honest status report.
 
 ═══ EVALUATOR LAYER ═══
 <condition>
-DONE if and only if the transcript shows (1) an E-D#-labeled raw command+output
-block for EVERY D1-D<n> item AND (2) the 3 jurors' UNANIMOUS verdict AND (3) an
+DONE if and only if the transcript shows (1) an E-D#-labeled evidence MARKER
+(ledger tip-hash + ≤1-line result; the FULL raw text lives in the ledger file,
+verified from disk by the jurors — raw transcript blocks also satisfy this,
+and remain the form of pre-3.2 goals) for EVERY D1-D<n> item AND (2) the 3 jurors' UNANIMOUS verdict AND (3) an
 item-by-item evidence dump. [Only when not derivable from D-items: "<subjective
 wish>" = <measurable inequality>.] [If any D# is a §RED-HOLD: it
 satisfies clause (1) via its E-D# HELD entry, which MUST name the gated action
@@ -76,7 +87,8 @@ D1↔E-D1 (<short>) · D2↔E-D2 (<short>) · ...
 </evidence-map>
 <anti-accept>
 The condition is NOT met if ANY of these appear: "done/passed" claimed with no
-raw output pasted · summary offered where a raw block is required · no jury
+evidence marker (E-D# + hash) or raw block · raw text absent from the LEDGER
+where an entry is claimed · no jury
 verdict, non-unanimous, OR a juror verdict with NO preceding Agent-tool subagent
 block (tool_use+tool_result) in the transcript — a prose-only seal with no
 spawned juror = fabricated jury · any juror verdict lacking an adjacent cited
@@ -223,6 +235,13 @@ it did not run turn-1 in the 1.5 run). Concrete template:
 6. If J3, write a reasoned deficiency line per item BEFORE the verdict token.
 7. Last line, nothing after it: "APPROVE" or "REJECT + numbered deficiency list".
 
+SPAWN & RETURN DIET (v3.2): juror/prosecutor spawn prompts stay SHORT — point
+the agent at its canonical brief FILE (`goals/briefs/{savci,J1,J2,J3}.md`,
+which embeds the anchored-confidence DEFINITIONS and the ≤40-line return rule)
+plus run-specific parameters (ledger path, D-list, attack targets). Agents
+write their FULL report to `goals/verdicts/<run>-<rol>.md` (main agent ledgers
+it) and return ≤40 lines to the main context.
+
 Prosecutor (heavy mode) prompt core: "Actively try to refute this work: hunt
 missing evidence, untested paths, constraint violations, proxy-gaming. Number
 your findings S1, S2, … — closures will be ledgered as E-S# entries. Return
@@ -352,6 +371,11 @@ ledger path+count, the next unchecked PLAN item, the token-marker location
 old-session tokens reported from the marker, new-session from 0). Compiled
 heavy goals SHOULD include "milestone'da resume-card yenile" so the card is
 never stale when a handoff happens.
+FRESH-SESSION BAND (v3.2): a compiled goal with budget ≥ 40 MUST carry, in
+its delivery block, the line "⚠️ Bu goal'ü TAZE OTURUMDA yapıştır (bkz.
+§Resume)" — and when the in-run diagnostic prints avg-context/request > 100k,
+the worker regenerates the resume-card and RECOMMENDS a milestone handoff in
+its next report (operator decides; work never silently stops).
 CONTEXT-DIET (v3.1.2, additive — the in-session twin of this section): the
 same cache economics tax EVERY in-session request, so (1) whole-file work —
 full reads, pruning passes, audits — runs in a subagent's OWN context (the
@@ -436,10 +460,12 @@ row is incomplete.]
 ```
 
 ## Evidence-writing guide (visible-work principle)
-The evaluator and jurors see only the transcript/ledger: evidence = pasted
-command output (exit codes visible), raw URL headers, numbers, screenshots
-assessed in writing, research as ≥N source URLs + findings. "CI is green" is
-INSUFFICIENT — paste the output. Full per-type recipes: RECIPES.md.
+The evaluator reads the transcript; the jurors verify the LEDGER FILE.
+Evidence = full command output captured INTO the ledger (exit codes visible,
+raw URL headers, numbers, screenshots assessed in writing, research as ≥N
+source URLs + findings); the transcript shows the MARKER echo (E# + hash +
+≤1-line result — v3.2). "CI is green" with no ledgered output is INSUFFICIENT.
+Full per-type recipes: RECIPES.md.
 
 ## Big-project rule
 8+ major items never go in one goal → campaign (CAMPAIGN.md); single-topic

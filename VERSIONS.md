@@ -23,10 +23,18 @@
 | — | **2.0** | Loop/campaign sertleştirme + exm7777 7-desen ADOPT (red-team-doğrulı): risk-rengi green/yellow/red (red⊇§RED-HOLD) · loop-round sözleşmesi (one-change + hash-donmuş-same-check + cheap-first-escalation + ZORUNLU-round-ledger) · scripts/repeat-offender.sh (çapraz-koşu sistem-problemi) · karar-hijyeni (kill-criteria+pre-mortem+§Shadow-test) |
 | — | **2.1** | "Herkes için düz-dil" — jargon→sade: eski geri-dönülmez-hold jetonu → §RED-HOLD (2.0 RED-tier'ın goal-tarafı çekirdeği) · kampanya-temyiz jetonu → appeal-law · STOP_REASON RED-HOLD; her teslim düz-özet+terim-legend (TEMPLATE §Plain-delivery); koşu-sonrası rapor düz-dil Result-blok-başlar (§Plain-report); public GLOSSARY.md (18-terim) + README teknik-olmayan-giriş; teknik-olmayan-persona jüri doğrulaması |
 | — | **3.0** | telemetri+mekanik-disiplin: tokens.sh TOKEN-RAPORU (model-başına $) · lint.sh script-skoru · STATE.md · GUARDRAILS-OTO · röportaj-her-koşulda+adaptif+Q6-rol-başına · anchored-confidence (ayrıntı: aşağıdaki 3.0 bölümü)
+| — | **3.2** | ince-orkestra: işaret-diyeti + brief/dönüş-diyeti + [M]-işçi-icra + faz-devri (%97.3 echo-tasarrufu ölçülü)
 | — | 3.1.3 | taşınabilirlik: test-yolları göreli + fixture-vendor + rozet/dil düzeltmeleri
 | — | 3.1.2 | bağlam-diyeti: yalnız-ek dersler + plugin/skill ölçüm+öneri (RED-HOLD)
 | — | 3.0.1 | rapor-zenginleştirme: süre + kod-değişimi satırları (aşağıdaki bölüm)
 | — | **3.1** | optimizasyon: xref-testi GATE-şartı · §Resume taze-oturum-devri (state.sh resume-card) · marker-kalıcılığı · retro.sh seal-sonrası-tarama · TEMPLATE-budama %8 (aşağıdaki 3.1 bölümü)
+
+## 3.2 (2026-07-06) — İNCE-ORKESTRA (bağlam-diyeti mimarisi; kanıt-gücü aynen)
+- İŞARET-DİYETİ: transkript-echo = E#+hash+≤1-satır; HAM tam-metin YALNIZ ledger (zorunluluk sürer; jüri dosyadan doğrular; pre-3.2 goal'ler geçerli) — TEMPLATE LEDGER/condition/anti-accept/Evidence-guide revize
+- BRİEF/DÖNÜŞ-DİYETİ: goals/briefs/{_ortak,savci,J1,J2,J3}.md (ankraj-confidence TANIMLARI gömülü — 3.1.2-jüri dersi) + SPAWN&RETURN-DIET kuralı (spawn=dosya-işaretçi; dönüş≤40-satır; tam-rapor goals/verdicts/)
+- İNCE-ORKESTRA: [M]-maddeler varsayılan subagent-icra (model-açık, ≤10-satır işaret-dönüş), [J] ana-bağlamda; 2-başarısızlıkta ana devralır — canlı-prova: 3.2-D5 işçide icra edildi (6-satır dönüş, ledger INTACT)
+- FAZ-DEVRİ: budget≥40 teslimi "TAZE OTURUMDA koş" bandı (MUST) + teşhis>100k milestone-devir talimatı
+- ÖLÇÜM (script): eski-echo→işaret, 3 gerçek girdi: 15536→421 char = %97.3 transkript-tasarrufu
 
 ## 3.1.3 (2026-07-06) — taşınabilirlik + doküman-tutarlılığı (dış-inceleme: Opus-4.8-cloud, 5 bulgu)
 - tests: 12 dosyadaki makineye-gömülü mutlak yol → BASH_SOURCE/__file__ türevi; m2-fixture'lar repoya vendor'landı (tests/fixtures/m2-synth) — temiz-klonda 13/13 kanıtlı
