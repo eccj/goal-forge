@@ -74,8 +74,9 @@ unfinished, honest status report.
 <condition>
 DONE if and only if the transcript shows (1) an E-D#-labeled evidence MARKER
 (ledger tip-hash + ≤1-line result; the FULL raw text lives in the ledger file,
-verified from disk by the jurors — raw transcript blocks also satisfy this,
-and remain the form of pre-3.2 goals) for EVERY D1-D<n> item AND (2) the 3 jurors' UNANIMOUS verdict AND (3) an
+verified from disk by the jurors — a raw transcript block satisfies this
+form ONLY for pre-3.2 goals; a v3.2 run still REQUIRES the ledger entry
+behind every marker) for EVERY D1-D<n> item AND (2) the 3 jurors' UNANIMOUS verdict AND (3) an
 item-by-item evidence dump. [Only when not derivable from D-items: "<subjective
 wish>" = <measurable inequality>.] [If any D# is a §RED-HOLD: it
 satisfies clause (1) via its E-D# HELD entry, which MUST name the gated action
@@ -236,7 +237,7 @@ it did not run turn-1 in the 1.5 run). Concrete template:
 7. Last line, nothing after it: "APPROVE" or "REJECT + numbered deficiency list".
 
 SPAWN & RETURN DIET (v3.2): juror/prosecutor spawn prompts stay SHORT — point
-the agent at its canonical brief FILE (`goals/briefs/{savci,J1,J2,J3}.md`,
+the agent at its canonical brief FILE (`briefs/{_ortak,savci,J1,J2,J3}.md (git-tracked — tamper-evident via repo)`,
 which embeds the anchored-confidence DEFINITIONS and the ≤40-line return rule)
 plus run-specific parameters (ledger path, D-list, attack targets). Agents
 write their FULL report to `goals/verdicts/<run>-<rol>.md` (main agent ledgers
